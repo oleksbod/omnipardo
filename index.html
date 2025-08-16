@@ -1,0 +1,608 @@
+<!--
+/**
+ * ZeroLight OmniStream State Integration Example
+ *
+ * This HTML file serves as a practical example demonstrating how to integrate and utilise
+ * advanced features of the ZeroLight OmniStream platform. It showcases key functionalities
+ * and best practices for developers looking to leverage the full capabilities of OmniStream
+ * within their web applications.
+ * It is designed to be used alongside https://github.com/ZeroLight-Ltd/omnistream-unreal-example
+ * as the OmniStream application. 
+ *
+ * Target Audience:
+ * This example is primarily intended for developers, engineers, and technical users who are
+ * integrating ZeroLight OmniStream into their projects and require guidance on implementing
+ * more complex or specific platform features.
+ *
+ * Disclaimer:
+ * This code is provided "as is" and for illustrative purposes only. It is intended to serve
+ * as an educational resource and a starting point for your own implementations. ZeroLight
+ * makes no representations or warranties of any kind, express or implied, about the
+ * completeness, accuracy, reliability, suitability, or availability with respect to the
+ * code or the information, products, services, or related graphics contained in this file
+ * for any purpose. Any reliance you place on such material is therefore strictly at your
+ * own risk.
+ *
+ * It is recommended to thoroughly test and adapt this example to your specific project
+ * requirements and environment.
+ */
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <base href="/" />
+
+        <title>Conf</title>
+
+        <script src="https://libzl.zlthunder.net/libzl/versions/latest/libzl.js"></script>
+    </head>
+
+    <body>
+        <!-- We need libZL -->
+
+        <!-- We need a container to attach the stream to -->
+        <div id="streamContainer" style="position: relative"></div>
+
+        <!-- Some buttons to make testing/experiemnting easier -->
+        <div id="buttonCluster">
+            <button class="streamButton" onclick="toggleStateDisplay()">Toggle State Display</button>
+            <button class="streamButton" onclick="toggleLogDisplay()">Toggle Log Display</button>
+            <button class="streamButton" onclick="connectLocal('video')">Connect to Local</button>
+            <button class="streamButton" onclick="connectWithMode('video')">Connect in Video Mode</button>
+            <button class="streamButton" onclick="connectWithMode('image')">Connect in Image Mode</button>
+            <button class="streamButton" onclick="switchToMode()" id="switchModeButton">Switch to Image Mode</button>
+            <button class="streamButton" onclick="disconnectStream()">Disconnect</button>
+            <button class="streamButton" onclick="animUp()">Anim Up</button>
+            <button class="streamButton" onclick="animDown()">Anim Down</button>
+            <button class="streamButton" onclick="shape1()">Shape 1</button>
+            <button class="streamButton" onclick="shape2()">Shape 2</button>
+            <button class="streamButton" onclick="bumpVersion()">Bump Version</button>
+            <button class="streamButton" onclick="setCamera('flycam')" id="flyCamButton">FlyCam</button>
+            <button class="streamButton" onclick="setCamera('1')">Orbit1</button>
+            <button class="streamButton" onclick="setCamera('orbit2')">Orbit2</button>
+        </div>
+
+        <!-- In the top left we have a container for us to draw on screen log message to -->
+        <div
+            id="onScreenLogContainer"
+            style="
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                z-index: 20;
+                display: none;
+                flex-direction: column;
+                align-items: flex-start;
+                pointer-events: none;
+            "></div>
+
+        <!-- In the top right we have a container that we can toggle on to show the current state values -->
+        <div
+            id="stateDisplayContainer"
+            style="
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                z-index: 40;
+                min-width: 200px;
+                max-width: 400px;
+                background: rgba(0, 0, 0, 0.8);
+                color: #fff;
+                font-family: monospace;
+                font-size: 14px;
+                border-radius: 6px;
+                padding: 12px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+                display: none;
+            ">
+            <div style="font-weight: bold; margin-bottom: 6px">Current confirmedState</div>
+            <pre id="stateDisplayPre" style="margin: 0; white-space: pre-wrap"></pre>
+        </div>
+
+        <style>
+            #buttonCluster {
+                position: absolute;
+                left: 10px;
+                bottom: 10px;
+                z-index: 30;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                align-items: flex-end;
+                max-width: 90%;
+                pointer-events: auto;
+            }
+            #streamContainer {
+                position: relative;
+                min-height: 400px;
+            }
+            .streamButton {
+                font-size: 16px;
+                padding: 8px 16px;
+                border-radius: 4px;
+                border: none;
+                background: #222;
+                color: #fff;
+                cursor: pointer;
+                margin-bottom: 5px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                transition: background 0.2s;
+            }
+            .streamButton:hover {
+                background: #444;
+            }
+            .streamButton:disabled {
+                background: #888;
+                color: #ccc;
+                cursor: not-allowed;
+                opacity: 0.6;
+                box-shadow: none;
+            }
+        </style>
+
+        <script>
+            const libzl = new LibZL();
+
+            // Our requested app state, we set our initial values we want the app to match when we connect
+            // we then update this and send thwe whole state every time we want to change state
+            var requestedState = {
+                camera: "flycam",
+                orbit: {
+                    currentStep: 0,
+                    totalSteps: 16,
+                },
+                logoAnim: false,
+                shape: "one",
+                version: 0,
+            };
+
+            // The confirmed state of the app - this can differer fromt he state we've requested for varioues reasons
+            // e.g. A state transition takes a long time to complete (an animation for example) or because we've
+            // requested a state the application cannot match. We can use this as part of our validation and error
+            // handling
+            var confirmedState = null;
+
+            // In image mode state transitions happen immediately, so we use this variable to cache that confrimed state
+            // until we see an image transition and then use it to update confirmedState
+            var pendingState = null;
+
+            var animationInProgress = false;
+
+            // We keep track of the current mode as we modify certain things based on it
+            var currentStreamMode = "video";
+
+            // "Version" variable, initialized from localStorage if available
+            // this makes it easy to "bust" the cache and make sure we're getting new images generated
+            // when requesting in image of a state that has previously been generated
+            var version = 0;
+            if (localStorage.getItem("appVersion")) {
+                version = parseInt(localStorage.getItem("appVersion"), 10) || 0;
+            }
+            requestedState.version = version;
+
+            // Our main connection settings
+            const cloudstreamSettings = {
+                directConnection: false,
+                directConnectionParameters: {
+                    ipAddress: "localhost",
+                },
+                cloudConnectionParameters: {
+                    customer: "omnistream",
+                    renderService: "078fc39dtestser", // Replace this with your details from https://portal.zerolight.com
+                },
+                onDemand2DConfig: {
+                    useSmoothTransition: false, // Don't interpolate between our frames in this example - can be useful for smoothing out turntable cameras
+                },
+                streamingMode: currentStreamMode,
+                parent: "streamContainer",
+                initialAppStateData: requestedState, //This is the state that will be requested to be matched for the first frame of the stream, if this cannot be matched, you will not get a stream - this is useful for resuming a previous session or allowing a configurator experiwence to start with a specifc configuration for example
+            };
+
+            libzl.cloudstream("cloudstreamExample").then(function (api) {
+                //Adding to the global namespace
+                cloudstream = window.cloudstream = api;
+
+                //Adding event listeners to what we're interested in
+                cloudstream.addEventListener("error", (error) => {
+                    addOnScreenLog("OmniStream had an error: ", error);
+                    // During development this is really useful to help us track things down
+                    // in production we might want to try resetting state and trying to reconnect
+                    // or possibly send the error to a backend system for monitoring
+                });
+
+                // Here we can do things like stop showing our loading screen and show the stream element
+                cloudstream.addEventListener("streamReady", () => {
+                    addOnScreenLog("The stream is ready!");
+                    confirmedState = { ...requestedState }; // As we've been connected we know that our current state is the state we requested on connect
+
+                    // Set initial state of FlyCam button
+                    setFlyCamButtonEnabled(currentStreamMode !== "image");
+                });
+
+                // Called when JSON data is sent from the application - in this example we're assuming it's
+                // come from the state system, but it could be plain JSON from outside the state syetem
+                // NOTE: This is only called in video mode
+                // in image mode you do not have a direct connection to the application, so we need to listen to appStateDataChanged
+                cloudstream.addEventListener("jsondatareceived", (args) => {
+                    // Get the text from the message and convert to json object
+                    const data = JSON.parse(args);
+
+                    if ("state_processing" in data) {
+                        // Our request for a change in state has been aknowledged - this does not mean the application macthes this state yet
+                        // this will be confirmed with a separate state_processing_ended message.
+                        // So we can keep track we'll get back a data.RequestId, that we can use to match in state_processing_ended
+
+                        addOnScreenLog(`State request ${data.RequestId} is processing (${data.state_processing})`);
+                    } else if ("state_processing_ended" in data) {
+                        // Our state has finished being processed, but we need to check if the application has been able to match what we requested
+                        switch (data.state_processing_ended.status) {
+                            case "complete":
+                                // Here we could update confirmedState with the contents of state_processing_ended.current_state
+                                // however it's best practise to do this in appStateDataChanged as that is called in both image and video modes
+                                addOnScreenLog(`State request ${data.RequestId} has been completed successfully`);
+                                break;
+                            case "unmatched":
+                                // Some state has not been matched - during dev we need to debug this
+                                // in production, this shouldn't happen, but we should handle it gracefully if it does
+                                addOnScreenLog(
+                                    `State request ${
+                                        data.RequestId
+                                    } has finished, but these parts of the requested state could not be matched:\n${
+                                        data.state_processing_ended.unprocessed_state
+                                            ? JSON.stringify(data.state_processing_ended.unprocessed_state, null, 2)
+                                            : "None"
+                                    }`
+                                );
+                                break;
+                        }
+                    }
+                });
+
+                // Called whenever an app state changes and is called in both Video and Image modes
+                // NOTE: In image mode this is called immediately, and will only be represented visually when the 2DFrameTransition event is fired
+                cloudstream.addEventListener("appStateDataChanged", (appStateData) => {
+                    addOnScreenLog("appStateDataChanged");
+                    if (currentStreamMode === "image") {
+                        // Cache the state until 2DFrameTransition
+                        pendingState = { ...appStateData };
+                    } else if (currentStreamMode === "video") {
+                        var animationWasInProgress = animationInProgress;
+                        // Update our internal representation of the state so we're in line with the remote application
+                        confirmedState = { ...appStateData };
+
+                        // When our animation has finished, send the final requestedState we've been building up of all the interactions that have
+                        // ocurred while we were waiting for the animation to finish
+                        animationInProgress = requestedState.logoAnim !== confirmedState.logoAnim;
+                        if (animationWasInProgress != animationInProgress) {
+                            SendState(requestedState);
+                        }
+                        // Here we're just showing the latest state on screen, but we might be updating UI or showing a message to the user
+                        updateStateDisplay();
+                    }
+                });
+
+                // Called when switching between image and video modes to allow any necessary changes to state between the two modes
+                // For example video mode might allow a free movement camera, but image mode will require the user to switch between static cameras
+                // so we can request a change of camera as part of the switch
+                cloudstream.addEventListener(
+                    "beforeModeSwitchSetAppStateData",
+                    (appStateData, setAppStateDataCallback) => {
+                        addOnScreenLog("beforeModeSwitchSetAppStateData");
+
+                        // Option 1: Modify the state data
+
+                        // This is just a basic camera switch, in a real case we'd probably be switching to the closest camera that matched
+                        // Checking currentStreamMode isn't optimal, but at the time of writing the mode being switched to isn't passed to this function
+                        if (currentStreamMode != "image") {
+                            // We're switching to image mode
+                            requestedState.camera = "orbit2";
+                        } else if (currentStreamMode != "video") {
+                            // We're switching to video mode
+                            requestedState.camera = "flycam";
+                        }
+
+                        // Apply the modified state by calling the callback
+                        setAppStateDataCallback(requestedState);
+
+                        // OR
+
+                        // Option 2: Don't modify the state data
+                        // Simply don't call the setAppStateData callback
+                        // This will keep the original state unchanged
+                    }
+                );
+
+                // Get information about switches between image and video modes
+                cloudstream.addEventListener("modeChange", (mode, status) => {
+                    switch (status) {
+                        case "success":
+                            // Mode switch is complete, all we're doing is re-anbling the button to switch modes and making sure it has the right text on
+                            // but there could be much more going on here
+                            currentStreamMode = mode == "2D" ? "image" : "video"; // TODO update this to just directly take the vlaue when LibZL is corrected
+                            addOnScreenLog(`Mode successfully changed to: ${currentStreamMode}`);
+                            updateSwitchModeButton(true);
+
+                            // Enable or disable FlyCam button based on mode
+                            setFlyCamButtonEnabled(currentStreamMode !== "image");
+                            break;
+                        case "pending":
+                            addOnScreenLog(`Mode change to ${mode} is pending...`);
+                            break;
+                    }
+                });
+
+                // The image for our requested state change has been displayed to the user
+                // In image mode, we might want to cache the state passed in appStateDataChanged and only apply it now
+                cloudstream.addEventListener("2DFrameTransition", () => {
+                    addOnScreenLog(`2DFrameTransition`);
+                    // In image mode, apply the cached state and update the display
+                    if (pendingState) {
+                        confirmedState = { ...pendingState };
+                        updateStateDisplay();
+                        pendingState = null;
+                    }
+                });
+
+                // These function are called when a drag happens - in the example here we use it to move
+                // between frames of an orbit camera (can use/test in video mode but intended for when we're in image mode)
+
+                const orbitCam = ["1", "2", "3", "4", "5", "6", "7", "8"]; //These are the camera "names" that will be send to rendering application to switch to
+                var orbitCamIndex = 0;
+                var lastMouseX = 0;
+                const xMoveDelta = 75; //When the mouse moves this many pixels in the x-axis we'll switch to the next/previous camera in the orbit sequence
+
+                cloudstream.addEventListener("dragStart", (dragData) => {
+                    if (orbitCam.includes(requestedState.camera) || requestedState.camera == "orbit2") {
+                        lastMouseX = dragData.container.x; // We could also use dragData.normalised.x or dragData.relative.x depending on our specific needs
+                    }
+                });
+
+                cloudstream.addEventListener("dragEnd", (dragData) => {
+                    // In our specific example we don't have anything we need to do on drag end
+                });
+
+                cloudstream.addEventListener("dragMove", (dragData) => {
+                    // Orbit type 1 - we have 8 static cameras placed in a circuit round our central point
+                    // // and we are going to switch between these in sequence
+                    if (orbitCam.includes(requestedState.camera)) {
+                        if (dragData.container.x - lastMouseX >= xMoveDelta) {
+                            // Mouse moved right
+                            orbitCamIndex = (orbitCamIndex + 1) % orbitCam.length; // Wrap back to the beginning so we'll loop
+                            setCamera(orbitCam[orbitCamIndex]); // Set the camera to be the next one in the sequence
+
+                            lastMouseX = dragData.container.x;
+                        } else if (dragData.container.x - lastMouseX <= -xMoveDelta) {
+                            // Mouse moved l eft
+                            orbitCamIndex = orbitCamIndex - 1 < 0 ? orbitCam.length - 1 : orbitCamIndex - 1; //Wrap round to the end so we'll loop
+                            setCamera(orbitCam[orbitCamIndex]); // Set the camera to be the previous one in the sequence
+
+                            lastMouseX = dragData.container.x;
+                        }
+                    }
+
+                    // Orbit type 2- we have one camera that is attached to an arm to a central point that we can rotate - causing the camera to move
+                    // this means we can increase the number of steps in our camera, without needing the change the source app, as the app will
+                    // work out what e.g. 5/16 or 8/32 is automatically
+                    else if (requestedState.camera == "orbit2") {
+                        if (dragData.container.x - lastMouseX >= xMoveDelta) {
+                            // Mouse moved right
+
+                            var newStep = (requestedState.orbit.currentStep + 1) % requestedState.orbit.totalSteps; // Wrap back to the beginning so we'll loop
+
+                            // Update our current step in the orbit, while retaining the rest of the orbit data
+                            UpdateState({
+                                orbit: {
+                                    ...requestedState.orbit,
+                                    currentStep: newStep,
+                                },
+                            });
+
+                            lastMouseX = dragData.container.x;
+                        } else if (dragData.container.x - lastMouseX <= -xMoveDelta) {
+                            //Mouse moved l eft
+
+                            var newStep =
+                                requestedState.orbit.currentStep - 1 < 0
+                                    ? requestedState.orbit.totalSteps - 1
+                                    : requestedState.orbit.currentStep - 1; //Wrap round to the end so we'll loop
+
+                            // Update our current step in the orbit, while retaining the rest of the orbit data
+                            UpdateState({
+                                orbit: {
+                                    ...requestedState.orbit,
+                                    currentStep: newStep,
+                                },
+                            });
+
+                            lastMouseX = dragData.container.x;
+                        }
+                    }
+                });
+            });
+
+            // A few basic functions to make changes to state and send them to the app
+            function animUp() {
+                UpdateState({ logoAnim: true });
+            }
+
+            function animDown() {
+                UpdateState({ logoAnim: false });
+            }
+
+            function shape1() {
+                UpdateState({ shape: "one" });
+            }
+
+            function shape2() {
+                UpdateState({ shape: "two" });
+            }
+
+            function UpdateState(changes) {
+                requestedState = { ...requestedState, ...changes }; // Patch the requested update on top of our current
+
+                // If we're waiting on the logo to animate then we'll keep updating state internally, but not actually requesting it
+                // so that we don't build up a big list of actions that will then all be processed in sequence. Instead we'll just
+                // request the culimiation of all of those actions when the animation is complete. This is an contect specific
+                // decision and might not be the right choice for your application (you might be better off disabling the UI to prevent
+                // the user triggering state changes in the  first place). Comment out the if check to see the difference
+                // in bevhaviour
+                if (!animationInProgress) {
+                    SendState(requestedState);
+
+                    // We only need to set animationInProgress in video mode as in image mode there's no difference in state requests
+                    // that are completed imediately or not - they can all take a "long" time while we wait for a frame to be generated
+                    if (currentStreamMode === "video") {
+                        animationInProgress = requestedState.logoAnim !== confirmedState.logoAnim;
+                    }
+                }
+            }
+
+            function SendState(stateToSend) {
+                // setAppStateData just calls sendJsonData internally
+                cloudstream.setAppStateData(stateToSend);
+            }
+
+            function SendJSON(JSONToSend) {
+                cloudstream.sendJsonData(JSONToSend);
+                // sendJsonData in 2D mode will completely replace previous state with new one
+                // sendJsonData in 2D mode will also return immediately as the state is processed in LibZL - as you're not connected to an instance you won;t get state validation errors
+                // In 3d the LibZL internal state is only updated after a viewer has confirmed the state change
+            }
+
+            function GetCurrentState() {
+                // Gets the current state
+                cloudstream.getAppStateData();
+            }
+
+            // Connect to a locally running applicational/editor for testing - great for quick turnaround when doing advanced state manipulation
+            // see https://resources.zerolight.com/docs/omnistream/app/advanced/testing/ for details
+            function connectLocal() {
+                cloudstreamSettings.streamingMode = "video";
+                cloudstreamSettings.directConnection = true;
+                cloudstream.connect(cloudstreamSettings);
+                addOnScreenLog(`Connecting to a local stream`);
+            }
+
+            // Connect in either video or image mode
+            function connectWithMode(mode) {
+                cloudstreamSettings.streamingMode = mode;
+                currentStreamMode = mode;
+
+                updateSwitchModeButton(true);
+
+                if (mode === "image") {
+                    cloudstreamSettings.initialAppStateData.camera = "orbit2";
+                }
+                cloudstream.connect(cloudstreamSettings);
+                addOnScreenLog(`Connecting in ${mode} mode...`);
+            }
+
+            // Switch to the opposite mode
+            function switchToMode() {
+                var newMode = currentStreamMode === "video" ? "image" : "video";
+                updateSwitchModeButton(false);
+                cloudstream.setStreamingMode(newMode, (error) => {
+                    if (error) {
+                        addOnScreenLog("Failed to change streaming mode:", error);
+                        updateSwitchModeButton(true);
+                    }
+                });
+            }
+
+            function disconnectStream() {
+                if (window.cloudstream && typeof window.cloudstream.disconnect === "function") {
+                    window.cloudstream.disconnect();
+                    addOnScreenLog("Disconnected from stream.");
+                } else {
+                    addOnScreenLog("Stream is not connected or disconnect not available.");
+                }
+            }
+
+            function bumpVersion() {
+                version++;
+                localStorage.setItem("appVersion", version);
+
+                UpdateState({ version: version });
+            }
+
+            function setCamera(cameraName) {
+                UpdateState({ camera: cameraName });
+            }
+
+            function addOnScreenLog(message, duration = 3) {
+                console.log(message);
+                const logContainer = document.getElementById("onScreenLogContainer");
+                const logEntry = document.createElement("div");
+                logEntry.textContent = message;
+                logEntry.style.color = "limegreen";
+                logEntry.style.background = "rgba(0,0,0,0.7)";
+                logEntry.style.padding = "4px 8px";
+                logEntry.style.marginBottom = "4px";
+                logEntry.style.borderRadius = "4px";
+                logEntry.style.fontFamily = "monospace";
+                logEntry.style.fontSize = "14px";
+                logEntry.style.pointerEvents = "none";
+                logContainer.appendChild(logEntry);
+                setTimeout(() => {
+                    logContainer.removeChild(logEntry);
+                }, duration * 1000);
+            }
+
+            // Update the text and enable/disable the button to switch between image and video modes
+            function updateSwitchModeButton(enabled = true) {
+                var btn = document.getElementById("switchModeButton");
+                if (btn) {
+                    btn.textContent = "Switch to " + (currentStreamMode === "video" ? "Image" : "Video") + " Mode";
+                    btn.disabled = !enabled;
+                }
+            }
+
+            // Helper to update the state display
+            function updateStateDisplay() {
+                const pre = document.getElementById("stateDisplayPre");
+                if (pre) {
+                    pre.textContent = JSON.stringify(confirmedState, null, 2);
+                }
+            }
+
+            // Toggle state display visibility
+            function toggleStateDisplay() {
+                const container = document.getElementById("stateDisplayContainer");
+                if (container) {
+                    if (container.style.display === "none") {
+                        updateStateDisplay();
+                        container.style.display = "block";
+                    } else {
+                        container.style.display = "none";
+                    }
+                }
+            }
+
+            function setFlyCamButtonEnabled(enabled) {
+                var flyCamBtn = document.getElementById("flyCamButton");
+                if (flyCamBtn) {
+                    flyCamBtn.disabled = !enabled;
+                }
+            }
+
+            function toggleLogDisplay() {
+                const logContainer = document.getElementById("onScreenLogContainer");
+                if (logContainer) {
+                    if (logContainer.style.display === "none") {
+                        logContainer.style.display = "flex";
+                    } else {
+                        logContainer.style.display = "none";
+                    }
+                }
+            }
+
+            // Update display on page load if visible
+            window.addEventListener("DOMContentLoaded", function () {
+                updateStateDisplay();
+            });
+        </script>
+    </body>
+</html>
