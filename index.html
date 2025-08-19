@@ -7,12 +7,14 @@
         <base href="https://pardoyachts.com/" />
 
         <title>Pardo Yachts Configurator</title>
+        <link href="http://127.0.0.1:5500/css/normalize.css" rel="stylesheet" type="text/css" media="all" />
         <link
             rel="icon"
             type="image/x-icon"
             href="//pardoyachts.com/cdn/shop/t/12/assets/red-circle.png?v=83357085585562326981746172557" />
         <link href="//pardoyachts.com/cdn/shop/t/12/assets/main.css" rel="stylesheet" type="text/css" media="all" />
-        <script src="https://libzl.zlthunder.net/libzl/versions/latest/libzl.js"></script>
+
+        <script type="text/javascript" src="https://libzl.zlthunder.net/libzl/versions/latest/libzl.js"></script>
     </head>
 
     <body>
@@ -1947,6 +1949,8 @@
 
         <!-- Some buttons to make testing/experiemnting easier -->
         <div id="buttonCluster">
+            <button class="streamButton" id="connectButton">Connect</button>
+            <!--
             <button class="streamButton" onclick="toggleStateDisplay()">Toggle State Display</button>
             <button class="streamButton" onclick="toggleLogDisplay()">Toggle Log Display</button>
             <button class="streamButton" onclick="connectLocal('video')">Connect to Local</button>
@@ -1962,7 +1966,7 @@
             <button class="streamButton" onclick="setCamera('flycam')" id="flyCamButton">FlyCam</button>
             <button class="streamButton" onclick="setCamera('1')">Orbit1</button>
             <button class="streamButton" onclick="setCamera('orbit2')">Orbit2</button>
-        </div>
+        --></div>
 
         <!-- In the top left we have a container for us to draw on screen log message to -->
         <div
@@ -2017,6 +2021,12 @@
             #streamContainer {
                 position: relative;
                 min-height: 400px;
+                aspect-ratio: 16 / 9;
+                width: 100%;
+                max-width: 1280px;
+                height: auto;
+                max-height: 720px;
+                display: block;
             }
             .streamButton {
                 font-size: 16px;
@@ -2946,7 +2956,7 @@
                 });
             </script>
         </div>
-
+        <!--
         <script>
             const libzl = new LibZL();
 
@@ -3404,6 +3414,249 @@
             window.addEventListener("DOMContentLoaded", function () {
                 updateStateDisplay();
             });
+        </script>
+    -->
+        <script>
+            const libzl = new LibZL();
+            //To count how many messages we get
+            function createCounter() {
+                let count = 0;
+                const counter = function () {
+                    count++;
+                    return count;
+                };
+                counter.reset = function () {
+                    count = 0;
+                };
+                return counter;
+            }
+            const statusCounter = createCounter();
+            const streamContainerid = document.getElementById("streamContainer");
+            //capture mouse on clicking on stream
+            function clickOnStream() {
+                console.log("Click container");
+                const captureMouse = window.localStorage.getItem("capturemouse");
+                if (captureMouse === "true") {
+                    window.cloudstream.setPointerLockState(true, (err) =>
+                        console.log("setPointerLockState Error", err)
+                    );
+                }
+            }
+            //streamContainerid.addEventListener("click", clickOnStream);
+            const isXR = window.localStorage.getItem("forcedconnectmode");
+            if (isXR && isXR == "xr") {
+                //Hide stream container in XR
+                streamContainerid.style.display = "none";
+            }
+            const connectButtonElement = document.getElementById("connectButton");
+            console.log(connectButtonElement);
+            var apps = [""];
+            var metadata = {};
+            var project = null;
+            var app = null;
+            var id = null;
+            var cloudstreamSettings = null;
+            // Function to generate dropdown options
+            function generateDropdownOptions(local) {
+                var dropdown = document.getElementById("appSelectDropDown");
+                // Clear existing options
+                dropdown.innerHTML = "";
+                if (local) {
+                    var option = document.createElement("option");
+                    option.value = "Local Running OmniStream App";
+                    option.text = "Local Running OmniStream App";
+                    dropdown.appendChild(option);
+                } else {
+                    // Create a new option for each service
+                    console.log("DROPDOWN", apps, metadata);
+                    for (var i = 0; i < apps.length; i++) {
+                        var option = document.createElement("option");
+                        option.value = apps[i];
+                        option.text = metadata?.[apps[i]]?.name ? metadata?.[apps[i]]?.name : apps[i];
+                        dropdown.appendChild(option);
+                    }
+                }
+            }
+            function selectApp() {
+                var dropdown = document.getElementById("appSelectDropDown");
+                var selectedName = dropdown.options[dropdown.selectedIndex].value;
+                console.log(selectedName);
+                const appDetails = selectedName.split(" ");
+                project = appDetails[0];
+                app = appDetails[1];
+                id = appDetails[2];
+            }
+            function CreateSettings() {
+                var connectionTypeValue = 0;
+                var customerNameValue = "omnistream";
+                var renderServiceValue = "078fc39dtestser";
+                var localIPValue = "localhost";
+                var touchAsMouse = true;
+                const storedconnectionType = window.localStorage.getItem("connectionType");
+                const storedcustomerName = window.localStorage.getItem("customerName");
+                const storedrenderService = window.localStorage.getItem("renderService");
+                const storedipAddress = window.localStorage.getItem("ipAddress");
+                const storedtouchAsMouse = window.localStorage.getItem("touchmouse");
+                if (storedconnectionType) connectionTypeValue = storedconnectionType;
+                if (storedcustomerName) customerNameValue = storedcustomerName;
+                if (storedrenderService) renderServiceValue = storedrenderService;
+                if (storedipAddress) localIPValue = storedipAddress;
+                if (storedtouchAsMouse) touchAsMouse = storedtouchAsMouse === "true";
+                const storedforceConnect = window.localStorage.getItem("forcedconnectmode");
+                //console.log("XXXX " + storedforceConnect);
+                var streamingModevar = "video";
+                if (storedforceConnect) {
+                    //could just copy the value but the names may be different in the future
+                    if (storedforceConnect == "image") {
+                        streamingModevar = "image";
+                    } else if (storedforceConnect == "video") {
+                        streamingModevar = "video";
+                    } else if (storedforceConnect == "xr") {
+                        streamingModevar = "xr";
+                    }
+                }
+                cloudstreamSettings = {
+                    directConnection: connectionTypeValue == 0,
+                    cloudConnectionParameters: {
+                        customer: customerNameValue,
+                        renderService: renderServiceValue,
+                    },
+                    directConnectionParameters: {
+                        ipAddress: localIPValue,
+                    },
+                    streamingMode: streamingModevar,
+                    parent: streamContainerid,
+                    fakeMouseWithTouch: touchAsMouse,
+                };
+
+                var authToken = window.sessionStorage.getItem("authToken");
+                if (authToken) {
+                    cloudstreamSettings.token = authToken;
+                }
+                if (project && app && id) {
+                    cloudstreamSettings.appSelect = {
+                        project: project,
+                        app: app,
+                        id: id,
+                    };
+                }
+                console.log("SETTINGS>>>");
+                console.log(cloudstreamSettings);
+                if (streamingModevar == "xr") {
+                    return false;
+                }
+                return true;
+            }
+            //Status for CloudXR primary page
+            function MessageRecieved(data) {
+                if (!data) return;
+                console.log(`Received: ${JSON.stringify(data)}`);
+                const { type, status } = JSON.parse(data.data);
+                if (type === "STATUS") {
+                    const statustextboxElement = document.getElementById("status-textbox");
+                    statustextboxElement.innerHTML = "Status: " + status + " [" + statusCounter() + "]";
+                }
+            }
+            function ConnectStream() {
+                console.log("Connects");
+                if (connectButtonElement.innerHTML == "Connect") {
+                    const connectHere = CreateSettings();
+                    //reset counter
+                    statusCounter.reset();
+                    if (connectHere) {
+                        window.cloudstream.connect(cloudstreamSettings).catch((err) => {
+                            const statustextboxElement = document.getElementById("status-textbox");
+                            statustextboxElement.innerHTML = "CloudStream had an error on connect: " + err;
+                            console.log(statustextboxElement.innerHTML);
+                        });
+                    } else {
+                        sendToCloudXRPage(cloudstreamSettings);
+                    }
+                    connectButtonElement.innerHTML = "Disconnect";
+                } else {
+                    window.cloudstream.disconnect();
+                    connectButtonElement.innerHTML = "Connect";
+                }
+            }
+            async function UpdateAppList() {
+                CreateSettings();
+                var connectionTypeValue = 1;
+                const storedconnectionType = window.localStorage.getItem("connectionType");
+                if (storedconnectionType) connectionTypeValue = storedconnectionType;
+                //only get app list when online mode
+                if (connectionTypeValue == 0) {
+                    generateDropdownOptions(true);
+                } else {
+                    const data = await cloudstream.queryAppsOnService(cloudstreamSettings);
+                    apps = data.apps;
+                    metadata = data.metadata;
+                    generateDropdownOptions(false);
+                    console.log("App list updated");
+                    selectApp();
+                }
+            }
+            function InitLibZL() {
+                libzl.cloudstream("OmniStreamExample").then(function (api) {
+                    //Adding to the global namespace
+                    cloudstream = window.cloudstream = api;
+                    CreateSettings();
+                    UpdateAppList();
+                    count = 0;
+                    const statustextboxElement = document.getElementById("status-textbox");
+                    //Adding event listeners to what we're interested in
+                    cloudstream.addEventListener("Direct2DReady", (api) => {
+                        console.log("Direct2D API became available");
+                        direct2d = window.direct2d = api;
+                    });
+                    cloudstream.addEventListener("error", function (error) {
+                        statustextboxElement.innerHTML = "CloudStream had an error: " + error;
+                        console.log(statustextboxElement.innerHTML);
+                    });
+                    cloudstream.addEventListener("streamReady", function () {
+                        statustextboxElement.innerHTML = "The stream is ready!";
+                        console.log(statustextboxElement.innerHTML);
+                    });
+                    cloudstream.addEventListener("adoptionInformation", function (info) {
+                        statustextboxElement.innerHTML = "Status: " + info.status + " [" + statusCounter() + "]";
+                        console.log(statustextboxElement.innerHTML);
+                    });
+                    cloudstream.onStreamDisconnect = function () {
+                        statustextboxElement.innerHTML = "Disconnected";
+                        console.log(statustextboxElement.innerHTML);
+                    };
+                    const recieveTextArea = document.getElementById("recieveTextArea");
+                    const maxTextRecievedLines = 20;
+                    cloudstream.addEventListener("jsondatareceived", (args) => {
+                        // Get the text from the message and convert to JSON object
+                        const data = JSON.parse(args);
+                        processRecievedData(data);
+                        // Convert the JSON object to a string
+                        const jsonString = JSON.stringify(data);
+                        console.log("Recieved data: " + jsonString);
+                        // Create a new <p> element for the received data
+                        var preElement = document.createElement("div"); // Create <pre> element
+                        //preElement.textContent = jsonString;
+                        recieveTextArea.insertBefore(preElement, recieveTextArea.firstChild);
+                        var tree = jsonTree.create(data, preElement);
+                        tree.expand();
+                        var timestampElement = document.createElement("div");
+                        var currentTime = new Date();
+                        timestampElement.textContent = currentTime.toLocaleString() + " >";
+                        recieveTextArea.insertBefore(timestampElement, preElement);
+                        // Remove excess <p> elements to keep it at the specified number of lines
+                        while (recieveTextArea.childNodes.length > maxTextRecievedLines) {
+                            recieveTextArea.removeChild(recieveTextArea.lastChild);
+                        }
+                    });
+                    connectButtonElement.addEventListener("click", ConnectStream);
+                    const storedAutoConnect = window.localStorage.getItem("autoconnect");
+                    if (storedAutoConnect && storedAutoConnect == "true") {
+                        ConnectStream();
+                    }
+                });
+            }
+
+            InitLibZL();
         </script>
     </body>
 </html>
