@@ -20,7 +20,7 @@
     <body>
         <!-- We need libZL -->
 
-        <div style="display: none" id="shopify-section-navbar" class="shopify-section">
+        <div id="shopify-section-navbar" class="shopify-section">
             <!-- navbar-new -->
 
             <!-- menu bow svg -->
@@ -1945,12 +1945,16 @@
         <main></main>
 
         <!-- We need a container to attach the stream to -->
-        <div id="streamContainer" style="position: relative"></div>
+        <div class="stream-container">
+            <div id="streamContainer" style="position: relative"></div>
+            <div class="sidebar"></div>
+        </div>
 
         <!-- Some buttons to make testing/experiemnting easier -->
+        <!--
         <div id="buttonCluster">
             <button class="streamButton" id="connectButton">Connect</button>
-            <!--
+           
             <button class="streamButton" onclick="toggleStateDisplay()">Toggle State Display</button>
             <button class="streamButton" onclick="toggleLogDisplay()">Toggle Log Display</button>
             <button class="streamButton" onclick="connectLocal('video')">Connect to Local</button>
@@ -1966,8 +1970,8 @@
             <button class="streamButton" onclick="setCamera('flycam')" id="flyCamButton">FlyCam</button>
             <button class="streamButton" onclick="setCamera('1')">Orbit1</button>
             <button class="streamButton" onclick="setCamera('orbit2')">Orbit2</button>
-        --></div>
-
+   </div>
+     -->
         <!-- In the top left we have a container for us to draw on screen log message to -->
         <div
             id="onScreenLogContainer"
@@ -2018,15 +2022,25 @@
                 max-width: 90%;
                 pointer-events: auto;
             }
-            #streamContainer {
-                position: relative;
-                min-height: 400px;
-                aspect-ratio: 16 / 9;
+            .stream-container {
+                display: flex;
                 width: 100%;
-                max-width: 1280px;
+                min-height: 500px;
+                width: 100%;
+                padding: 20px;
+                padding-top: 175px;
+                gap: 20px;
+            }
+            .sidebar {
+                width: calc(30% - 20px);
+            }
+            #streamContainer {
+                aspect-ratio: 16 / 9;
                 height: auto;
-                max-height: 720px;
-                display: block;
+                border-radius: 20px;
+                overflow: hidden;
+                width: 70%;
+                max-width: 1280px;
             }
             .streamButton {
                 font-size: 16px;
@@ -2052,7 +2066,7 @@
             }
         </style>
 
-        <div style="display: none" id="shopify-section-footer" class="shopify-section">
+        <div id="shopify-section-footer" class="shopify-section">
             <!-- Footer section -->
             <div
                 class="footer w-full h-auto px-6 py-16 flex flex-col items-start justify-center md:p-12 lg:flex-row lg:flex-wrap lg:gap-x-4 lg:justify-start lg:px-20 lg:py-[120px] lg:gap-y-10"
@@ -3439,6 +3453,18 @@
                 });
                 cloudstream.addEventListener("streamReady", function () {
                     console.log("The stream is ready!");
+                });
+
+                cloudstream.addEventListener("jsondatareceived", (args) => {
+                    // Get the text from the message and convert to json object
+                    console.warn(args);
+                    const data = JSON.parse(args);
+                    console.log(data);
+                    // display as string
+                    const jsonString = JSON.stringify(data);
+                    console.warn("jsondatareceived", jsonString);
+                    //print it
+                    console.log(jsonString);
                 });
 
                 //Connecting to the stream
