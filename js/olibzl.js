@@ -33,8 +33,8 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                 };
 
                 console.log("Sending camera data:", data);
-                console.log("Sending camera str data:", JSON.stringify(data));
-                cloudstream.sendJsonData(JSON.stringify(data));
+                //console.log("Sending camera str data:", JSON.stringify(data));
+                cloudstream.sendJsonData(data);
             });
         });
     });
