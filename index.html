@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
 
-        <base href="/omnipardo/" />
+        <base href="/" />
 
         <title>Pardo Yachts Configurator</title>
         <link href="css/normalize.css" rel="stylesheet" type="text/css" media="all" />
@@ -19,69 +19,1243 @@
     </head>
 
     <body>
-        <!--
         <iframe
             src="header.html"
             onload="this.before((this.contentDocument.body||this.contentDocument).children[0]);this.remove()"></iframe>
--->
+
         <main>
             <div class="stream-container">
                 <div class="stream-view-container">
                     <div id="streamContainer" style="position: relative"></div>
                     <div class="cameras">
                         <div class="camera-container">
-                            <div class="camera img-wrapper" data-camera="Orbit">
-                                <img class="img" src="img/3-orbit.png" alt="orbit camera" />
+                            <div class="camera img-wrapper active" data-camera="Orbit">
+                                <img class="img" src="img/camera/Orbit.jpg" alt="orbit camera" />
                             </div>
-                            <div class="camera-name">Orbit</div>
                         </div>
 
                         <div class="camera-container">
                             <div class="camera img-wrapper" data-camera="Prua">
-                                <img class="img" src="img/4-orbit-focus.png" alt="prua camera" />
+                                <img class="img" src="img/camera/Prua.jpg" alt="prua camera" />
                             </div>
-                            <div class="camera-name">Prua</div>
                         </div>
 
                         <div class="camera-container">
                             <div class="camera img-wrapper" data-camera="Poppa">
-                                <img class="img" src="img/4-orbit-focus.png" alt="poppa camera" />
+                                <img class="img" src="img/camera/Poppa.jpg" alt="poppa camera" />
                             </div>
-                            <div class="camera-name">Poppa</div>
                         </div>
 
                         <div class="camera-container">
                             <div class="camera img-wrapper" data-camera="Driver">
-                                <img class="img" src="img/4-orbit-focus.png" alt="driver camera" />
+                                <img class="img" src="img/camera//Driver.jpg" alt="driver camera" />
                             </div>
-                            <div class="camera-name">Driver</div>
                         </div>
 
                         <div class="camera-container">
                             <div class="camera img-wrapper" data-camera="Interior">
-                                <img class="img" src="img/4-orbit-focus.png" alt="interior camera" />
+                                <img class="img" src="img/camera/Interior.jpg" alt="interior camera" />
                             </div>
-                            <div class="camera-name">Interior</div>
                         </div>
 
                         <div class="camera-container">
                             <div class="camera img-wrapper" data-camera="FPC">
-                                <img class="img" src="img/5-first-persona.png" alt="fpc camera" />
+                                <img class="img" src="img/camera/FPC.jpg" alt="fpc camera" />
                             </div>
-                            <div class="camera-name">FPC</div>
                         </div>
                     </div>
                 </div>
                 <div class="sidebar">
-                    <div class="scenes"></div>
+                    <div class="yacht-title-container">
+                        <h1 class="yacht-model">P43</h1>
+                        <div class="yacht-year">2026</div>
+                    </div>
+
+                    <div class="tech-link"><a href="#">Dati tecnici ed equipaggiamento di serie</a></div>
+
+                    <div class="scenes">
+                        <div class="exterior-scenes">
+                            <div class="scene-type">Scegli il Modello Esterno</div>
+                            <div class="scene-label">Entrobordo</div>
+                            <!--Fuoribordo-->
+                            <div class="exterior-scenes-container">
+                                <div class="scene-container">
+                                    <div class="scene img-wrapper active" data-exscene="P43_Entrobordo">
+                                        <img class="img" src="img/Esterno/Entrobordo.jpg" alt="orbit camera" />
+                                    </div>
+                                </div>
+
+                                <div class="scene-container">
+                                    <div class="scene img-wrapper" data-exscene="P43_Fuoribordo">
+                                        <img class="img" src="img/Esterno/Fuoribordo.jpg" alt="prua camera" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="scene-type">Colori dell'esterno</div>
+
+                            <!-- Carena -->
+                            <div class="scene-label">Carena</div>
+                            <div class="scene-label normal">Bianco</div>
+                            <div class="exterior-scenes-container">
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper active"
+                                        data-mat="mat020"
+                                        data-name="Bianco"
+                                        data-mesh="Hull5 : 1">
+                                        <div class="texture mat020"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat021"
+                                        data-name="Nero"
+                                        data-mesh="Hull5 : 1">
+                                        <div class="texture mat021"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Linea di Bellezza -->
+                            <div class="scene-label">Linea di Bellezza</div>
+                            <div class="scene-label normal">Grey LINX LZ7S</div>
+                            <div class="exterior-scenes-container">
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper active"
+                                        data-mat="mat022"
+                                        data-name="Grey LINX LZ7S"
+                                        data-mesh="Hull5 : 2">
+                                        <div class="texture metalic-paint mat022"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat023"
+                                        data-name="Baby Blue"
+                                        data-mesh="Hull5 : 2">
+                                        <div class="texture metalic-paint mat023"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat024"
+                                        data-name="Byron Blue"
+                                        data-mesh="Hull5 : 2">
+                                        <div class="texture metalic-paint mat024"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat025"
+                                        data-name="Floretti Silver"
+                                        data-mesh="Hull5 : 2">
+                                        <div class="texture metalic-paint mat025"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat018"
+                                        data-name="Artic grey"
+                                        data-mesh="Hull5 : 2">
+                                        <div class="texture mat018"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat019"
+                                        data-name="Steel Blue"
+                                        data-mesh="Hull5 : 2">
+                                        <div class="texture mat019"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat020"
+                                        data-name="Bianco"
+                                        data-mesh="Hull5 : 2">
+                                        <div class="texture mat020"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat021"
+                                        data-name="Nero"
+                                        data-mesh="Hull5 : 2">
+                                        <div class="texture mat021"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Scafo -->
+                            <div class="scene-label">Scafo</div>
+                            <div class="scene-label normal">Grey LINX LZ7S</div>
+                            <div class="exterior-scenes-container">
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper active"
+                                        data-mat="mat022"
+                                        data-name="Grey LINX LZ7S"
+                                        data-mesh="Hull5 : 0">
+                                        <div class="texture metalic-paint mat022"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat023"
+                                        data-name="Baby Blue"
+                                        data-mesh="Hull5 : 0">
+                                        <div class="texture metalic-paint mat023"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat024"
+                                        data-name="Byron Blue"
+                                        data-mesh="Hull5 : 0">
+                                        <div class="texture metalic-paint mat024"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat025"
+                                        data-name="Floretti Silver"
+                                        data-mesh="Hull5 : 0">
+                                        <div class="texture metalic-paint mat025"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat018"
+                                        data-name="Artic grey"
+                                        data-mesh="Hull5 : 0">
+                                        <div class="texture mat018"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat019"
+                                        data-name="Steel Blue"
+                                        data-mesh="Hull5 : 0">
+                                        <div class="texture mat019"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat020"
+                                        data-name="Bianco"
+                                        data-mesh="Hull5 : 0">
+                                        <div class="texture mat020"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat021"
+                                        data-name="Nero"
+                                        data-mesh="Hull5 : 0">
+                                        <div class="texture mat021"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Coperta -->
+                            <div class="scene-label">Coperta</div>
+                            <div class="scene-label normal">Grey LINX LZ7S</div>
+                            <div class="exterior-scenes-container">
+                                <div class="scene-container">
+                                    <div class="texture-wrapper active" data-mat="mat022" data-name="Grey LINX LZ7S">
+                                        <div class="texture metalic-paint mat022"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat023" data-name="Baby Blue">
+                                        <div class="texture metalic-paint mat023"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat024" data-name="Byron Blue">
+                                        <div class="texture metalic-paint mat024"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat025" data-name="Floretti Silver">
+                                        <div class="texture metalic-paint mat025"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat018" data-name="Artic grey">
+                                        <div class="texture mat018"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat019" data-name="Steel Blue">
+                                        <div class="texture mat019"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat020" data-name="Bianco">
+                                        <div class="texture mat020"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat021" data-name="Nero">
+                                        <div class="texture mat021"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- T-Top -->
+                            <div class="scene-label">T-Top</div>
+                            <div class="scene-label normal">Grey LINX LZ7S</div>
+                            <div class="exterior-scenes-container">
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper active"
+                                        data-mat="mat022"
+                                        data-name="Grey LINX LZ7S"
+                                        data-mesh="Hull3 : 2">
+                                        <div class="texture metalic-paint mat022"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat023"
+                                        data-name="Baby Blue"
+                                        data-mesh="Hull3 : 2">
+                                        <div class="texture metalic-paint mat023"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat024"
+                                        data-name="Byron Blue"
+                                        data-mesh="Hull3 : 2">
+                                        <div class="texture metalic-paint mat024"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat025"
+                                        data-name="Floretti Silver"
+                                        data-mesh="Hull3 : 2">
+                                        <div class="texture metalic-paint mat025"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat018"
+                                        data-name="Artic grey"
+                                        data-mesh="Hull3 : 2">
+                                        <div class="texture mat018"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat019"
+                                        data-name="Steel Blue"
+                                        data-mesh="Hull3 : 2">
+                                        <div class="texture mat019"></div>
+                                    </div>
+                                </div>
+
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat021"
+                                        data-name="Nero"
+                                        data-mesh="Hull3 : 2">
+                                        <div class="texture mat021"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Cucina -->
+                            <div class="scene-label">Cucina</div>
+                            <div class="scene-label normal">Grey LINX LZ7S</div>
+                            <div class="exterior-scenes-container">
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper active"
+                                        data-mat="mat022"
+                                        data-name="Grey LINX LZ7S"
+                                        data-mesh="Hull2 : 2">
+                                        <div class="texture metalic-paint mat022"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat023"
+                                        data-name="Baby Blue"
+                                        data-mesh="Hull2 : 2">
+                                        <div class="texture metalic-paint mat023"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat024"
+                                        data-name="Byron Blue"
+                                        data-mesh="Hull2 : 2">
+                                        <div class="texture metalic-paint mat024"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat025"
+                                        data-name="Floretti Silver"
+                                        data-mesh="Hull2 : 2">
+                                        <div class="texture metalic-paint mat025"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat018"
+                                        data-name="Artic grey"
+                                        data-mesh="Hull2 : 2">
+                                        <div class="texture mat018"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat019"
+                                        data-name="Steel Blue"
+                                        data-mesh="Hull2 : 2">
+                                        <div class="texture mat019"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat020"
+                                        data-name="Bianco"
+                                        data-mesh="Hull2 : 2">
+                                        <div class="texture mat020"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat021"
+                                        data-name="Nero"
+                                        data-mesh="Hull2 : 2">
+                                        <div class="texture mat021"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Ante cucina -->
+                            <div class="scene-label">Ante cucina</div>
+                            <div class="scene-label normal">Rovere grigio</div>
+                            <div class="exterior-scenes-container">
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper active"
+                                        data-mat="mat002"
+                                        data-name="Rovere grigio"
+                                        data-mesh="Hull2 : 3">
+                                        <div class="texture teak mat002"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper active"
+                                        data-mat="mat022"
+                                        data-name="Grey LINX LZ7S"
+                                        data-mesh="Hull2 : 3">
+                                        <div class="texture metalic-paint mat022"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat023"
+                                        data-name="Baby Blue"
+                                        data-mesh="Hull2 : 3">
+                                        <div class="texture metalic-paint mat023"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat024"
+                                        data-name="Byron Blue"
+                                        data-mesh="Hull2 : 3">
+                                        <div class="texture metalic-paint mat024"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat025"
+                                        data-name="Floretti Silver"
+                                        data-mesh="Hull2 : 3">
+                                        <div class="texture metalic-paint mat025"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat018"
+                                        data-name="Artic grey"
+                                        data-mesh="Hull2 : 3">
+                                        <div class="texture mat018"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat019"
+                                        data-name="Steel Blue"
+                                        data-mesh="Hull2 : 3">
+                                        <div class="texture mat019"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat020"
+                                        data-name="Bianco"
+                                        data-mesh="Hull2 : 3">
+                                        <div class="texture mat020"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat021"
+                                        data-name="Nero"
+                                        data-mesh="Hull2 : 3">
+                                        <div class="texture mat021"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pavimentazione -->
+                            <div class="scene-label">Pavimentazione</div>
+                            <div class="scene-label normal">Natural Teak with black caulking</div>
+                            <div class="exterior-scenes-container">
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper active"
+                                        data-mat="mat026"
+                                        data-name="Natural Teak with black caulking"
+                                        data-mesh="Hull6 : 2">
+                                        <div class="texture teak mat026"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat027"
+                                        data-name="Natural Teak with grey caulking"
+                                        data-mesh="Hull6 : 2">
+                                        <div class="texture teak mat027"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat028"
+                                        data-name="Flexiteak col. Scrubbed with grey caulking"
+                                        data-mesh="Hull6 : 2">
+                                        <div class="texture teak mat028"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat029"
+                                        data-name="Flexiteak col. Scrubbed with white caulking"
+                                        data-mesh="Hull6 : 2">
+                                        <div class="texture teak mat029"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat030"
+                                        data-name="Flexiteak col. Scrubbed with black caulking"
+                                        data-mesh="Hull6 : 2">
+                                        <div class="texture teak mat030"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat031"
+                                        data-name="Flexiteak col. Natural teak with grey caulking"
+                                        data-mesh="Hull6 : 2">
+                                        <div class="texture teak mat031"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat032"
+                                        data-name="Flexiteak col. Natural teak with white caulking"
+                                        data-mesh="Hull6 : 2">
+                                        <div class="texture teak mat032"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat033"
+                                        data-name="Flexiteak col. Natural teak with black caulking"
+                                        data-mesh="Hull6 : 2">
+                                        <div class="texture teak mat033"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Cockpit seats internal -->
+
+                            <div class="scene-label">Cockpit seats internal</div>
+                            <div class="scene-label normal">ICE</div>
+                            <div class="exterior-scenes-container">
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper active"
+                                        data-mat="mat034"
+                                        data-name="ICE"
+                                        data-mesh="Hull4 : 1">
+                                        <div class="texture fabric mat034"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat035"
+                                        data-name="Cream"
+                                        data-mesh="Hull4 : 1">
+                                        <div class="texture fabric mat035"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat036"
+                                        data-name="Sisal"
+                                        data-mesh="Hull4 : 1">
+                                        <div class="texture fabric mat036"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat037"
+                                        data-name="Champagne"
+                                        data-mesh="Hull4 : 1">
+                                        <div class="texture fabric mat037"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat038"
+                                        data-name="Macadamia"
+                                        data-mesh="Hull4 : 1">
+                                        <div class="texture fabric mat038"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat011"
+                                        data-name="Taupe"
+                                        data-mesh="Hull4 : 1">
+                                        <div class="texture fabric mat011"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat040"
+                                        data-name="Meteor"
+                                        data-mesh="Hull4 : 1">
+                                        <div class="texture fabric mat040"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat041"
+                                        data-name="Sunkist"
+                                        data-mesh="Hull4 : 1">
+                                        <div class="texture fabric mat041"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat042"
+                                        data-name="Jet"
+                                        data-mesh="Hull4 : 1">
+                                        <div class="texture fabric mat042"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat043"
+                                        data-name="Storm"
+                                        data-mesh="Hull4 : 1">
+                                        <div class="texture fabric mat043"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat044"
+                                        data-name="Sterling"
+                                        data-mesh="Hull4 : 1">
+                                        <div class="texture fabric mat044"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat045"
+                                        data-name="Carbon Sky"
+                                        data-mesh="Hull4 : 1">
+                                        <div class="texture fabric mat045"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat046"
+                                        data-name="Graumel Chalk"
+                                        data-mesh="Hull4 : 1">
+                                        <div class="texture fabric mat046"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat047"
+                                        data-name="Mirage"
+                                        data-mesh="Hull4 : 1">
+                                        <div class="texture fabric mat047"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat048"
+                                        data-name="Charcoal Chiné"
+                                        data-mesh="Hull4 : 1">
+                                        <div class="texture fabric mat048"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat049"
+                                        data-name="Cadet Grey"
+                                        data-mesh="Hull4 : 1">
+                                        <div class="texture fabric mat049"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat050"
+                                        data-name="Bluestone"
+                                        data-mesh="Hull4 : 1">
+                                        <div class="texture fabric mat050"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat051"
+                                        data-name="Carbon Beige"
+                                        data-mesh="Hull4 : 1">
+                                        <div class="texture fabric mat051"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat052"
+                                        data-name="Healther Beige"
+                                        data-mesh="Hull4 : 1">
+                                        <div class="texture fabric mat052"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat053"
+                                        data-name="Antique"
+                                        data-mesh="Hull4 : 1">
+                                        <div class="texture fabric mat053"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat054"
+                                        data-name="Mango"
+                                        data-mesh="Hull4 : 1">
+                                        <div class="texture fabric mat054"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Cockpit seats external -->
+
+                            <div class="scene-label">Cockpit seats internal</div>
+                            <div class="scene-label normal">ICE</div>
+                            <div class="exterior-scenes-container">
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper active"
+                                        data-mat="mat034"
+                                        data-name="ICE"
+                                        data-mesh="Hull4 : 3">
+                                        <div class="texture fabric mat034"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat035"
+                                        data-name="Cream"
+                                        data-mesh="Hull4 : 3">
+                                        <div class="texture fabric mat035"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat036"
+                                        data-name="Sisal"
+                                        data-mesh="Hull4 : 3">
+                                        <div class="texture fabric mat036"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat037"
+                                        data-name="Champagne"
+                                        data-mesh="Hull4 : 3">
+                                        <div class="texture fabric mat037"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat038"
+                                        data-name="Macadamia"
+                                        data-mesh="Hull4 : 3">
+                                        <div class="texture fabric mat038"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat011"
+                                        data-name="Taupe"
+                                        data-mesh="Hull4 : 3">
+                                        <div class="texture fabric mat011"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat040"
+                                        data-name="Meteor"
+                                        data-mesh="Hull4 : 3">
+                                        <div class="texture fabric mat040"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat041"
+                                        data-name="Sunkist"
+                                        data-mesh="Hull4 : 3">
+                                        <div class="texture fabric mat041"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat042"
+                                        data-name="Jet"
+                                        data-mesh="Hull4 : 3">
+                                        <div class="texture fabric mat042"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat043"
+                                        data-name="Storm"
+                                        data-mesh="Hull4 : 3">
+                                        <div class="texture fabric mat043"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat044"
+                                        data-name="Sterling"
+                                        data-mesh="Hull4 : 3">
+                                        <div class="texture fabric mat044"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat045"
+                                        data-name="Carbon Sky"
+                                        data-mesh="Hull4 : 3">
+                                        <div class="texture fabric mat045"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat046"
+                                        data-name="Graumel Chalk"
+                                        data-mesh="Hull4 : 3">
+                                        <div class="texture fabric mat046"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat047"
+                                        data-name="Mirage"
+                                        data-mesh="Hull4 : 3">
+                                        <div class="texture fabric mat047"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat048"
+                                        data-name="Charcoal Chiné"
+                                        data-mesh="Hull4 : 3">
+                                        <div class="texture fabric mat048"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat049"
+                                        data-name="Cadet Grey"
+                                        data-mesh="Hull4 : 3">
+                                        <div class="texture fabric mat049"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat050"
+                                        data-name="Bluestone"
+                                        data-mesh="Hull4 : 3">
+                                        <div class="texture fabric mat050"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat051"
+                                        data-name="Carbon Beige"
+                                        data-mesh="Hull4 : 3">
+                                        <div class="texture fabric mat051"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat052"
+                                        data-name="Healther Beige"
+                                        data-mesh="Hull4 : 3">
+                                        <div class="texture fabric mat052"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat053"
+                                        data-name="Antique"
+                                        data-mesh="Hull4 : 3">
+                                        <div class="texture fabric mat053"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
+                                        data-mat="mat054"
+                                        data-name="Mango"
+                                        data-mesh="Hull4 : 3">
+                                        <div class="texture fabric mat054"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Altri sedili esterni -->
+
+                            <div class="scene-label">Cockpit seats internal</div>
+                            <div class="scene-label normal">ICE</div>
+                            <div class="exterior-scenes-container">
+                                <div class="scene-container">
+                                    <div class="texture-wrapper active" data-mat="mat034" data-name="ICE">
+                                        <div class="texture fabric mat034"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat035" data-name="Cream">
+                                        <div class="texture fabric mat035"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat036" data-name="Sisal">
+                                        <div class="texture fabric mat036"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat037" data-name="Champagne">
+                                        <div class="texture fabric mat037"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat038" data-name="Macadamia">
+                                        <div class="texture fabric mat038"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat011" data-name="Taupe">
+                                        <div class="texture fabric mat011"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat040" data-name="Meteor">
+                                        <div class="texture fabric mat040"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat041" data-name="Sunkist">
+                                        <div class="texture fabric mat041"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat042" data-name="Jet">
+                                        <div class="texture fabric mat042"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat043" data-name="Storm">
+                                        <div class="texture fabric mat043"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat044" data-name="Sterling">
+                                        <div class="texture fabric mat044"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat045" data-name="Carbon Sky">
+                                        <div class="texture fabric mat045"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat046" data-name="Graumel Chalk">
+                                        <div class="texture fabric mat046"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat047" data-name="Mirage">
+                                        <div class="texture fabric mat047"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat048" data-name="Charcoal Chiné">
+                                        <div class="texture fabric mat048"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat049" data-name="Cadet Grey">
+                                        <div class="texture fabric mat049"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat050" data-name="Bluestone">
+                                        <div class="texture fabric mat050"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat051" data-name="Carbon Beige">
+                                        <div class="texture fabric mat051"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat052" data-name="Healther Beige">
+                                        <div class="texture fabric mat052"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat053" data-name="Antique">
+                                        <div class="texture fabric mat053"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat054" data-name="Mango">
+                                        <div class="texture fabric mat054"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="interior-scenes">
+                            <div class="scene-type">Scegli il Modello Interno</div>
+                            <div class="scene-label normal">Dinette</div>
+                            <div class="interior-scenes-container">
+                                <div class="scene-container">
+                                    <div class="scene img-wrapper active" data-inscene="Dinette">
+                                        <img class="img" src="img/Interno/Dinette.jpg" alt="dinette camera" />
+                                    </div>
+                                </div>
+
+                                <div class="scene-container">
+                                    <div class="scene img-wrapper" data-inscene="Cabin">
+                                        <img class="img" src="img/Interno/Cabin.jpg" alt="cabin camera" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="scene-type">Essenza</div>
+                            <div class="scene-label normal">F002</div>
+                            <div class="interior-scenes-container">
+                                <div class="scene-container">
+                                    <div class="scene img-wrapper active" data-inscene="Dinette">
+                                        <img
+                                            class="img"
+                                            src="img/Scegli/Dinette F002 and Cabin F000.jpg"
+                                            alt="f002 camera" />
+                                    </div>
+                                </div>
+
+                                <div class="scene-container">
+                                    <div class="scene img-wrapper" data-inscene="Cabin">
+                                        <img
+                                            class="img"
+                                            src="img/Scegli/Dinette F003 and Cabin F001.jpg"
+                                            alt="f003 camera" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="scene-type">Sofa Fabric</div>
+                            <div class="scene-label normal">Seafoam</div>
+                            <div class="exterior-scenes-container">
+                                <div class="scene-container">
+                                    <div class="texture-wrapper active" data-mat="mat008" data-name="Seafoam">
+                                        <div class="texture fabric mat008"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat009" data-name="Grey">
+                                        <div class="texture fabric mat009"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat010" data-name="Light grey">
+                                        <div class="texture fabric mat010"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat011" data-name="Taupe">
+                                        <div class="texture fabric mat011"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat012" data-name="Linen">
+                                        <div class="texture fabric mat012"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat013" data-name="Terracotta">
+                                        <div class="texture fabric mat013"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat014" data-name="Navy">
+                                        <div class="texture fabric mat014"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat015" data-name="Dark grey">
+                                        <div class="texture fabric mat015"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat016" data-name="Sand">
+                                        <div class="texture fabric mat016"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div class="texture-wrapper" data-mat="mat017" data-name="Blue">
+                                        <div class="texture fabric mat017"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="scene-type">Moquette</div>
+                            <div class="scene-label normal">Yes</div>
+                            <div class="interior-scenes-container">
+                                <div class="scene-container">
+                                    <div class="scene img-wrapper active" data-moq="yes">
+                                        <img class="img" src="img/Moquette/YES.jpg" alt="f002 camera" />
+                                    </div>
+                                </div>
+
+                                <div class="scene-container">
+                                    <div class="scene img-wrapper" data-moq="no">
+                                        <img class="img" src="img/Moquette/NO.jpg" alt="f003 camera" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
 
-        <!-- <iframe
+        <iframe
             src="footer.html"
             onload="this.before((this.contentDocument.body||this.contentDocument).children[0]);this.remove()"></iframe>
--->
+
         <script src="js/olibzl.js"></script>
     </body>
 </html>

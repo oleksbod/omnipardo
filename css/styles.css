@@ -1,6 +1,189 @@
 body {
     font-family: "General-regular", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    letter-spacing: -0.4px;
 }
+.metalic-paint {
+    background-image: url("../img/texture/metallic_paint.png");
+}
+.concrete {
+    background-image: url("../img/texture/Concrete.png");
+}
+.fabric {
+    background-image: url("../img/texture/FABRIC.png");
+}
+.leather {
+    background-image: url("../img/texture/Leather.png");
+}
+.moquette {
+    background-image: url("../img/texture/Moquette.png");
+}
+.teak {
+    background-image: url("../img/texture/teak.png");
+}
+.mat001 {
+    background-color: #fffff0;
+}
+.mat002 {
+    background-color: #878581;
+}
+.mat003 {
+    background-color: #e8e2d8;
+}
+.mat004 {
+    background-color: #c6c8ca;
+}
+.mat005 {
+    background-color: #f3f3f3;
+}
+.mat006 {
+    background-color: #aa7330;
+}
+.mat007 {
+    background-color: #5e3f1c;
+}
+.mat008 {
+    background-color: #5fa0a0;
+}
+.mat009 {
+    background-color: #a3c1ad;
+}
+.mat010 {
+    background-color: #505050;
+}
+.mat011 {
+    background-color: #e7e1da;
+}
+.mat012 {
+    background-color: #faf0e6;
+}
+.mat013 {
+    background-color: #d69264;
+}
+.mat014 {
+    background-color: #000053;
+}
+.mat015 {
+    background-color: #636363;
+}
+.mat016 {
+    background-color: #eccca2;
+}
+.mat017 {
+    background-color: #0000ff;
+}
+.mat018 {
+    background-color: #bfbdbc;
+}
+.mat019 {
+    background-color: #4682b4;
+}
+.mat020 {
+    background-color: #ffffff;
+}
+.mat021 {
+    background-color: #000000;
+}
+.mat022 {
+    background-color: #707070;
+}
+.mat023 {
+    background-color: #89cff0;
+}
+.mat024 {
+    background-color: #76b5c5;
+}
+.mat025 {
+    background-color: #a7a7a7;
+}
+.mat026 {
+    background-color: #a67c52;
+}
+.mat027 {
+    background-color: #b58e65;
+}
+.mat028 {
+    background-color: #c9b29c;
+}
+.mat029 {
+    background-color: #e2c9aa;
+}
+.mat030 {
+    background-color: #b7936b;
+}
+.mat031 {
+    background-color: #b68655;
+}
+.mat032 {
+    background-color: #c79a63;
+}
+.mat033 {
+    background-color: #a97447;
+}
+.mat034 {
+    background-color: #d6fffa;
+}
+.mat035 {
+    background-color: #fffdd0;
+}
+.mat036 {
+    background-color: #c2b69e;
+}
+.mat037 {
+    background-color: #f7e7ce;
+}
+.mat038 {
+    background-color: #f7edc9;
+}
+.mat040 {
+    background-color: #d07d12;
+}
+.mat041 {
+    background-color: #ffe137;
+}
+.mat042 {
+    background-color: #343434;
+}
+.mat043 {
+    background-color: #4f666b;
+}
+.mat044 {
+    background-color: #c0c0c0;
+}
+.mat045 {
+    background-color: #448ee4;
+}
+.mat046 {
+    background-color: #dcdcd4;
+}
+.mat047 {
+    background-color: #364043;
+}
+.mat048 {
+    background-color: #36454f;
+}
+.mat049 {
+    background-color: #91a3b0;
+}
+.mat050 {
+    background-color: #999ca7;
+}
+.mat051 {
+    background-color: #d6b588;
+}
+.mat052 {
+    background-color: #edd7bd;
+}
+.mat053 {
+    background-color: #5e6a58;
+}
+.mat054 {
+    background-color: #ffbf34;
+}
+
 #buttonCluster {
     position: absolute;
     left: 10px;
@@ -17,31 +200,61 @@ body {
     display: flex;
     width: 100%;
     min-height: 500px;
-    width: 100%;
-    padding: 20px;
-    padding-top: 175px;
+
+    padding: 0 20px;
+    padding-top: 150px;
     gap: 20px;
+    height: calc(100vh - 150px);
+    overflow: hidden;
 }
 .sidebar {
-    width: calc(30% - 20px);
+    flex: 1;
+    min-width: 0;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+.yacht-title-container {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    margin-bottom: 16px;
+}
+.yacht-model {
+    font-family: "tt-commons-pro", sans-serif;
+    font-weight: 400;
+    font-size: 3rem;
+    line-height: 3rem;
+}
+.yacht-year {
+    background-color: #eeeff2;
+    padding: 1px 6px;
+    border-radius: 4px;
+}
+.tech-link {
+    margin-bottom: 15px;
+    text-decoration: underline;
+    font-size: 17px;
 }
 .stream-view-container {
-    height: auto;
-    width: 70%;
+    flex: 0 0 70%;
     max-width: 1280px;
+    display: flex;
+    flex-direction: column;
 }
 #streamContainer {
     aspect-ratio: 16 / 9;
     height: auto;
-    border-radius: 20px;
+    border-radius: 10px;
     overflow: hidden;
     width: 100%;
+
+    border: 2px solid blue;
 }
 .cameras {
     display: flex;
     padding: 12px 0;
     width: 100%;
-    height: 75px;
+    height: 82px;
     gap: 20px;
 }
 .img-wrapper {
@@ -50,21 +263,121 @@ body {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-color: #222;
-    padding: 5px;
-    border-radius: 50%;
+    padding: 2px;
+    border-radius: 6px;
+    border: 2px solid transparent;
 }
-.img-wrapper:hover {
-    background-color: rgb(240, 88, 88);
+.img-wrapper:hover,
+.img-wrapper.active,
+.texture-wrapper.active,
+.texture-wrapper:hover {
+    border-color: black;
     cursor: pointer;
 }
 .img {
     height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    overflow: hidden;
 }
-.camera-name {
+
+.scenes {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.interior-scenes,
+.exterior-scenes {
+    width: 100%;
+    height: auto;
+    min-height: 200px;
+}
+.scene-type {
+    font-weight: 700;
+    font-size: 23px;
+    margin-bottom: 20px;
+}
+
+.scene-label {
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.interior-scenes-container,
+.exterior-scenes-container {
+    display: flex;
+    width: 100%;
+    height: auto;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.exterior-scenes,
+.interior-scenes {
+    box-shadow: 0px 4px 16px #00000029;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #eeeff2;
+    box-sizing: border-box;
+    border-radius: 12px;
+}
+
+.scene.img-wrapper {
+    width: 132px;
+    height: 70px;
+    overflow: hidden;
+    background-color: hsl(0, 0%, 100%);
+    background-blend-mode: multiply;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    border: 2px solid transparent;
+}
+.texture-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    border: 2px solid transparent;
+    overflow: hidden;
+    border-radius: 6px;
+}
+.texture {
+    width: 62px;
+    height: 62px;
+
+    background-blend-mode: multiply;
+    border-radius: 6px;
+    background-repeat: no-repeat;
+    background-position: 0 0; /* acts like "padding" */
+    background-size: 100% 100%;
+}
+
+.scene.img-wrapper:hover,
+.scene.img-wrapper.active {
+    border-color: black;
+    cursor: pointer;
+}
+.camera-name,
+.scene-name {
     font-weight: 700;
     font-size: 18px;
     text-align: center;
+}
+.scene-tmp {
+    background: url("../img/Leather.png");
+
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    background-color: hsl(206, 27%, 38%);
+    background-blend-mode: multiply;
+    border-radius: 0;
 }
 .streamButton {
     font-size: 16px;
@@ -87,4 +400,7 @@ body {
     cursor: not-allowed;
     opacity: 0.6;
     box-shadow: none;
+}
+.normal {
+    font-weight: 400;
 }

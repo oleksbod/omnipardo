@@ -35,6 +35,64 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                 console.log("Sending camera data:", data);
                 //console.log("Sending camera str data:", JSON.stringify(data));
                 cloudstream.sendJsonData(data);
+
+                document.querySelectorAll(".camera").forEach((c) => c.classList.remove("active"));
+                camera.classList.add("active");
+            });
+        });
+
+        document.querySelectorAll(".scene").forEach((scene) => {
+            scene.addEventListener("click", () => {
+                const parent = scene.closest(".scene-container").parentElement;
+
+                // remove previous active in the same container
+                parent.querySelectorAll(".scene").forEach((el) => el.classList.remove("active"));
+                scene.classList.add("active");
+
+                // get combined value
+                const activeEx = document.querySelector(".exterior-scenes-container .scene.active");
+                const activeIn = document.querySelector(".interior-scenes-container .scene.active");
+
+                const exValue = activeEx ? activeEx.dataset.exscene : "";
+                const inValue = activeIn ? activeIn.dataset.inscene : "";
+
+                const value = exValue && inValue ? `${exValue}_${inValue}` : exValue || inValue;
+
+                const data = {
+                    Type: 1,
+                    Key: "",
+                    Value: value,
+                };
+
+                console.log("Sending scene data:", data);
+                cloudstream.sendJsonData(data);
+            });
+        });
+
+        document.querySelectorAll(".exterior-scenes-container").forEach((container) => {
+            const label = container.previousElementSibling;
+            const wrappers = container.querySelectorAll(".texture-wrapper");
+
+            wrappers.forEach((wrapper) => {
+                wrapper.addEventListener("click", () => {
+                    wrappers.forEach((w) => w.classList.remove("active"));
+
+                    wrapper.classList.add("active");
+                    //{"Type":2,"Key":"Hull5 : 1","Value":"mat020"}
+
+                    const data = {
+                        Type: 2,
+                        Key: wrapper.dataset.mesh,
+                        Value: wrapper.dataset.mat,
+                    };
+
+                    console.log("Sending material data:", data);
+                    cloudstream.sendJsonData(data);
+
+                    if (label && label.classList.contains("normal")) {
+                        label.textContent = wrapper.dataset.name;
+                    }
+                });
             });
         });
     });
