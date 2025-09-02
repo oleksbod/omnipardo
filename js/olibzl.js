@@ -203,7 +203,7 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
 
         document.querySelectorAll(".interior-scenes-container.moq").forEach((container) => {
             const label = container.previousElementSibling;
-            const wrappers = container.querySelectorAll(".scene.img-wrapper");
+            const wrappers = container.querySelectorAll(".essenza-scene.img-wrapper");
 
             wrappers.forEach((wrapper) => {
                 wrapper.addEventListener("click", () => {
