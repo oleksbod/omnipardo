@@ -5,6 +5,7 @@ body {
     font-weight: 300;
     font-style: normal;
     letter-spacing: -0.4px;
+    min-height: 75vh;
 }
 .metalic-paint {
     background-image: url("../img/texture/metallic_paint.png");
@@ -199,13 +200,28 @@ body {
 .stream-container {
     display: flex;
     width: 100%;
-    min-height: 500px;
 
     padding: 0 20px;
     padding-top: 150px;
     gap: 20px;
-    height: calc(100vh - 150px);
+    height: 95vh;
     overflow: hidden;
+}
+
+.stream-view-container {
+    flex: 0 0 70%;
+    max-width: 1280px;
+    display: flex;
+    flex-direction: column;
+}
+#streamContainer {
+    aspect-ratio: 16 / 9;
+    height: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+
+    border: 2px solid blue;
 }
 .sidebar {
     flex: 1;
@@ -234,21 +250,6 @@ body {
     margin-bottom: 15px;
     text-decoration: underline;
     font-size: 17px;
-}
-.stream-view-container {
-    flex: 0 0 70%;
-    max-width: 1280px;
-    display: flex;
-    flex-direction: column;
-}
-#streamContainer {
-    aspect-ratio: 16 / 9;
-    height: auto;
-    border-radius: 10px;
-    overflow: hidden;
-    width: 100%;
-
-    border: 2px solid blue;
 }
 .cameras {
     display: flex;
@@ -325,7 +326,8 @@ body {
     border-radius: 12px;
 }
 
-.scene.img-wrapper {
+.scene.img-wrapper,
+.essenza-scene.img-wrapper {
     width: 132px;
     height: 70px;
     overflow: hidden;
@@ -348,6 +350,7 @@ body {
     border-radius: 6px;
 }
 .texture {
+    box-shadow: 0px 4px 16px #00000029;
     width: 62px;
     height: 62px;
 
@@ -358,8 +361,40 @@ body {
     background-size: 100% 100%;
 }
 
+.cockpit-selector {
+    display: flex;
+    gap: 1rem;
+}
+
+.radio-option {
+    position: relative;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    color: black;
+}
+
+.radio-option input {
+    display: none;
+}
+
+.radio-option span {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 2px solid black;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+}
+
+.radio-option input:checked + span {
+    background: black;
+    color: white;
+}
+
 .scene.img-wrapper:hover,
-.scene.img-wrapper.active {
+.scene.img-wrapper.active,
+.essenza-scene.img-wrapper:hover,
+.essenza-scene.img-wrapper.active {
     border-color: black;
     cursor: pointer;
 }
@@ -403,4 +438,18 @@ body {
 }
 .normal {
     font-weight: 400;
+}
+
+@media (max-width: 1000px) {
+    .stream-container {
+        flex-direction: column;
+        height: auto;
+        overflow-y: auto;
+        padding-top: 150px;
+    }
+
+    .sidebar {
+        overflow: visible;
+        padding-right: 0;
+    }
 }

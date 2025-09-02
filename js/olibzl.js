@@ -1,3 +1,37 @@
+// F002 set
+const materialsF002 = [
+    { Key: "Cabin5 : 10", Value: "mat002" },
+    { Key: "Cabin5 : 9", Value: "mat002" },
+    { Key: "Cabin2 : 14", Value: "mat002" },
+    { Key: "Cabin2 : 9", Value: "mat002" },
+    { Key: "Cabin3 : 7", Value: "mat002" },
+    { Key: "Cabin5 : 0", Value: "mat003" },
+    { Key: "Cabin3 : 3", Value: "mat003" },
+    { Key: "Cabin2 : 4", Value: "mat003" },
+    { Key: "Cabin3 : 5", Value: "mat004" },
+    { Key: "Cabin5 : 1", Value: "mat007" },
+    { Key: "Cabin1 : 2", Value: "mat007" },
+    { Key: "Cabin1 : 1", Value: "mat002" },
+    { Key: "Cabin2 : 6", Value: "mat007" },
+];
+
+// F003 set
+const materialsF003 = [
+    { Key: "Cabin5 : 10", Value: "mat003" },
+    { Key: "Cabin5 : 9", Value: "mat003" },
+    { Key: "Cabin2 : 14", Value: "mat003" },
+    { Key: "Cabin2 : 9", Value: "mat003" },
+    { Key: "Cabin3 : 7", Value: "mat003" },
+    { Key: "Cabin5 : 0", Value: "mat002" },
+    { Key: "Cabin3 : 3", Value: "mat002" },
+    { Key: "Cabin2 : 4", Value: "mat002" },
+    { Key: "Cabin3 : 5", Value: "mat005" },
+    { Key: "Cabin5 : 1", Value: "mat006" },
+    { Key: "Cabin1 : 2", Value: "mat006" },
+    { Key: "Cabin1 : 1", Value: "mat003" },
+    { Key: "Cabin2 : 6", Value: "mat006" },
+];
+
 const libzl = new LibZL();
 
 const cloudstreamSettings = {
@@ -49,6 +83,12 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                 parent.querySelectorAll(".scene").forEach((el) => el.classList.remove("active"));
                 scene.classList.add("active");
 
+                // update scene-label text
+                const label = parent.previousElementSibling; // the .scene-label
+                if (label && label.classList.contains("scene-label")) {
+                    label.textContent = scene.dataset.name || "";
+                }
+
                 // get combined value
                 const activeEx = document.querySelector(".exterior-scenes-container .scene.active");
                 const activeIn = document.querySelector(".interior-scenes-container .scene.active");
@@ -80,18 +120,162 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                     wrapper.classList.add("active");
                     //{"Type":2,"Key":"Hull5 : 1","Value":"mat020"}
 
-                    const data = {
+                    // split meshes if multiple (separated by ;)
+                    const meshes = wrapper.dataset.mesh.split(";").map((m) => m.trim());
+
+                    meshes.forEach((mesh) => {
+                        const data = {
+                            Type: 2,
+                            Key: mesh,
+                            Value: wrapper.dataset.mat,
+                        };
+
+                        console.log("Sending material data:", data);
+                        cloudstream.sendJsonData(data);
+                    });
+
+                    if (label && label.classList.contains("normal")) {
+                        label.textContent = wrapper.dataset.name;
+                    }
+                });
+            });
+        });
+
+        document.querySelectorAll(".cockpit-selector input[type=radio]").forEach((radio) => {
+            radio.addEventListener("change", () => {
+                if (radio.checked) {
+                    const dataTop = {
                         Type: 2,
-                        Key: wrapper.dataset.mesh,
-                        Value: wrapper.dataset.mat,
+                        Key: "Hul1 : 3",
+                        Value: "mat021",
                     };
+                    let dataBottom = {
+                        Type: 2,
+                        Key: "Hul1 : 0",
+                        Value: "mat020",
+                    };
+                    if (radio.value === "Nautical") {
+                        const activeCoperta = document.querySelector(".coperta .texture-wrapper.active");
+
+                        if (activeCoperta) {
+                            const mat = activeCoperta.dataset.mat;
+                            dataBottom = {
+                                Type: 2,
+                                Key: "Hull6 : 0",
+                                Value: mat,
+                            };
+                        }
+                    }
+                    console.log("Sending material dataTop:", dataTop);
+                    cloudstream.sendJsonData(dataTop);
+                    console.log("Sending material dataBottom:", dataBottom);
+                    cloudstream.sendJsonData(dataBottom);
+                }
+            });
+        });
+
+        document.querySelectorAll(".ante-cucina-selector input[type=radio]").forEach((radio) => {
+            radio.addEventListener("change", () => {
+                if (radio.checked) {
+                    let data = {
+                        Type: 2,
+                        Key: "Hul2 : 3",
+                        Value: "mat002",
+                    };
+
+                    if (radio.value === "No") {
+                        const activeCucina = document.querySelector(".cucina .texture-wrapper.active");
+
+                        if (activeCucina) {
+                            const mat = activeCucina.dataset.mat;
+                            data = {
+                                Type: 2,
+                                Key: "Hull2 : 3",
+                                Value: mat,
+                            };
+                        }
+                    }
+                    console.log("Sending material data:", data);
+                    cloudstream.sendJsonData(data);
+                }
+            });
+        });
+
+        document.querySelectorAll(".interior-scenes-container.moq").forEach((container) => {
+            const label = container.previousElementSibling;
+            const wrappers = container.querySelectorAll(".scene.img-wrapper");
+
+            wrappers.forEach((wrapper) => {
+                wrapper.addEventListener("click", () => {
+                    wrappers.forEach((w) => w.classList.remove("active"));
+                    wrapper.classList.add("active");
+
+                    const wrapData = wrapper.dataset.moq;
+
+                    let data = {
+                        Type: 2,
+                        Key: "Cabin5 : 10",
+                        Value: "mat001",
+                    };
+
+                    if (wrapData === "No") {
+                        // Find active Essenza
+                        const activeEssenza = document.querySelector(
+                            ".interior-scenes-container.essenza .img-wrapper.active"
+                        );
+
+                        if (activeEssenza) {
+                            const essenzaName = activeEssenza.dataset.name;
+                            if (essenzaName === "F002") {
+                                data.Value = "mat002";
+                            } else if (essenzaName === "F003") {
+                                data.Value = "mat003";
+                            }
+                        }
+                    }
 
                     console.log("Sending material data:", data);
                     cloudstream.sendJsonData(data);
 
                     if (label && label.classList.contains("normal")) {
+                        label.textContent = wrapData;
+                    }
+                });
+            });
+        });
+
+        document.querySelectorAll(".interior-scenes-container.essenza").forEach((container) => {
+            const label = container.previousElementSibling; // .scene-label.normal
+            const wrappers = container.querySelectorAll(".img-wrapper");
+
+            wrappers.forEach((wrapper) => {
+                wrapper.addEventListener("click", () => {
+                    wrappers.forEach((w) => w.classList.remove("active"));
+                    wrapper.classList.add("active");
+
+                    // update label text
+                    if (label && label.classList.contains("normal")) {
                         label.textContent = wrapper.dataset.name;
                     }
+
+                    // pick correct materials
+                    let selectedMaterials = [];
+                    if (wrapper.dataset.name === "F002") {
+                        selectedMaterials = materialsF002;
+                    } else if (wrapper.dataset.name === "F003") {
+                        selectedMaterials = materialsF003;
+                    }
+
+                    // send each material
+                    selectedMaterials.forEach((m) => {
+                        const data = {
+                            Type: 2,
+                            Key: m.Key,
+                            Value: m.Value,
+                        };
+                        console.log("Sending Essenza material:", data);
+                        cloudstream.sendJsonData(data);
+                    });
                 });
             });
         });
