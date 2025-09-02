@@ -146,12 +146,12 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                 if (radio.checked) {
                     const dataTop = {
                         Type: 2,
-                        Key: "Hul1 : 3",
+                        Key: "Hull1 : 3",
                         Value: "mat021",
                     };
                     let dataBottom = {
                         Type: 2,
-                        Key: "Hul1 : 0",
+                        Key: "Hull1 : 0",
                         Value: "mat020",
                     };
                     if (radio.value === "Nautical") {
@@ -179,7 +179,7 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                 if (radio.checked) {
                     let data = {
                         Type: 2,
-                        Key: "Hul2 : 3",
+                        Key: "Hull2 : 3",
                         Value: "mat002",
                     };
 
