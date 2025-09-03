@@ -161,6 +161,19 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                     if (label && label.classList.contains("normal")) {
                         label.textContent = wrapper.dataset.name;
                     }
+
+                    if (wrapper.dataset.cucina === "true") {
+                        const anteRadioNo = document.querySelector(".ante-cucina-selector input[value='No']:checked");
+                        if (anteRadioNo) {
+                            const data = {
+                                Type: 2,
+                                Key: "Hull2 : 3",
+                                Value: wrapper.dataset.mat,
+                            };
+                            console.log("Sending additional material for Ante Cucina = No:", data);
+                            cloudstream.sendJsonData(data);
+                        }
+                    }
                 });
             });
         });
