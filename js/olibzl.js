@@ -89,6 +89,30 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                     label.textContent = scene.dataset.name || "";
                 }
 
+                // ===== NEW LOGIC: update Essenza block =====
+                const essenzaContainer = document.querySelector(".interior-scenes-container.essenza");
+                const essenzaLabel = essenzaContainer?.previousElementSibling;
+
+                if (essenzaContainer) {
+                    const essenzaScenes = essenzaContainer.querySelectorAll(".essenza-scene");
+
+                    if (scene.dataset.name === "Dinette") {
+                        // Dinette → Essenza F002 / F003
+
+                        essenzaScenes[0].dataset.name = "F002";
+                        essenzaScenes[1].dataset.name = "F003";
+                        const activeEssenza = essenzaContainer.querySelector(".essenza-scene.active");
+                        essenzaLabel.textContent = activeEssenza ? activeEssenza.dataset.name : "F002";
+                    } else if (scene.dataset.name === "Cabin") {
+                        // Cabin → Essenza F000 / F001
+
+                        essenzaScenes[0].dataset.name = "F000";
+                        essenzaScenes[1].dataset.name = "F001";
+                        const activeEssenza = essenzaContainer.querySelector(".essenza-scene.active");
+                        essenzaLabel.textContent = activeEssenza ? activeEssenza.dataset.name : "F000";
+                    }
+                }
+
                 // get combined value
                 const activeEx = document.querySelector(".exterior-scenes-container .scene.active");
                 const activeIn = document.querySelector(".interior-scenes-container .scene.active");
@@ -218,6 +242,18 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                         Value: "mat001",
                     };
 
+                    let data1 = {
+                        Type: 2,
+                        Key: "Cabin2 : 14",
+                        Value: "mat001",
+                    };
+
+                    let data2 = {
+                        Type: 2,
+                        Key: "Cabin2 : 9",
+                        Value: "mat001",
+                    };
+
                     if (wrapData === "No") {
                         // Find active Essenza
                         const activeEssenza = document.querySelector(
@@ -226,16 +262,22 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
 
                         if (activeEssenza) {
                             const essenzaName = activeEssenza.dataset.name;
-                            if (essenzaName === "F002") {
+                            if (essenzaName === "F002" || essenzaName === "F000") {
                                 data.Value = "mat002";
-                            } else if (essenzaName === "F003") {
+                                data1.Value = "mat002";
+                                data2.Value = "mat002";
+                            } else if (essenzaName === "F003" || essenzaName === "F001") {
                                 data.Value = "mat003";
+                                data1.Value = "mat003";
+                                data2.Value = "mat003";
                             }
                         }
                     }
 
                     console.log("Sending material data:", data);
                     cloudstream.sendJsonData(data);
+                    cloudstream.sendJsonData(data1);
+                    cloudstream.sendJsonData(data2);
 
                     if (label && label.classList.contains("normal")) {
                         label.textContent = wrapData;
