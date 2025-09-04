@@ -1,36 +1,202 @@
 // F002 set
 const materialsF002 = [
-    { Key: "Cabin5 : 10", Value: "mat002" },
-    { Key: "Cabin5 : 9", Value: "mat002" },
-    { Key: "Cabin2 : 14", Value: "mat002" },
-    { Key: "Cabin2 : 9", Value: "mat002" },
-    { Key: "Cabin3 : 7", Value: "mat002" },
-    { Key: "Cabin5 : 0", Value: "mat003" },
-    { Key: "Cabin3 : 3", Value: "mat003" },
-    { Key: "Cabin2 : 4", Value: "mat003" },
-    { Key: "Cabin3 : 5", Value: "mat004" },
-    { Key: "Cabin5 : 1", Value: "mat007" },
-    { Key: "Cabin1 : 2", Value: "mat007" },
-    { Key: "Cabin1 : 1", Value: "mat002" },
-    { Key: "Cabin2 : 6", Value: "mat007" },
+    { Type: 2, Key: "Cabin5 : 10", Value: "mat002" },
+    { Type: 2, Key: "Cabin5 : 9", Value: "mat002" },
+    { Type: 2, Key: "Cabin2 : 14", Value: "mat002" },
+    { Type: 2, Key: "Cabin2 : 9", Value: "mat002" },
+    { Type: 2, Key: "Cabin3 : 7", Value: "mat002" },
+    { Type: 2, Key: "Cabin5 : 0", Value: "mat003" },
+    { Type: 2, Key: "Cabin3 : 3", Value: "mat003" },
+    { Type: 2, Key: "Cabin2 : 4", Value: "mat003" },
+    { Type: 2, Key: "Cabin3 : 5", Value: "mat004" },
+    { Type: 2, Key: "Cabin5 : 1", Value: "mat007" },
+    { Type: 2, Key: "Cabin1 : 2", Value: "mat007" },
+    { Type: 2, Key: "Cabin1 : 1", Value: "mat002" },
+    { Type: 2, Key: "Cabin2 : 6", Value: "mat007" },
 ];
 
 // F003 set
 const materialsF003 = [
-    { Key: "Cabin5 : 10", Value: "mat003" },
-    { Key: "Cabin5 : 9", Value: "mat003" },
-    { Key: "Cabin2 : 14", Value: "mat003" },
-    { Key: "Cabin2 : 9", Value: "mat003" },
-    { Key: "Cabin3 : 7", Value: "mat003" },
-    { Key: "Cabin5 : 0", Value: "mat002" },
-    { Key: "Cabin3 : 3", Value: "mat002" },
-    { Key: "Cabin2 : 4", Value: "mat002" },
-    { Key: "Cabin3 : 5", Value: "mat005" },
-    { Key: "Cabin5 : 1", Value: "mat006" },
-    { Key: "Cabin1 : 2", Value: "mat006" },
-    { Key: "Cabin1 : 1", Value: "mat003" },
-    { Key: "Cabin2 : 6", Value: "mat006" },
+    { Type: 2, Key: "Cabin5 : 10", Value: "mat003" },
+    { Type: 2, Key: "Cabin5 : 9", Value: "mat003" },
+    { Type: 2, Key: "Cabin2 : 14", Value: "mat003" },
+    { Type: 2, Key: "Cabin2 : 9", Value: "mat003" },
+    { Type: 2, Key: "Cabin3 : 7", Value: "mat003" },
+    { Type: 2, Key: "Cabin5 : 0", Value: "mat002" },
+    { Type: 2, Key: "Cabin3 : 3", Value: "mat002" },
+    { Type: 2, Key: "Cabin2 : 4", Value: "mat002" },
+    { Type: 2, Key: "Cabin3 : 5", Value: "mat005" },
+    { Type: 2, Key: "Cabin5 : 1", Value: "mat006" },
+    { Type: 2, Key: "Cabin1 : 2", Value: "mat006" },
+    { Type: 2, Key: "Cabin1 : 1", Value: "mat003" },
+    { Type: 2, Key: "Cabin2 : 6", Value: "mat006" },
 ];
+
+let defaultSettings = {};
+let currentSettings = {};
+
+// helpers (зберігаємо ключи як у DOM — з ";" якщо є)
+function makeMatObj(mesh, mat) {
+    return { Type: 2, Key: mesh, Value: mat };
+}
+function makeSceneObj(val) {
+    return { Type: 1, Key: "", Value: val };
+}
+
+// Збери дефолти з усіх контейнерів, що мають id і відповідають структурі
+function collectDefaults() {
+    defaultSettings = {};
+
+    // вибираємо контейнери з id, які використовуються як блоки настроювань
+    const containers = document.querySelectorAll(".exterior-scenes-container[id], .interior-scenes-container[id]");
+
+    containers.forEach((container) => {
+        const id = container.id;
+        if (!id) return;
+
+        // ESSENZA (спеціальна логіка)
+        if (container.classList.contains("essenza")) {
+            const activeEss = container.querySelector(".img-wrapper.active") || container.querySelector(".img-wrapper");
+            let essName = activeEss?.dataset.name;
+
+            // fallback: визначити по активній внутрішній сцені
+            if (!essName) {
+                const activeInterior = document.querySelector(".interior-scenes-container .scene.active");
+                essName = activeInterior && activeInterior.dataset.name === "Dinette" ? "F002" : "F000";
+            }
+
+            if (essName === "F002" || essName === "F000") {
+                // materialsF002 має бути визначений вище в твоєму коді
+                defaultSettings[id] =
+                    typeof materialsF002 !== "undefined" ? JSON.parse(JSON.stringify(materialsF002)) : [];
+            } else {
+                defaultSettings[id] =
+                    typeof materialsF003 !== "undefined" ? JSON.parse(JSON.stringify(materialsF003)) : [];
+            }
+
+            return;
+        }
+
+        // MOQUETTE (moq) — створює 3 Type:2 записи як у твоєму js
+        if (container.classList.contains("moq") || id.toLowerCase().includes("moquette")) {
+            const activeMoq = container.querySelector(".img-wrapper.active") || container.querySelector(".img-wrapper");
+            const moqVal = activeMoq?.dataset.moq || "Si";
+
+            const data = { Type: 2, Key: "Cabin5 : 10", Value: "mat001" };
+            const data1 = { Type: 2, Key: "Cabin2 : 14", Value: "mat001" };
+            const data2 = { Type: 2, Key: "Cabin2 : 9", Value: "mat001" };
+
+            if (moqVal === "No") {
+                const activeEss =
+                    document.querySelector(".interior-scenes-container.essenza .img-wrapper.active") ||
+                    document.querySelector(".interior-scenes-container.essenza .img-wrapper");
+                const essName = activeEss?.dataset.name;
+
+                if (essName === "F002" || essName === "F000") {
+                    data.Value = data1.Value = data2.Value = "mat002";
+                } else if (essName === "F003" || essName === "F001") {
+                    data.Value = data1.Value = data2.Value = "mat003";
+                }
+            }
+
+            defaultSettings[id] = [data, data1, data2];
+            return;
+        }
+
+        // COCKPIT (radio container) — відправляє 2 Type:2 (top + bottom)
+        if (id === "cockpit" || container.classList.contains("cockpit-selector")) {
+            const radio = container.querySelector("input[type=radio]:checked");
+            const dataTop = { Type: 2, Key: "Hull1 : 3", Value: "mat021" };
+            let dataBottom = { Type: 2, Key: "Hull1 : 0", Value: "mat020" };
+
+            if (radio && radio.value === "Nautical") {
+                const activeCoperta = document.querySelector(".coperta .texture-wrapper.active");
+                if (activeCoperta) dataBottom.Value = activeCoperta.dataset.mat;
+            }
+
+            defaultSettings[id] = [dataTop, dataBottom];
+            return;
+        }
+
+        // ANTE CUCINA (radio) — Key = "Hull2 : 3"
+        if (id === "anteCucina" || container.classList.contains("ante-cucina-selector")) {
+            const radio = container.querySelector("input[type=radio]:checked");
+            let data = { Type: 2, Key: "Hull2 : 3", Value: "mat002" }; // js default mat002
+
+            if (radio && radio.value === "No") {
+                const activeCucina = document.querySelector(".cucina .texture-wrapper.active");
+                if (activeCucina) data.Value = activeCucina.dataset.mat;
+            }
+
+            defaultSettings[id] = data;
+            return;
+        }
+
+        // ЗАГАЛЬНА ЛОГІКА: texture-wrapper.active або img-wrapper.active
+        const activeTex = container.querySelector(
+            ".texture-wrapper.active, .img-wrapper.active, .essenza-scene.img-wrapper.active"
+        );
+        if (activeTex) {
+            if (activeTex.classList.contains("texture-wrapper")) {
+                const meshRaw = activeTex.getAttribute("data-mesh") || activeTex.dataset.mesh || "";
+                const mat = activeTex.dataset.mat || activeTex.getAttribute("data-mat") || "";
+                defaultSettings[id] = { Type: 2, Key: meshRaw, Value: mat };
+            } else {
+                // наприклад interior scene (звичайний вибір моделі) — збережемо як Type:1
+                const name = activeTex.dataset.name || activeTex.dataset.moq || "";
+                defaultSettings[id] = makeSceneObj(name);
+            }
+        }
+    });
+
+    // Копіюємо у currentSettings
+    currentSettings = structuredClone(defaultSettings);
+
+    console.log("Collected defaultSettings:", defaultSettings);
+    console.log("Initialized currentSettings:", currentSettings);
+    return defaultSettings;
+}
+
+// Функція оновлення поточної копії (викликати при зміні елементів)
+function updateCurrentSettings(parentId, data) {
+    if (!parentId) return;
+    currentSettings[parentId] = data;
+    console.log("updateCurrentSettings:", parentId, data);
+}
+
+// (Опціонально) функція — відправити весь currentSettings на cloudstream (викликати коли потрібно)
+function sendSettingsToCloud(settings) {
+    Object.values(settings).forEach((entry) => {
+        if (Array.isArray(entry)) {
+            entry.forEach((d) => sendDataEntry(d));
+        } else if (entry && typeof entry === "object") {
+            sendDataEntry(entry);
+        }
+    });
+
+    console.log("Sent settings to cloudstream.");
+}
+// допоміжна — враховує Key з ";" (декілька mesh)
+function sendDataEntry(d) {
+    if (d.Type === 2 && d.Key && d.Key.includes(";")) {
+        const meshes = d.Key.split(";").map((m) => m.trim());
+        meshes.forEach((mesh) => {
+            const data = { ...d, Key: mesh };
+            console.log("Sending material data (split):", data);
+            cloudstream.sendJsonData(data);
+        });
+    } else {
+        console.log("Sending data:", d);
+        cloudstream.sendJsonData(d);
+    }
+}
+
+// Викликати при завантаженні
+document.addEventListener("DOMContentLoaded", () => {
+    collectDefaults();
+    console.log("Default settings:", defaultSettings);
+    console.log("Current settings:", currentSettings);
+});
 
 const libzl = new LibZL();
 
@@ -54,6 +220,16 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
     });
     cloudstream.addEventListener("streamReady", function () {
         console.log("The stream is ready!");
+
+        setTimeout(() => {
+            const data = {
+                Type: 0,
+                Key: "test",
+                Value: "Orbit",
+            };
+            cloudstream.sendJsonData(data);
+            sendSettingsToCloud(defaultSettings);
+        }, 700);
 
         // Attach click listeners to cameras
         document.querySelectorAll(".camera").forEach((camera) => {
@@ -130,6 +306,10 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
 
                 console.log("Sending scene data:", data);
                 cloudstream.sendJsonData(data);
+
+                setTimeout(() => {
+                    sendSettingsToCloud(currentSettings);
+                }, 1000);
             });
         });
 
@@ -174,6 +354,59 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                             cloudstream.sendJsonData(data);
                         }
                     }
+
+                    const parentWithId = wrapper.closest("[id]");
+                    if (parentWithId) {
+                        const pid = parentWithId.id;
+                        // головний об'єкт (зберігаємо "сирий" data-mesh зі всіма ';' як у DOM)
+
+                        const main = {
+                            Type: 2,
+                            Key: wrapper.getAttribute("data-mesh") || wrapper.dataset.mesh,
+                            Value: wrapper.dataset.mat,
+                        };
+
+                        if (pid === "coperta") {
+                            const activeCockpitRadio = document.querySelector(
+                                ".cockpit-selector input[type=radio]:checked"
+                            );
+
+                            if (activeCockpitRadio && activeCockpitRadio.value === "Nautical") {
+                                const dataTop = {
+                                    Type: 2,
+                                    Key: "Hull1 : 3",
+                                    Value: "mat021",
+                                };
+                                const dataBottom = {
+                                    Type: 2,
+                                    Key: "Hull1 : 0",
+                                    Value: wrapper.dataset.mat,
+                                };
+
+                                console.log("Updating cockpit (Nautical):", [dataTop, dataBottom]);
+                                cloudstream.sendJsonData(dataTop);
+                                cloudstream.sendJsonData(dataBottom);
+
+                                updateCurrentSettings("cockpit", [dataTop, dataBottom]);
+                            }
+                        }
+                        // якщо cucina і ante = No — зберігаємо додатково Hull2 : 3
+                        if (wrapper.dataset.cucina === "true") {
+                            const anteNo = document.querySelector(".ante-cucina-selector input[value='No']:checked");
+                            if (anteNo) {
+                                updateCurrentSettings(pid, [
+                                    main,
+                                    { Type: 2, Key: "Hull2 : 3", Value: wrapper.dataset.mat },
+                                ]);
+                            } else {
+                                updateCurrentSettings(pid, main);
+                            }
+                        } else {
+                            updateCurrentSettings(pid, main);
+                        }
+                    }
+
+                    console.log(currentSettings);
                 });
             });
         });
@@ -203,6 +436,7 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                     cloudstream.sendJsonData(dataTop);
                     console.log("Sending material dataBottom:", dataBottom);
                     cloudstream.sendJsonData(dataBottom);
+                    updateCurrentSettings("cockpit", [dataTop, dataBottom]);
                 }
             });
         });
@@ -230,6 +464,7 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                     }
                     console.log("Sending material data:", data);
                     cloudstream.sendJsonData(data);
+                    updateCurrentSettings("anteCucina", data);
                 }
             });
         });
@@ -288,6 +523,8 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                     cloudstream.sendJsonData(data1);
                     cloudstream.sendJsonData(data2);
 
+                    updateCurrentSettings("moquette", [data, data1, data2]);
+
                     if (label && label.classList.contains("normal")) {
                         label.textContent = wrapData;
                     }
@@ -327,6 +564,8 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                         console.log("Sending Essenza material:", data);
                         cloudstream.sendJsonData(data);
                     });
+
+                    updateCurrentSettings("essenza", selectedMaterials);
                 });
             });
         });

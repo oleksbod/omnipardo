@@ -2068,13 +2068,13 @@
                                         class="scene img-wrapper active"
                                         data-name="Entrobordo"
                                         data-exscene="P43_Entrobordo">
-                                        <img class="img" src="img/Esterno/Entrobordo.jpg" alt="orbit camera" />
+                                        <img class="img" src="img/Esterno/Entrobordo.jpg" alt="P43_Entrobordo" />
                                     </div>
                                 </div>
 
                                 <div class="scene-container">
                                     <div class="scene img-wrapper" data-name="Fuoribordo" data-exscene="P43_Fuoribordo">
-                                        <img class="img" src="img/Esterno/Fuoribordo.jpg" alt="prua camera" />
+                                        <img class="img" src="img/Esterno/Fuoribordo.jpg" alt="P43_Fuoribordo" />
                                     </div>
                                 </div>
                             </div>
@@ -2084,7 +2084,7 @@
                             <!-- Carena -->
                             <div class="scene-label">Carena</div>
                             <div class="scene-label normal">Bianco</div>
-                            <div class="exterior-scenes-container">
+                            <div id="carena" class="exterior-scenes-container">
                                 <div class="scene-container">
                                     <div
                                         class="texture-wrapper active"
@@ -2108,7 +2108,7 @@
                             <!-- Linea di Bellezza -->
                             <div class="scene-label">Linea di Bellezza</div>
                             <div class="scene-label normal">Grey LINX LZ7S</div>
-                            <div class="exterior-scenes-container">
+                            <div id="beautyLine" class="exterior-scenes-container">
                                 <div class="scene-container">
                                     <div
                                         class="texture-wrapper active"
@@ -2186,7 +2186,7 @@
                             <!-- Scafo -->
                             <div class="scene-label">Scafo</div>
                             <div class="scene-label normal">Grey LINX LZ7S</div>
-                            <div class="exterior-scenes-container">
+                            <div id="hull" class="exterior-scenes-container">
                                 <div class="scene-container">
                                     <div
                                         class="texture-wrapper active"
@@ -2264,7 +2264,7 @@
                             <!-- Coperta -->
                             <div class="scene-label">Coperta</div>
                             <div class="scene-label normal">Grey LINX LZ7S</div>
-                            <div class="exterior-scenes-container coperta">
+                            <div id="coperta" class="exterior-scenes-container coperta">
                                 <div class="scene-container">
                                     <div
                                         class="texture-wrapper active"
@@ -2342,7 +2342,7 @@
                             <!-- T-Top -->
                             <div class="scene-label">T-Top</div>
                             <div class="scene-label normal">Grey LINX LZ7S</div>
-                            <div class="exterior-scenes-container">
+                            <div id="tTop" class="exterior-scenes-container">
                                 <div class="scene-container">
                                     <div
                                         class="texture-wrapper active"
@@ -2411,7 +2411,7 @@
                             <!---->
                             <div class="scene-label">Cockpit</div>
 
-                            <div class="exterior-scenes-container cockpit-selector">
+                            <div id="cockpit" class="exterior-scenes-container cockpit-selector">
                                 <label class="radio-option">
                                     <input
                                         type="radio"
@@ -2435,7 +2435,7 @@
                             <!-- Cucina -->
                             <div class="scene-label">Cucina</div>
                             <div class="scene-label normal">Grey LINX LZ7S</div>
-                            <div class="exterior-scenes-container cucina">
+                            <div id="cucina" class="exterior-scenes-container cucina">
                                 <div class="scene-container">
                                     <div
                                         class="texture-wrapper active"
@@ -2521,7 +2521,7 @@
                             <!-- Ante cucina -->
                             <div class="scene-label">Ante cucina</div>
                             <div class="scene-label normal">Vuoi le ante in legno?</div>
-                            <div class="exterior-scenes-container ante-cucina-selector">
+                            <div id="anteCucina" class="exterior-scenes-container ante-cucina-selector">
                                 <label class="radio-option">
                                     <input type="radio" name="antecucina" value="Yes" checked />
                                     <span>Si</span>
@@ -2536,7 +2536,7 @@
                             <!-- Pavimentazione -->
                             <div class="scene-label">Pavimentazione</div>
                             <div class="scene-label normal">Natural Teak with black caulking</div>
-                            <div class="exterior-scenes-container">
+                            <div id="flooring" class="exterior-scenes-container">
                                 <div class="scene-container">
                                     <div
                                         class="texture-wrapper active"
@@ -2615,7 +2615,7 @@
 
                             <div class="scene-label">Tessuto interno sedute guida</div>
                             <div class="scene-label normal">ICE</div>
-                            <div class="exterior-scenes-container">
+                            <div id="driverSeatsInterior" class="exterior-scenes-container">
                                 <div class="scene-container">
                                     <div
                                         class="texture-wrapper active"
@@ -2664,10 +2664,10 @@
                                 <div class="scene-container">
                                     <div
                                         class="texture-wrapper"
-                                        data-mat="mat011"
+                                        data-mat="mat039"
                                         data-name="Taupe"
                                         data-mesh="Hull4 : 2">
-                                        <div class="texture fabric mat011"></div>
+                                        <div class="texture fabric mat039"></div>
                                     </div>
                                 </div>
                                 <div class="scene-container">
@@ -2811,7 +2811,7 @@
 
                             <div class="scene-label">Tessuto esterno sedute guida</div>
                             <div class="scene-label normal">ICE</div>
-                            <div class="exterior-scenes-container">
+                            <div id="driverSeatsExterior" class="exterior-scenes-container">
                                 <div class="scene-container">
                                     <div
                                         class="texture-wrapper active"
@@ -2860,10 +2860,10 @@
                                 <div class="scene-container">
                                     <div
                                         class="texture-wrapper"
-                                        data-mat="mat011"
+                                        data-mat="mat039"
                                         data-name="Taupe"
                                         data-mesh="Hull4 : 1">
-                                        <div class="texture fabric mat011"></div>
+                                        <div class="texture fabric mat039"></div>
                                     </div>
                                 </div>
                                 <div class="scene-container">
@@ -3007,7 +3007,7 @@
 
                             <div class="scene-label">Altri sedili esterni</div>
                             <div class="scene-label normal">ICE</div>
-                            <div class="exterior-scenes-container">
+                            <div id="otherSeats" class="exterior-scenes-container">
                                 <div class="scene-container">
                                     <div
                                         class="texture-wrapper active"
@@ -3056,10 +3056,10 @@
                                 <div class="scene-container">
                                     <div
                                         class="texture-wrapper"
-                                        data-mat="mat011"
+                                        data-mat="mat039"
                                         data-name="Taupe"
                                         data-mesh="Hull4 : 3">
-                                        <div class="texture fabric mat011"></div>
+                                        <div class="texture fabric mat039"></div>
                                     </div>
                                 </div>
                                 <div class="scene-container">
@@ -3218,7 +3218,7 @@
                             </div>
                             <div class="scene-type">Essenza</div>
                             <div class="scene-label normal">F000</div>
-                            <div class="interior-scenes-container essenza">
+                            <div id="essenza" class="interior-scenes-container essenza">
                                 <div class="scene-container">
                                     <div class="essenza-scene img-wrapper active" data-name="F000">
                                         <img
@@ -3238,12 +3238,21 @@
                                 </div>
                             </div>
 
-                            <div class="scene-type">Sofa Fabric</div>
-                            <div class="scene-label normal">Seafoam</div>
-                            <div class="exterior-scenes-container">
+                            <div class="scene-type">Tessuti divani</div>
+                            <div class="scene-label normal">Taupe</div>
+                            <div id="sofaFabric" class="exterior-scenes-container">
                                 <div class="scene-container">
                                     <div
                                         class="texture-wrapper active"
+                                        data-mesh="Cabin5 : 4;Cabin1 : 0"
+                                        data-mat="mat011"
+                                        data-name="Taupe">
+                                        <div class="texture fabric mat011"></div>
+                                    </div>
+                                </div>
+                                <div class="scene-container">
+                                    <div
+                                        class="texture-wrapper"
                                         data-mesh="Cabin5 : 4;Cabin1 : 0"
                                         data-mat="mat008"
                                         data-name="Seafoam">
@@ -3266,15 +3275,6 @@
                                         data-mat="mat010"
                                         data-name="Light grey">
                                         <div class="texture fabric mat010"></div>
-                                    </div>
-                                </div>
-                                <div class="scene-container">
-                                    <div
-                                        class="texture-wrapper"
-                                        data-mesh="Cabin5 : 4;Cabin1 : 0"
-                                        data-mat="mat011"
-                                        data-name="Taupe">
-                                        <div class="texture fabric mat011"></div>
                                     </div>
                                 </div>
                                 <div class="scene-container">
@@ -3335,7 +3335,7 @@
 
                             <div class="scene-type">Moquette</div>
                             <div class="scene-label normal">Si</div>
-                            <div class="interior-scenes-container moq">
+                            <div id="moquette" class="interior-scenes-container moq">
                                 <div class="scene-container">
                                     <div class="essenza-scene img-wrapper active" data-moq="Si">
                                         <img class="img" src="img/Moquette/YES.jpg" alt="Moquette yes" />
