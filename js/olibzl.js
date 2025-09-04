@@ -221,25 +221,6 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
     cloudstream.addEventListener("streamReady", function () {
         console.log("The stream is ready!");
 
-        setTimeout(() => {
-            const data = {
-                Type: 1,
-                Key: "",
-                Value: "P43_Entrobordo_Cabin",
-            };
-            cloudstream.sendJsonData(data);
-
-            setTimeout(() => {
-                const data = {
-                    Type: 0,
-                    Key: "test",
-                    Value: "Orbit",
-                };
-                cloudstream.sendJsonData(data);
-                sendSettingsToCloud(defaultSettings);
-            }, 700);
-        }, 700);
-
         // Attach click listeners to cameras
         document.querySelectorAll(".camera").forEach((camera) => {
             camera.addEventListener("click", () => {
@@ -315,10 +296,6 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
 
                 console.log("Sending scene data:", data);
                 cloudstream.sendJsonData(data);
-
-                setTimeout(() => {
-                    sendSettingsToCloud(currentSettings);
-                }, 1000);
             });
         });
 
@@ -585,11 +562,26 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
         console.warn(args);
         const data = JSON.parse(args);
         console.log(data);
+
+        if (data?.Message === "SCENE_CHANGED") {
+            sendSettingsToCloud(currentSettings);
+        } else if (data?.Message === "CONNECTED") {
+            const dataCam = {
+                Type: 0,
+                Key: "test",
+                Value: "Orbit",
+            };
+            cloudstream.sendJsonData(dataCam);
+            const data = {
+                Type: 1,
+                Key: "",
+                Value: "P43_Entrobordo_Cabin",
+            };
+            cloudstream.sendJsonData(data);
+        }
         // display as string
         const jsonString = JSON.stringify(data);
         console.warn("jsondatareceived", jsonString);
-        //print it
-        console.log(jsonString);
     });
 
     //Connecting to the stream
