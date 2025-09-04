@@ -153,7 +153,6 @@ function collectDefaults() {
     currentSettings = structuredClone(defaultSettings);
 
     console.log("Collected defaultSettings:", defaultSettings);
-    console.log("Initialized currentSettings:", currentSettings);
     return defaultSettings;
 }
 
@@ -161,7 +160,6 @@ function collectDefaults() {
 function updateCurrentSettings(parentId, data) {
     if (!parentId) return;
     currentSettings[parentId] = data;
-    console.log("updateCurrentSettings:", parentId, data);
 }
 
 // (Опціонально) функція — відправити весь currentSettings на cloudstream (викликати коли потрібно)
@@ -173,8 +171,6 @@ function sendSettingsToCloud(settings) {
             sendDataEntry(entry);
         }
     });
-
-    console.log("Sent settings to cloudstream.");
 }
 // допоміжна — враховує Key з ";" (декілька mesh)
 function sendDataEntry(d) {
@@ -182,11 +178,9 @@ function sendDataEntry(d) {
         const meshes = d.Key.split(";").map((m) => m.trim());
         meshes.forEach((mesh) => {
             const data = { ...d, Key: mesh };
-            console.log("Sending material data (split):", data);
             cloudstream.sendJsonData(data);
         });
     } else {
-        console.log("Sending data:", d);
         cloudstream.sendJsonData(d);
     }
 }
@@ -194,8 +188,6 @@ function sendDataEntry(d) {
 // Викликати при завантаженні
 document.addEventListener("DOMContentLoaded", () => {
     collectDefaults();
-    console.log("Default settings:", defaultSettings);
-    console.log("Current settings:", currentSettings);
 });
 
 const libzl = new LibZL();
@@ -216,7 +208,7 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
 
     //Adding event listeners to what we're interested in
     cloudstream.addEventListener("error", function (error) {
-        console.log("OmniStream had an error: ", error);
+        console.error("OmniStream had an error: ", error);
     });
     cloudstream.addEventListener("streamReady", function () {
         console.log("The stream is ready!");
@@ -232,8 +224,6 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                     Value: camName,
                 };
 
-                console.log("Sending camera data:", data);
-                //console.log("Sending camera str data:", JSON.stringify(data));
                 cloudstream.sendJsonData(data);
 
                 document.querySelectorAll(".camera").forEach((c) => c.classList.remove("active"));
@@ -293,8 +283,6 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                     Key: "",
                     Value: value,
                 };
-
-                console.log("Sending scene data:", data);
                 cloudstream.sendJsonData(data);
             });
         });
@@ -320,7 +308,6 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                             Value: wrapper.dataset.mat,
                         };
 
-                        console.log("Sending material data:", data);
                         cloudstream.sendJsonData(data);
                     });
 
@@ -336,7 +323,7 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                                 Key: "Hull2 : 3",
                                 Value: wrapper.dataset.mat,
                             };
-                            console.log("Sending additional material for Ante Cucina = No:", data);
+
                             cloudstream.sendJsonData(data);
                         }
                     }
@@ -369,7 +356,6 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                                     Value: wrapper.dataset.mat,
                                 };
 
-                                console.log("Updating cockpit (Nautical):", [dataTop, dataBottom]);
                                 cloudstream.sendJsonData(dataTop);
                                 cloudstream.sendJsonData(dataBottom);
 
@@ -391,8 +377,6 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                             updateCurrentSettings(pid, main);
                         }
                     }
-
-                    console.log(currentSettings);
                 });
             });
         });
@@ -418,9 +402,9 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                             dataBottom.Value = mat;
                         }
                     }
-                    console.log("Sending material dataTop:", dataTop);
+
                     cloudstream.sendJsonData(dataTop);
-                    console.log("Sending material dataBottom:", dataBottom);
+
                     cloudstream.sendJsonData(dataBottom);
                     updateCurrentSettings("cockpit", [dataTop, dataBottom]);
                 }
@@ -448,7 +432,7 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                             };
                         }
                     }
-                    console.log("Sending material data:", data);
+
                     cloudstream.sendJsonData(data);
                     updateCurrentSettings("anteCucina", data);
                 }
@@ -504,7 +488,6 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                         }
                     }
 
-                    console.log("Sending material data:", data);
                     cloudstream.sendJsonData(data);
                     cloudstream.sendJsonData(data1);
                     cloudstream.sendJsonData(data2);
@@ -547,7 +530,7 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                             Key: m.Key,
                             Value: m.Value,
                         };
-                        console.log("Sending Essenza material:", data);
+
                         cloudstream.sendJsonData(data);
                     });
 
@@ -579,9 +562,6 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
             };
             cloudstream.sendJsonData(data);
         }
-        // display as string
-        const jsonString = JSON.stringify(data);
-        console.warn("jsondatareceived", jsonString);
     });
 
     //Connecting to the stream
