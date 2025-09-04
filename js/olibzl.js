@@ -311,9 +311,9 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
 
                     // pick correct materials
                     let selectedMaterials = [];
-                    if (wrapper.dataset.name === "F002") {
+                    if (wrapper.dataset.name === "F002" || wrapper.dataset.name === "F000") {
                         selectedMaterials = materialsF002;
-                    } else if (wrapper.dataset.name === "F003") {
+                    } else if (wrapper.dataset.name === "F003" || wrapper.dataset.name === "F001") {
                         selectedMaterials = materialsF003;
                     }
 
