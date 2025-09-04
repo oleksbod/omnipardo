@@ -118,7 +118,7 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                 const activeIn = document.querySelector(".interior-scenes-container .scene.active");
 
                 const exValue = activeEx ? activeEx.dataset.exscene : "";
-                const inValue = activeIn ? activeIn.dataset.inscene : "";
+                const inValue = activeIn ? activeIn.dataset.name : "";
 
                 const value = exValue && inValue ? `${exValue}_${inValue}` : exValue || inValue;
 
@@ -196,11 +196,7 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
 
                         if (activeCoperta) {
                             const mat = activeCoperta.dataset.mat;
-                            dataBottom = {
-                                Type: 2,
-                                Key: "Hull6 : 0",
-                                Value: mat,
-                            };
+                            dataBottom.Value = mat;
                         }
                     }
                     console.log("Sending material dataTop:", dataTop);
