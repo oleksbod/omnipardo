@@ -223,12 +223,21 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
 
         setTimeout(() => {
             const data = {
-                Type: 0,
-                Key: "test",
-                Value: "Orbit",
+                Type: 1,
+                Key: "",
+                Value: "P43_Entrobordo_Cabin",
             };
             cloudstream.sendJsonData(data);
-            sendSettingsToCloud(defaultSettings);
+
+            setTimeout(() => {
+                const data = {
+                    Type: 0,
+                    Key: "test",
+                    Value: "Orbit",
+                };
+                cloudstream.sendJsonData(data);
+                sendSettingsToCloud(defaultSettings);
+            }, 700);
         }, 700);
 
         // Attach click listeners to cameras
