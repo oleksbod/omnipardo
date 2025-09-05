@@ -1,10 +1,10 @@
 // F002 set
 const materialsF002 = [
-    { Type: 2, Key: "Cabin5 : 10", Value: "mat002" },
+    { Type: 2, Key: "Cabin5 : 10", Value: "mat055" },
     { Type: 2, Key: "Cabin5 : 9", Value: "mat002" },
-    { Type: 2, Key: "Cabin2 : 14", Value: "mat002" },
+    { Type: 2, Key: "Cabin2 : 14", Value: "mat055" },
     { Type: 2, Key: "Cabin2 : 9", Value: "mat002" },
-    { Type: 2, Key: "Cabin3 : 7", Value: "mat002" },
+    { Type: 2, Key: "Cabin3 : 7", Value: "mat055" },
     { Type: 2, Key: "Cabin5 : 0", Value: "mat003" },
     { Type: 2, Key: "Cabin3 : 3", Value: "mat003" },
     { Type: 2, Key: "Cabin2 : 4", Value: "mat003" },
@@ -17,11 +17,11 @@ const materialsF002 = [
 
 // F003 set
 const materialsF003 = [
-    { Type: 2, Key: "Cabin5 : 10", Value: "mat003" },
+    { Type: 2, Key: "Cabin5 : 10", Value: "mat056" },
     { Type: 2, Key: "Cabin5 : 9", Value: "mat003" },
-    { Type: 2, Key: "Cabin2 : 14", Value: "mat003" },
+    { Type: 2, Key: "Cabin2 : 14", Value: "mat056" },
     { Type: 2, Key: "Cabin2 : 9", Value: "mat003" },
-    { Type: 2, Key: "Cabin3 : 7", Value: "mat003" },
+    { Type: 2, Key: "Cabin3 : 7", Value: "mat056" },
     { Type: 2, Key: "Cabin5 : 0", Value: "mat002" },
     { Type: 2, Key: "Cabin3 : 3", Value: "mat002" },
     { Type: 2, Key: "Cabin2 : 4", Value: "mat002" },

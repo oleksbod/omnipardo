@@ -267,6 +267,9 @@ body {
 .mat038 {
     background-color: #90857c; /* Macadamia */
 }
+.mat039 {
+    background-color: #867355; /* Taupe */
+}
 .mat040 {
     background-color: #373130; /* Meteor */
 }
@@ -311,6 +314,12 @@ body {
 }
 .mat054 {
     background-color: #e98923; /* Mango */
+}
+.mat055 {
+    background-color: #878581; /* Mango */
+}
+.mat056 {
+    background-color: #e8e2d8; /* Mango */
 }
 
 #buttonCluster {
