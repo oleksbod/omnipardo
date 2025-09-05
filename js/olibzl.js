@@ -232,7 +232,7 @@ const cloudstreamSettings = {
     },
     streamingMode: "video",
     parent: "streamContainer",
-    fakeMouseWithTouch: true,
+    fakeMouseWithTouch: false,
 };
 
 libzl.cloudstream("cloudstreamExample").then(function (api) {
