@@ -622,6 +622,26 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
         });
     });
 
+    if (streamContainer) {
+        streamContainer.addEventListener("mouseenter", () => {
+            const data = {
+                Type: 4,
+                Key: "",
+                Value: "FOCUS_ON",
+            };
+            cloudstream.sendJsonData(data);
+        });
+
+        streamContainer.addEventListener("mouseleave", () => {
+            const data = {
+                Type: 4,
+                Key: "",
+                Value: "FOCUS_OFF",
+            };
+            cloudstream.sendJsonData(data);
+        });
+    }
+
     cloudstream.addEventListener("jsondatareceived", (args) => {
         // Get the text from the message and convert to json object
         console.warn(args);
