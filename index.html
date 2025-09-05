@@ -13,7 +13,7 @@
             rel="icon"
             type="image/x-icon"
             href="//pardoyachts.com/cdn/shop/t/12/assets/red-circle.png?v=83357085585562326981746172557" />
-        <!-- <link href="//pardoyachts.com/cdn/shop/t/12/assets/main.css" rel="stylesheet" type="text/css" media="all" /> -->
+        <link href="//pardoyachts.com/cdn/shop/t/12/assets/main.css" rel="stylesheet" type="text/css" media="all" />
 
         <script type="text/javascript" src="https://libzl.zlthunder.net/libzl/versions/latest/libzl.js"></script>
     </head>
@@ -1420,6 +1420,921 @@
             </div>
 
             <!--  footer.html -->
+            <footer id="shopify-section-footer" class="shopify-section">
+                <!-- Footer section -->
+                <div
+                    class="footer w-full h-auto px-6 py-16 flex flex-col items-start justify-center md:p-12 lg:flex-row lg:flex-wrap lg:gap-x-4 lg:justify-start lg:px-20 lg:py-[120px] lg:gap-y-10"
+                    style="background: linear-gradient(180deg, #262322 0%, #716a68 48.5%, #393332 100%)">
+                    <div
+                        class="w-full h-auto flex items-start justify-center flex-col lg:w-full lg:gap-y-10 lg:flex-wrap lg:flex-row lg:gap-x-6 lg:items-start relative">
+                        <div
+                            class="footer-container w-full h-auto flex flex-col items-start justify-center gap-y-6 lg:p-0 lg:w-[calc(50%_-_1.5rem)]">
+                            <div
+                                class="newsletter-form w-full h-auto flex flex-col items-start justify-center gap-y-8"
+                                id="newsletter">
+                                <!-- form section headings -->
+                                <div
+                                    class="newsletter-form-heading w-full h-auto flex flex-col items-start justify-center gap-y-8">
+                                    <p class="text-[32px] leading-[38px] tt-norms-pro-light text-white">Stay updated</p>
+                                    <p class="body-16 text-white tt-norms-pro-reg lg:text-[18px] lg:leading-[24px]">
+                                        Get the most relevant news from the Pardo world.<span class="ml-1"
+                                            ><a
+                                                href="//pardoyachts.com/pages/pardo-privacy-policy"
+                                                class="tt-norms-pro-reg body-16 lg:text-[18px] lg:leading-[24px] underline"
+                                                >Privacy Policy</a
+                                            ></span
+                                        >
+                                    </p>
+                                </div>
+
+                                <!-- form block -->
+                                <form
+                                    method="post"
+                                    action="/contact#contact_form"
+                                    id="contact_form"
+                                    accept-charset="UTF-8"
+                                    class="newsletter-form-style w-full h-auto flex flex-col items-start justify-center gap-y-6"
+                                    data-persist-bound="true">
+                                    <input type="hidden" name="form_type" value="customer" /><input
+                                        type="hidden"
+                                        name="utf8"
+                                        value="✓" />
+
+                                    <div
+                                        class="newsletter-form-radio-containers w-full h-auto flex flex-row items-center justify-start gap-x-2">
+                                        <!-- radio one -->
+                                        <div
+                                            class="radio-contaier w-auto min-w-[124px] h-auto flex flex-row gap-x-2 items-center justify-start">
+                                            <input
+                                                class="appearance-none w-5 h-5 border-[1.5px] border-white bg-transparent rounded-full checked:bg-white focus:ring-0"
+                                                type="radio"
+                                                id="visitor"
+                                                name="contact[role]"
+                                                value="visitor" />
+                                            <label
+                                                for="visitor"
+                                                class="body-16 text-white lg:text-[18px] lg:leading-[24px]"
+                                                >Visitor</label
+                                            >
+                                        </div>
+                                        <!-- radio two -->
+                                        <div
+                                            class="radio-contaier w-auto min-w-[124px] h-auto flex flex-row gap-x-2 items-center justify-start">
+                                            <input
+                                                class="appearance-none w-5 h-5 border-[1.5px] border-white bg-transparent rounded-full checked:bg-white focus:ring-0"
+                                                type="radio"
+                                                id="owner"
+                                                name="contact[role]"
+                                                value="owner" />
+                                            <label
+                                                for="owner"
+                                                class="body-16 text-white lg:text-[18px] lg:leading-[24px]"
+                                                >Owner Pardo</label
+                                            >
+                                        </div>
+                                    </div>
+
+                                    <!-- Hidden input to store the tag -->
+                                    <input type="hidden" name="contact[tags]" id="user-tag" value="newsletter" />
+
+                                    <!-- Email input with submit icon -->
+                                    <div class="relative w-full">
+                                        <input
+                                            class="w-full h-auto px-6 py-4 rounded-xl bg-white border-[0.5px] border-transparent text-black focus:outline-none focus:border-white placeholder:text-gray-500"
+                                            type="email"
+                                            name="contact[email]"
+                                            id="Email"
+                                            value=""
+                                            placeholder="E-mail" />
+
+                                        <!-- Submit Button (as icon) -->
+                                        <button
+                                            type="submit"
+                                            class="absolute top-1/2 right-6 -translate-y-1/2 w-auto h-auto flex items-center justify-center bg-transparent border-none cursor-pointer">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="25"
+                                                height="24"
+                                                viewBox="0 0 25 24"
+                                                fill="none">
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    clip-rule="evenodd"
+                                                    d="M13.0475 20C12.5809 20 12.3473 19.4444 12.6772 19.1194L19.1874 12.7071C19.2517 12.6438 19.3056 12.574 19.349 12.5H5C4.72386 12.5 4.5 12.2761 4.5 12C4.5 11.7238 4.72386 11.5 5 11.5L19.349 11.5C19.3055 11.4259 19.2517 11.3562 19.1874 11.2929L12.6497 4.85355C12.3299 4.53858 12.5564 4.00003 13.0086 4C13.1433 3.99999 13.2724 4.05267 13.3676 4.14645L19.9053 10.5858C20.6982 11.3668 20.6982 12.6332 19.9053 13.4142L13.4191 19.8476C13.3208 19.9451 13.187 20 13.0475 20Z"
+                                                    fill="black"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- social icon block here -->
+                            <div class="socials-menu-container w-full h-auto pb-14 lg:pb-0">
+                                <div
+                                    class="social-links-container flex flex-row gap-x-6 items-center justify-start w-auto h-auto">
+                                    <div class="social-link-container w-auto h-auto">
+                                        <li class="social-link flex flex-row gap-x-3 items-center justify-start">
+                                            <a href="https://www.instagram.com/pardoyachts/">
+                                                <img
+                                                    src="//pardoyachts.com/cdn/shop/files/Platform_Instagram_Color_Negative.png?v=1727433648"
+                                                    alt=""
+                                                    class="social-image w-5 h-5 object-cover"
+                                                    style="width: 20px; height: 20px" />
+                                            </a>
+                                        </li>
+                                    </div>
+
+                                    <div class="social-link-container w-auto h-auto">
+                                        <li class="social-link flex flex-row gap-x-3 items-center justify-start">
+                                            <a href="https://www.linkedin.com/company/cantieredelpardo/">
+                                                <img
+                                                    src="//pardoyachts.com/cdn/shop/files/Platform_LinkedIn_Color_Negative.png?v=1727433678"
+                                                    alt=""
+                                                    class="social-image w-5 h-5 object-cover"
+                                                    style="width: 20px; height: 20px" />
+                                            </a>
+                                        </li>
+                                    </div>
+
+                                    <div class="social-link-container w-auto h-auto">
+                                        <li class="social-link flex flex-row gap-x-3 items-center justify-start">
+                                            <a href="https://www.facebook.com/pardoyachts/">
+                                                <img
+                                                    src="//pardoyachts.com/cdn/shop/files/Platform_Facebook_Color_Negative.png?v=1727433702"
+                                                    alt=""
+                                                    class="social-image w-5 h-5 object-cover"
+                                                    style="width: 20px; height: 20px" />
+                                            </a>
+                                        </li>
+                                    </div>
+
+                                    <div class="social-link-container w-auto h-auto">
+                                        <li class="social-link flex flex-row gap-x-3 items-center justify-start">
+                                            <a
+                                                href="https://www.youtube.com/channel/UCmpnpPIfoo_3a29WjqaEauA?view_as=subscriber">
+                                                <img
+                                                    src="//pardoyachts.com/cdn/shop/files/Platform_YouTube_Color_Negative.png?v=1727433725"
+                                                    alt=""
+                                                    class="social-image w-5 h-5 object-cover"
+                                                    style="width: 20px; height: 20px" />
+                                            </a>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- footer menu links container -->
+                            <div class="footer-menu w-full h-auto lg:py-0">
+                                <div
+                                    class="footer-menu w-full h-auto flex flex-col gap-y-5 items-start justify-start lg:flex-row lg:gap-x-4 lg:p-0">
+                                    <div class="discover-menu-container w-full h-auto flex flex-col gap-y-5">
+                                        <div
+                                            class="discover-links-container flex flex-col gap-y-4 py-4 items-start justify-center w-full h-auto lg:flex-row lg:items-center lg:justify-start lg:flex-wrap lg:gap-x-10 lg:gap-y-6">
+                                            <div
+                                                class="w-full h-auto flex flex-wrap items-center gap-x-8 gap-y-4 justify-start lg:gap-x-10">
+                                                <li class="list-none w-[calc(50%_-_1.5rem)] lg:w-auto">
+                                                    <a
+                                                        class="text-white text-[20px] leading-[26px] tt-norms-pro-reg block text-left"
+                                                        href="//pardoyachts.com/pages/our-values">
+                                                        About
+                                                    </a>
+                                                </li>
+
+                                                <li class="list-none w-[calc(50%_-_1.5rem)] lg:w-auto">
+                                                    <a
+                                                        class="text-white text-[20px] leading-[26px] tt-norms-pro-reg block text-left"
+                                                        href="//pardoyachts.com/blogs/news">
+                                                        Events &amp; News
+                                                    </a>
+                                                </li>
+
+                                                <li class="list-none w-[calc(50%_-_1.5rem)] lg:w-auto">
+                                                    <a
+                                                        class="text-white text-[20px] leading-[26px] tt-norms-pro-reg block text-left"
+                                                        href="//pardoyachts.com/pages/partnership">
+                                                        Partnerships
+                                                    </a>
+                                                </li>
+
+                                                <li class="list-none w-[calc(50%_-_1.5rem)] lg:w-auto">
+                                                    <a
+                                                        class="text-white text-[20px] leading-[26px] tt-norms-pro-reg block text-left"
+                                                        href="//pardoyachts.com/pages/contact">
+                                                        Contacts
+                                                    </a>
+                                                </li>
+
+                                                <li class="list-none w-[calc(50%_-_1.5rem)] lg:w-auto">
+                                                    <a
+                                                        class="text-white text-[20px] leading-[26px] tt-norms-pro-reg block text-left"
+                                                        href="https://cantieredelpardo.com/it/carriera/">
+                                                        Work with us
+                                                    </a>
+                                                </li>
+
+                                                <li class="list-none w-[calc(50%_-_1.5rem)] lg:w-auto">
+                                                    <a
+                                                        class="text-white text-[20px] leading-[26px] tt-norms-pro-reg block text-left"
+                                                        href="//pardoyachts.com/pages/locate-dealer">
+                                                        Find a Dealer
+                                                    </a>
+                                                </li>
+
+                                                <li class="list-none w-[calc(50%_-_1.5rem)] lg:w-auto">
+                                                    <a
+                                                        class="text-white text-[20px] leading-[26px] tt-norms-pro-reg block text-left"
+                                                        href="//pardoyachts.com/pages/after-sales">
+                                                        After Sales
+                                                    </a>
+                                                </li>
+                                            </div>
+                                            <div
+                                                class="w-full h-auto flex flex-col items-start justify-center gap-y-2 lg:flex-row lg:items-center lg:justify-start lg:gap-x-10">
+                                                <li class="list-none">
+                                                    <a
+                                                        class="text-white text-[14px] leading-[20px] tt-norms-pro-light text-center block underline lg:no-underline"
+                                                        href="//pardoyachts.com/pages/pardo-privacy-policy">
+                                                        Privacy
+                                                    </a>
+                                                </li>
+
+                                                <li class="list-none">
+                                                    <a
+                                                        class="text-white text-[14px] leading-[20px] tt-norms-pro-light text-center block underline lg:no-underline"
+                                                        href="//pardoyachts.com/pages/cookie-policy">
+                                                        Cookie
+                                                    </a>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="w-full h-auto flex flex-col items-start justify-center py-6"
+                                style="display: none">
+                                <div
+                                    class="w-[155px] h-auto bg-white flex flex-row items-center justify-between rounded-lg gap-x-3 px-4 py-1 cursor-pointer select-language"
+                                    aria-label="Seleziona lingua"
+                                    data-locale-code="en">
+                                    <p class="body-16 tt-norms-pro-med lg:text-[18px] lg:leading-[24px]">LANGUAGE</p>
+
+                                    <!-- Language Icon -->
+                                    <div class="w-auto h-auto" id="gb-icon" data-locale-code="en">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="20"
+                                            height="16"
+                                            viewBox="0 0 20 16"
+                                            fill="none">
+                                            <g clip-path="url(#clip0_1177_20637)">
+                                                <path d="M0 0.5H20V15.5H0V0.5Z" fill="#012169"></path>
+                                                <path
+                                                    d="M2.34375 0.5L9.96875 6.15625L17.5625 0.5H20V2.4375L12.5 8.03125L20 13.5938V15.5H17.5L10 9.90625L2.53125 15.5H0V13.625L7.46875 8.0625L0 2.5V0.5H2.34375Z"
+                                                    fill="white"></path>
+                                                <path
+                                                    d="M13.25 9.28125L20 14.25V15.5L11.5312 9.28125H13.25ZM7.5 9.90625L7.6875 11L1.6875 15.5H0L7.5 9.90625ZM20 0.5V0.59375L12.2188 6.46875L12.2812 5.09375L18.4375 0.5H20ZM0 0.5L7.46875 6H5.59375L0 1.8125V0.5Z"
+                                                    fill="#C8102E"></path>
+                                                <path
+                                                    d="M7.53125 0.5V15.5H12.5312V0.5H7.53125ZM0 5.5V10.5H20V5.5H0Z"
+                                                    fill="white"></path>
+                                                <path
+                                                    d="M0 6.53125V9.53125H20V6.53125H0ZM8.53125 0.5V15.5H11.5312V0.5H8.53125Z"
+                                                    fill="#C8102E"></path>
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_1177_20637">
+                                                    <rect
+                                                        width="20"
+                                                        height="15"
+                                                        fill="white"
+                                                        transform="translate(0 0.5)"></rect>
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                    </div>
+                                    <div class="w-auto h-auto hidden" id="it-icon" data-locale-code="it">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="20"
+                                            height="16"
+                                            viewBox="0 0 81 61"
+                                            fill="none">
+                                            <g clip-path="url(#clip0_1772_14487)">
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    clip-rule="evenodd"
+                                                    d="M0.256348 0.387695H80.2563V60.3877H0.256348V0.387695Z"
+                                                    fill="white"></path>
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    clip-rule="evenodd"
+                                                    d="M0.256348 0.387695H26.9188V60.3877H0.256348V0.387695Z"
+                                                    fill="#009246"></path>
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    clip-rule="evenodd"
+                                                    d="M53.5938 0.387695H80.2562V60.3877H53.5938V0.387695Z"
+                                                    fill="#CE2B37"></path>
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_1772_14487">
+                                                    <rect
+                                                        width="80"
+                                                        height="60"
+                                                        fill="white"
+                                                        transform="translate(0.256348 0.387695)"></rect>
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="w-full h-full inset-0 backdrop-blur-lg z-[100] container-form lg:items-center lg:justify-center hidden">
+                                <div
+                                    class="w-full h-auto right-0 left-0 bottom-0 px-6 pb-6 pt-9 flex flex-col items-center justify-center bg-white rounded-t-[32px] gap-y-6 transition-all duration-150 ease-in content-form lg:w-[640px] lg:rounded-[32px] lg:relative lg:gap-y-8 lg:p-10 translate-y-[1000px] absolute">
+                                    <!-- Pulsante per chiudere -->
+                                    <div
+                                        class="icon-content cursor-pointer close-form absolute right-6 top-6 close-locale-form lg:right-10 lg:top-10"
+                                        aria-label="Chiudi">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor">
+                                            <path d="M4.5 4.10645L19.5 19.1064" stroke-linecap="round"></path>
+                                            <path d="M4.5 19.1064L19.5 4.10644" stroke-linecap="round"></path>
+                                        </svg>
+                                    </div>
+
+                                    <!-- Titolo -->
+                                    <div class="w-full h-auto flex items-center justify-center lg:justify-start">
+                                        <p class="text-[14px] leading-[20px] tt-norms-pro-med">Cambia lingua</p>
+                                    </div>
+
+                                    <!-- Modulo per selezionare la lingua -->
+                                    <div class="w-full h-auto flex flex-col items-start justify-center gap-y-8">
+                                        <form
+                                            method="post"
+                                            action="/localization"
+                                            id="localization_form_tag"
+                                            accept-charset="UTF-8"
+                                            class="w-full h-auto"
+                                            enctype="multipart/form-data">
+                                            <input type="hidden" name="form_type" value="localization" /><input
+                                                type="hidden"
+                                                name="utf8"
+                                                value="✓" /><input type="hidden" name="_method" value="put" /><input
+                                                type="hidden"
+                                                name="return_to"
+                                                value="/" />
+                                            <div class="w-full h-auto flex flex-col items-start justify-center gap-y-4">
+                                                <button
+                                                    type="button"
+                                                    tabindex="0"
+                                                    data-locale-code="en"
+                                                    class="localeCode w-full h-auto px-4 py-3 flex items-center justify-center gap-x-2 text-[14px] leading-[20px] bg-[#F7F7F7] border border-transparent rounded-xl focus:border-black tt-norms-pro-reg">
+                                                    Inglese
+
+                                                    <span class="check-icon">
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            width="24"
+                                                            height="24"
+                                                            viewBox="0 0 24 24"
+                                                            fill="none">
+                                                            <path
+                                                                fill-rule="evenodd"
+                                                                clip-rule="evenodd"
+                                                                d="M4.83549 13.138C4.54161 12.8116 4 13.0195 4 13.4587C4 13.5771 4.04385 13.6914 4.12309 13.7794L8.24311 18.3556C9.09441 19.3011 10.641 19.1891 11.3387 18.1314L19.5078 5.74624C19.7188 5.42627 19.4894 5 19.106 5C18.9443 5 18.7934 5.08125 18.7043 5.21628L10.5214 17.6223C10.1726 18.1511 9.39931 18.2071 8.97366 17.7344L4.83549 13.138Z"
+                                                                fill="black"></path>
+                                                        </svg>
+                                                    </span>
+                                                </button>
+
+                                                <button
+                                                    type="button"
+                                                    tabindex="0"
+                                                    data-locale-code="it"
+                                                    class="localeCode w-full h-auto px-4 py-3 flex items-center justify-center gap-x-2 text-[14px] leading-[20px] bg-[#F7F7F7] border border-transparent rounded-xl focus:border-black tt-norms-pro-reg">
+                                                    Italiano
+
+                                                    <span class="check-icon">
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            width="24"
+                                                            height="24"
+                                                            viewBox="0 0 24 24"
+                                                            fill="none">
+                                                            <path
+                                                                fill-rule="evenodd"
+                                                                clip-rule="evenodd"
+                                                                d="M4.83549 13.138C4.54161 12.8116 4 13.0195 4 13.4587C4 13.5771 4.04385 13.6914 4.12309 13.7794L8.24311 18.3556C9.09441 19.3011 10.641 19.1891 11.3387 18.1314L19.5078 5.74624C19.7188 5.42627 19.4894 5 19.106 5C18.9443 5 18.7934 5.08125 18.7043 5.21628L10.5214 17.6223C10.1726 18.1511 9.39931 18.2071 8.97366 17.7344L4.83549 13.138Z"
+                                                                fill="black"></path>
+                                                        </svg>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                            <input type="hidden" name="locale_code" value="en" id="localeCode" />
+                                        </form>
+                                    </div>
+
+                                    <div class="w-full h-auto">
+                                        <button
+                                            type="button"
+                                            class="w-full h-auto flex items-center justify-center rounded-xl bg-[#423C3B] text-white py-3 submit-locale tt-norms-pro-reg">
+                                            Conferma selezione
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- gamma list containers -->
+                        <div
+                            class="w-full h-auto flex items-center justify-start flex-col pb-12 lg:pb-0 lg:w-[calc(50%_-_1.5rem)] lg:px-6">
+                            <div class="w-full h-auto flex items-center justify-start py-4">
+                                <p class="text-[32px] leading-[38px] tt-norms-pro-med text-white">Pardo's range</p>
+                            </div>
+                            <div class="w-full h-auto flex items-start justify-center flex-col">
+                                <div class="w-full h-auto flex items-start justify-center flex-col overflow-hidden">
+                                    <li class="w-full h-auto flex items-start justify-between py-6">
+                                        <span class="text-[20px] leading-[18px] tt-norms-pro-med text-white"
+                                            >Walkaround</span
+                                        >
+                                        <!-- plus icon -->
+                                        <span
+                                            class="w-auto h-auto flex items-center justify-center text-white dropdown-icon transition-all duration-200 ease-in cursor-pointer">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke-width="1.5"
+                                                stroke="currentColor"
+                                                class="size-6">
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M12 4.5v15m7.5-7.5h-15"></path>
+                                            </svg>
+                                        </span>
+                                    </li>
+                                    <!-- content -->
+
+                                    <div
+                                        class="w-full h-auto transition-all duration-200 ease overflow-hidden dropdown-content-gamma"
+                                        style="height: 0px; opacity: 0">
+                                        <div
+                                            class="w-full h-auto flex items-start justify-center pt-2 pb-6 gap-y-4 flex-col">
+                                            <div class="w-auto h-auto">
+                                                <p class="body-14 text-white">
+                                                    The single level walkaround deck is an invitation to fully enjoy the
+                                                    generous spaces dedicated to relaxation, connection with the sea,
+                                                    and socializing on board. It ensures smooth and safe movement
+                                                    between all areas of the yacht. This feature enhances the
+                                                    free-spirited nature of the open range – the P38, P43, P50, and the
+                                                    upcoming P75 – yachts that are as enjoyable to handle as they are to
+                                                    live aboard. Designed to combine speed, comfort, and stability, they
+                                                    guarantee an optimal sailing experience thanks to their exceptional
+                                                    ease of maneuvering.
+                                                </p>
+                                            </div>
+                                            <div class="w-full h-auto flex items-center justify-start flex-row gap-x-6">
+                                                <a href="//pardoyachts.com/products/p38">
+                                                    <p class="body-14 text-white tt-norms-pro-med">P38</p>
+                                                </a>
+
+                                                <a href="//pardoyachts.com/products/p38-outboard">
+                                                    <p class="body-14 text-white tt-norms-pro-med">P38R</p>
+                                                </a>
+
+                                                <a href="//pardoyachts.com/products/p43">
+                                                    <p class="body-14 text-white tt-norms-pro-med">P43</p>
+                                                </a>
+
+                                                <a href="//pardoyachts.com/products/p50">
+                                                    <p class="body-14 text-white tt-norms-pro-med">P50</p>
+                                                </a>
+                                            </div>
+                                            <!-- discover gamma button -->
+                                            <div class="w-full h-auto flex items-center justify-end">
+                                                <a href="//pardoyachts.com/collections/walkaround">
+                                                    <div class="w-auto h-auto inline-flex cta-choco-round">
+                                                        <p class="text-white body-14">You discover Walkaround</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="w-full h-auto flex items-start justify-center flex-col overflow-hidden">
+                                    <li class="w-full h-auto flex items-start justify-between py-6">
+                                        <span class="text-[20px] leading-[18px] tt-norms-pro-med text-white"
+                                            >Endurance</span
+                                        >
+                                        <!-- plus icon -->
+                                        <span
+                                            class="w-auto h-auto flex items-center justify-center text-white dropdown-icon transition-all duration-200 ease-in cursor-pointer">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke-width="1.5"
+                                                stroke="currentColor"
+                                                class="size-6">
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M12 4.5v15m7.5-7.5h-15"></path>
+                                            </svg>
+                                        </span>
+                                    </li>
+                                    <!-- content -->
+
+                                    <div
+                                        class="w-full h-auto transition-all duration-200 ease overflow-hidden dropdown-content-gamma"
+                                        style="height: 0px; opacity: 0">
+                                        <div
+                                            class="w-full h-auto flex items-start justify-center pt-2 pb-6 gap-y-4 flex-col">
+                                            <div class="w-auto h-auto">
+                                                <p class="body-14 text-white">
+                                                    The yachts in the Endurance range are designed for lovers of long
+                                                    cruises and seek a relaxed, quiet sailing experience. The E60 and
+                                                    E72 models allow for enjoyable journeys, including overnight
+                                                    passages, offering impressive range at controlled speeds with
+                                                    reduced and efficient fuel consumption. The generous spaces, from
+                                                    the cabins to the flybridge, are enhanced by a contemporary and
+                                                    always functional design, providing livability and comfort in
+                                                    harmony with the most sophisticated residential solutions. Even the
+                                                    interiors are crafted to fully immerse yourself in the marine
+                                                    setting, creating a seamless connection with the outdoors through
+                                                    the opening of large panoramic windows.
+                                                </p>
+                                            </div>
+                                            <div class="w-full h-auto flex items-center justify-start flex-row gap-x-6">
+                                                <a href="//pardoyachts.com/products/e60">
+                                                    <p class="body-14 text-white tt-norms-pro-med">E60</p>
+                                                </a>
+
+                                                <a href="//pardoyachts.com/products/e72">
+                                                    <p class="body-14 text-white tt-norms-pro-med">E72</p>
+                                                </a>
+                                            </div>
+                                            <!-- discover gamma button -->
+                                            <div class="w-full h-auto flex items-center justify-end">
+                                                <a href="//pardoyachts.com/collections/endurance">
+                                                    <div class="w-auto h-auto inline-flex cta-choco-round">
+                                                        <p class="text-white body-14">You discover Endurance</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="w-full h-auto flex items-start justify-center flex-col overflow-hidden">
+                                    <li class="w-full h-auto flex items-start justify-between py-6">
+                                        <span class="text-[20px] leading-[18px] tt-norms-pro-med text-white">GT</span>
+                                        <!-- plus icon -->
+                                        <span
+                                            class="w-auto h-auto flex items-center justify-center text-white dropdown-icon transition-all duration-200 ease-in cursor-pointer">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke-width="1.5"
+                                                stroke="currentColor"
+                                                class="size-6">
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M12 4.5v15m7.5-7.5h-15"></path>
+                                            </svg>
+                                        </span>
+                                    </li>
+                                    <!-- content -->
+
+                                    <div
+                                        class="w-full h-auto transition-all duration-200 ease overflow-hidden dropdown-content-gamma"
+                                        style="height: 0px; opacity: 0">
+                                        <div
+                                            class="w-full h-auto flex items-start justify-center pt-2 pb-6 gap-y-4 flex-col">
+                                            <div class="w-auto h-auto">
+                                                <p class="body-14 text-white">
+                                                    The perfect balance of sportiness, onboard comfort, and strong
+                                                    aesthetic identity defines the GT range, which combines the dynamic
+                                                    spirit of the walkaround with the generous volumes typical of an
+                                                    Endurance yacht. The spaces on board the GT52, GT75, and the
+                                                    upcoming GT65 are optimized with a distinctive and functional
+                                                    design, offering guests welcoming environments to unwind while
+                                                    maintaining a constant visual and physical connection with the
+                                                    outdoors, thanks to panoramic glazing and large, opening windows. A
+                                                    GT yacht allows you to alternate between moments of rewarding
+                                                    conviviality or quiet retreat and the thrill of powerful, sporty
+                                                    cruising.
+                                                </p>
+                                            </div>
+                                            <div class="w-full h-auto flex items-center justify-start flex-row gap-x-6">
+                                                <a href="//pardoyachts.com/products/gt52">
+                                                    <p class="body-14 text-white tt-norms-pro-med">GT52</p>
+                                                </a>
+
+                                                <a href="//pardoyachts.com/products/gt65">
+                                                    <p class="body-14 text-white tt-norms-pro-med">GT65</p>
+                                                </a>
+
+                                                <a href="//pardoyachts.com/products/gt75">
+                                                    <p class="body-14 text-white tt-norms-pro-med">GT75</p>
+                                                </a>
+                                            </div>
+                                            <!-- discover gamma button -->
+                                            <div class="w-full h-auto flex items-center justify-end">
+                                                <a href="//pardoyachts.com/collections/gt">
+                                                    <div class="w-auto h-auto inline-flex cta-choco-round">
+                                                        <p class="text-white body-14">You discover GT</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="gamma-container w-full h-auto flex items-start justify-center gap-y-12 flex-col lg:gap-y-[60px]">
+                        <!-- right reserved container + icon pardo -->
+                        <div class="w-full h-auto flex items-start justify-center flex-col gap-y-14">
+                            <!--find delear button-->
+                            <div class="w-full h-auto flex items-center justify-center">
+                                <a href="//pardoyachts.com/pages/contact">
+                                    <div class="w-auto h-auto inline-flex cta-white-rounded">
+                                        <p class="body-14 tt-norms-pro-med">Ask Pardo</p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <!-- pardo logo container -->
+                            <div class="w-full h-auto flex items-center justify-center pardo-logo">
+                                <!-- render cantiere logo -->
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="54"
+                                    height="37"
+                                    viewBox="0 0 54 37"
+                                    fill="none">
+                                    <path
+                                        id="Subtract"
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M31.2883 9.21701H40.8072C47.8388 9.21701 53.5224 12.3675 53.5224 18.802C53.5224 25.1698 47.8388 28.387 40.8415 28.387H29.8078L30.3797 26.2753H39.6649C44.4415 26.2753 47.8388 24.9011 47.8388 20.4433C47.8388 16.254 44.4415 14.7137 39.6649 14.7137H29.9761L26.4774 25.6728C25.5361 28.6556 23.451 34.1508 22.0717 37H20.4915L22.6437 28.387H13.1575C6.16172 28.387 0.476562 25.2365 0.476562 18.7679C0.476562 12.4001 6.16016 9.18285 13.1575 9.18285H24.1912L23.6193 11.2946H14.3357C9.5591 11.2946 6.16172 12.6687 6.16172 17.1266C6.16172 21.3159 9.5591 22.8562 14.3357 22.8562H24.0229L27.2862 12.2666C28.2946 9.11608 30.4483 3.08372 31.8945 0H33.4748L31.2883 9.21701Z"
+                                        fill="white"></path>
+                                </svg>
+                            </div>
+                            <!-- reserved container -->
+
+                            <div
+                                class="right-reserved-container w-full h-auto flex items-center justify-start md:justify-center lg:w-full lg:flex-grow lg:justify-center">
+                                <p class="caption text-white text-center tt-norms-pro-reg">
+                                    ©2025 CANTIERE DEL PARDO SpA • ITALY • VAT no. 03869300404 • Share capital €
+                                    5,261,600.00 iv • All Rights Reserved
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--form success-->
+                <div
+                    class="fixed inset-0 w-full h-screen flex flex-col justify-center items-center hidden backdrop-blur-[40px] z-50 px-6"
+                    id="success-message">
+                    <div
+                        class="w-auto h-auto min-w-[382px] flex flex-col justify-center items-center bg-white rounded-[32px] gap-y-6 p-6">
+                        <div class="w-full h-auto flex flex-row items-center justify-between">
+                            <p class="body-14 lg:text-[18px] lg:leading-[24px] tt-norms-pro-med">
+                                Newsletter subscription
+                            </p>
+                            <div class="w-auto h-auto cursor-pointer" id="closing-pop-up">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor">
+                                    <path d="M4.5 4.10645L19.5 19.1064" stroke-linecap="round"></path>
+                                    <path d="M4.5 19.1064L19.5 4.10644" stroke-linecap="round"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="w-full h-auto flex flex-col justify-center items-center">
+                            <p class="text-[12px] leading-[18px] lg:text-[18px] lg:leading-[24px] tt-norms-pro-reg">
+                                Check your email to confirm your subscription to the newsletter.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <style>
+                    .rotate-90 {
+                        transform: rotate(45deg);
+                        transition: transform 0.3s ease;
+                    }
+
+                    .localeCode .check-icon {
+                        display: none;
+                    }
+
+                    .localeCode:focus .check-icon {
+                        display: inline;
+                    }
+                </style>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const radioButtons = document.querySelectorAll('input[name="contact[role]"]');
+                        const userTag = document.getElementById("user-tag");
+
+                        radioButtons.forEach(function (radio) {
+                            radio.addEventListener("change", function () {
+                                if (this.checked) {
+                                    userTag.value = `newsletter,${this.value}`;
+                                }
+                            });
+                        });
+
+                        //handle language selector
+                        const languageSelector = document.querySelector(".select-language");
+                        const currentLocaleCode = languageSelector.getAttribute("data-locale-code");
+                        handleFlag(currentLocaleCode);
+
+                        function setLocaleCode(selectedLocaleCode) {
+                            const localeCodeInput = document.getElementById("localeCode");
+                            if (localeCodeInput) {
+                                localeCodeInput.value = selectedLocaleCode;
+                                handleFlag(selectedLocaleCode);
+                            }
+                        }
+
+                        function handleFlag(value) {
+                            const itIcon = document.getElementById("it-icon");
+                            const gbIcon = document.getElementById("gb-icon");
+
+                            itIcon.classList.add("hidden");
+                            gbIcon.classList.add("hidden");
+
+                            if (value === "it") {
+                                itIcon.classList.remove("hidden");
+                            } else if (value === "en") {
+                                gbIcon.classList.remove("hidden");
+                            }
+                        }
+
+                        function showLocaleForm(condition) {
+                            containerLocaleForm.classList.remove("hidden");
+                            containerLocaleForm.classList.add("fixed");
+                            contentLocaleForm.classList.remove("translate-y-[1000px]");
+
+                            if (condition) {
+                                containerLocaleForm.classList.add("flex");
+                                contentLocaleForm.classList.add("static");
+                                contentLocaleForm.classList.remove("absolute");
+                            } else {
+                                containerLocaleForm.classList.remove("flex");
+                                contentLocaleForm.classList.add("absolute");
+                                contentLocaleForm.classList.remove("static");
+                            }
+                        }
+
+                        function hideLocaleForm(condition) {
+                            containerLocaleForm.classList.add("hidden");
+                            containerLocaleForm.classList.remove("fixed");
+                            contentLocaleForm.classList.add("translate-y-[1000px]");
+
+                            if (condition) {
+                                containerLocaleForm.classList.remove("flex");
+                                contentLocaleForm.classList.remove("static");
+                                contentLocaleForm.classList.add("absolute");
+                            } else {
+                                containerLocaleForm.classList.add("flex");
+                                contentLocaleForm.classList.remove("absolute");
+                                contentLocaleForm.classList.add("static");
+                            }
+                        }
+
+                        const containerLocaleForm = document.querySelector(".container-form");
+                        const contentLocaleForm = document.querySelector(".content-form");
+                        const closeLocaleFormIcon = document.querySelector(".close-locale-form");
+                        const localeButtons = document.querySelectorAll(".localeCode");
+                        const submitButton = document.querySelector(".submit-locale");
+                        const languageButton = document.querySelector(".select-language");
+
+                        let selectedLocaleCode = null;
+                        const isDesktop = window.innerWidth >= 1024;
+
+                        localeButtons.forEach((button) => {
+                            button.addEventListener("click", () => {
+                                selectedLocaleCode = button.getAttribute("data-locale-code");
+                                setLocaleCode(selectedLocaleCode);
+                            });
+                        });
+
+                        submitButton.addEventListener("click", () => {
+                            const form = document.getElementById("localization_form_tag");
+                            if (form && selectedLocaleCode) {
+                                form.submit();
+                                setTimeout(hideLocaleForm, 200);
+                            } else {
+                                alert("Seleziona una lingua prima di confermare.");
+                            }
+                        });
+
+                        languageButton.addEventListener("click", () => {
+                            showLocaleForm(isDesktop);
+                        });
+
+                        closeLocaleFormIcon.addEventListener("click", () => {
+                            hideLocaleForm(isDesktop);
+                        });
+
+                        // Handle dropdown
+                        const dropdownContents = document.querySelectorAll(".dropdown-content-gamma");
+                        const dropIcons = document.querySelectorAll(".dropdown-icon");
+
+                        // Initialize all dropdowns as closed
+                        dropdownContents.forEach((content) => {
+                            content.style.height = "0";
+                            content.style.opacity = "0";
+                        });
+
+                        dropIcons.forEach((icon, index) => {
+                            icon.addEventListener("click", function () {
+                                dropdownContents.forEach((content, i) => {
+                                    const isActive = i === index; // Check if the current dropdown is being clicked
+
+                                    if (isActive) {
+                                        // Toggle the clicked dropdown
+                                        if (content.style.height === "0px" || content.style.height === "0") {
+                                            content.style.height = `${content.scrollHeight}px`;
+                                            content.style.opacity = "1";
+                                            dropIcons[i].classList.add("rotate-90");
+                                        } else {
+                                            content.style.height = "0";
+                                            content.style.opacity = "0";
+                                            dropIcons[i].classList.remove("rotate-90");
+                                        }
+                                    } else {
+                                        // Close all other dropdowns
+                                        content.style.height = "0";
+                                        content.style.opacity = "0";
+                                        dropIcons[i].classList.remove("rotate-90");
+                                    }
+                                });
+                            });
+                        });
+
+                        //handle newsletter form after sent
+                        let isOpenPopUp = false;
+                        const closePopUp = document.getElementById("closing-pop-up");
+                        const successMessage = document.getElementById("success-message");
+
+                        function handleSuccessMessage() {
+                            const urlParams = new URLSearchParams(window.location.search);
+
+                            if (urlParams.get("customer_posted") === "true") {
+                                successMessage.classList.remove("hidden");
+                                document.body.classList.add("no-scroll");
+                                isOpenPopUp = true;
+                            }
+
+                            setTimeout(() => {
+                                if (!isOpenPopUp) {
+                                    return;
+                                } else {
+                                    successMessage.classList.add("hidden");
+                                    document.body.classList.remove("no-scroll");
+                                    isOpenPopUp = false;
+                                }
+                            }, 5000);
+                        }
+
+                        handleSuccessMessage();
+
+                        closePopUp.addEventListener("click", () => {
+                            successMessage.classList.add("hidden");
+                            document.body.classList.remove("no-scroll");
+                            isOpenPopUp = false;
+                        });
+                    });
+                </script>
+            </footer>
         </div>
         <script src="js/olibzl.js"></script>
     </body>
