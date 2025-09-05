@@ -2007,6 +2007,24 @@
             <div class="stream-container">
                 <div class="stream-view-container">
                     <div id="streamContainer" style="position: relative">
+                        <div id="pageLoader" class="page-loader" role="status" aria-hidden="true" aria-live="polite">
+                            <div class="page-loader__backdrop" aria-hidden="true"></div>
+
+                            <div class="page-loader__content" aria-hidden="true">
+                                <!-- Black & white spinner (SVG) -->
+                                <svg class="loader-spinner" viewBox="0 0 50 50" aria-hidden="true" focusable="false">
+                                    <circle class="spinner-bg" cx="25" cy="25" r="20" fill="none" stroke-width="4" />
+                                    <path
+                                        class="spinner-seg"
+                                        d="M25 5 a20 20 0 0 1 0 40"
+                                        fill="none"
+                                        stroke-width="4"
+                                        stroke-linecap="round" />
+                                </svg>
+
+                                <div class="loader-text">Loading...</div>
+                            </div>
+                        </div>
                         <button
                             id="fullscreenBtn"
                             style="

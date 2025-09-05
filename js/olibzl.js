@@ -32,6 +32,38 @@ const materialsF003 = [
     { Type: 2, Key: "Cabin2 : 6", Value: "mat006" },
 ];
 
+const loader = document.getElementById("pageLoader");
+const loaderText = loader?.querySelector(".loader-text");
+
+window.showLoader = function (opts = {}) {
+    if (!loader) return;
+    const { text, blockPointerEvents = true } = opts;
+    if (text && loaderText) loaderText.textContent = text;
+    loader.classList.add("is-visible");
+    loader.setAttribute("aria-hidden", "false");
+    if (blockPointerEvents) {
+        // prevent interacting with page while loader visible
+        loader.style.pointerEvents = "auto";
+    } else {
+        loader.style.pointerEvents = "none";
+    }
+    // optionally prevent scroll while visible
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+};
+
+window.hideLoader = function () {
+    if (!loader) return;
+    loader.classList.remove("is-visible");
+    loader.setAttribute("aria-hidden", "true");
+    document.documentElement.style.overflow = "";
+    document.body.style.overflow = "";
+    // restore default label
+    if (loaderText) loaderText.textContent = "Loading…";
+};
+
+showLoader();
+
 let defaultSettings = {};
 let currentSettings = {};
 
@@ -611,6 +643,7 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                 Value: "P43_Entrobordo_Cabin",
             };
             cloudstream.sendJsonData(data);
+            hideLoader();
         }
     });
 
