@@ -269,6 +269,48 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                     }
                 }
 
+                const activeCamera = document.querySelector(".camera.active");
+                const cameraInterior = document.querySelector('.camera[data-camera="Interior"]');
+                const cameraPoppa = document.querySelector('.camera[data-camera="Poppa"]');
+
+                if (scene.dataset.name === "Dinette" || scene.dataset.name === "Cabin") {
+                    // Якщо камери не Interior і не FPC → міняємо на Interior
+                    if (
+                        activeCamera &&
+                        activeCamera.dataset.camera !== "Interior" &&
+                        activeCamera.dataset.camera !== "FPC"
+                    ) {
+                        activeCamera.classList.remove("active");
+                        cameraInterior.classList.add("active");
+                        let camera = {
+                            Type: 0,
+                            Key: "",
+                            Value: "Interior",
+                        };
+
+                        cloudstream.sendJsonData(camera);
+                    }
+                }
+
+                if (scene.dataset.name === "Entrobordo" || scene.dataset.name === "Fuoribordo") {
+                    // Якщо камери не Poppa і не FPC → міняємо на Poppa
+                    if (
+                        activeCamera &&
+                        activeCamera.dataset.camera !== "Poppa" &&
+                        activeCamera.dataset.camera !== "FPC"
+                    ) {
+                        activeCamera.classList.remove("active");
+                        cameraPoppa.classList.add("active");
+
+                        let camera = {
+                            Type: 0,
+                            Key: "",
+                            Value: "Poppa",
+                        };
+
+                        cloudstream.sendJsonData(camera);
+                    }
+                }
                 // get combined value
                 const activeEx = document.querySelector(".exterior-scenes-container .scene.active");
                 const activeIn = document.querySelector(".interior-scenes-container .scene.active");
