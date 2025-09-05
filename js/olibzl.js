@@ -565,8 +565,16 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                         selectedMaterials = materialsF003;
                     }
 
+                    const activeMoq = document.querySelector("#moquette .essenza-scene.active");
+                    const moqValue = activeMoq ? activeMoq.dataset.moq : "No";
+
+                    const excludedKeysWhenMoqSi = ["Cabin5 : 10", "Cabin2 : 14", "Cabin2 : 9"];
+
                     // send each material
                     selectedMaterials.forEach((m) => {
+                        if (moqValue === "Si" && excludedKeysWhenMoqSi.includes(m.Key)) {
+                            return;
+                        }
                         const data = {
                             Type: 2,
                             Key: m.Key,
