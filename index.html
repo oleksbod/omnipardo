@@ -2006,7 +2006,37 @@
 
             <div class="stream-container">
                 <div class="stream-view-container">
-                    <div id="streamContainer" style="position: relative"></div>
+                    <div id="streamContainer" style="position: relative">
+                        <button
+                            id="fullscreenBtn"
+                            style="
+                                position: absolute;
+                                bottom: 10px;
+                                right: 10px;
+                                background: rgba(0, 0, 0, 0.3);
+                                border: none;
+                                border-radius: 6px;
+                                padding: 8px;
+                                cursor: pointer;
+                                z-index: 10;
+                            ">
+                            <img src="img/icons/fullscreen.svg" alt="Fullscreen" style="width: 20px; height: 20px" />
+                        </button>
+                    </div>
+                    <script>
+                        const streamContainer = document.getElementById("streamContainer");
+                        const fullscreenBtn = document.getElementById("fullscreenBtn");
+
+                        fullscreenBtn.addEventListener("click", () => {
+                            if (!document.fullscreenElement) {
+                                streamContainer.requestFullscreen().catch((err) => {
+                                    console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+                                });
+                            } else {
+                                document.exitFullscreen();
+                            }
+                        });
+                    </script>
                     <div id="cameras" class="cameras">
                         <div class="camera-container">
                             <div class="camera img-wrapper active" data-camera="Orbit">
