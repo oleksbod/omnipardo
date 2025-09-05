@@ -588,3 +588,57 @@ body {
         padding-right: 0;
     }
 }
+
+@media (max-width: 700px) {
+    .cameras {
+        gap: 5px;
+    }
+}
+
+@media (max-width: 600px) {
+    .cameras {
+        height: 72px;
+    }
+}
+
+@media (max-width: 540px) {
+    .cameras {
+        height: 70px;
+    }
+}
+
+@media (max-width: 505px) {
+    .cameras {
+        height: 66px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cameras {
+        height: 64px;
+    }
+}
+
+@media (max-width: 450px) {
+    .cameras {
+        height: 60px;
+    }
+}
+@media (max-width: 410px) {
+    .cameras {
+        height: 57px;
+        gap: 3px;
+    }
+}
+
+@media (max-width: 380px) {
+    .cameras {
+        height: 55px;
+    }
+}
+
+@media (max-width: 355px) {
+    .cameras {
+        height: 52px;
+    }
+}
