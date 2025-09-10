@@ -585,13 +585,22 @@ body {
     }
     .stream-view-container {
         position: sticky;
-        top: 150px;
+        top: 120px;
         z-index: 20;
     }
 
     .sidebar {
         overflow: visible;
         padding-right: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .cameras {
+        gap: 5px;
+    }
+    .stream-view-container {
+        top: 96px;
     }
 }
 
@@ -638,9 +647,6 @@ body {
     .stream-container {
         padding: 0 5px;
         padding-top: 120px;
-    }
-    .stream-view-container {
-        top: 120px;
     }
 }
 
