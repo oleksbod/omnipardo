@@ -585,8 +585,8 @@ body {
     }
     .stream-view-container {
         position: sticky;
-        top: 0;
-        z-index: 40;
+        top: 150px;
+        z-index: 20;
     }
 
     .sidebar {
@@ -638,6 +638,9 @@ body {
     .stream-container {
         padding: 0 5px;
         padding-top: 120px;
+    }
+    .stream-view-container {
+        top: 120px;
     }
 }
 
