@@ -1180,44 +1180,6 @@
             window.addEventListener("resize", handleSecondMenuLevel);
             handleSecondMenuLevel();
 
-            function updateNavBackground() {
-                const currentPage = window.location.pathname;
-                const isNotHomepage = currentPage !== "/";
-                const isProductPage = currentPage.startsWith("/products/");
-                const hadScrolled = window.scrollY;
-                const viewportHeight = window.innerHeight;
-
-                // Selettore del breadcrumbsContainer
-                const breadcrumbsContainer = document.querySelector(".breadcrumbs");
-
-                // Funzione per nascondere il breadcrumbs
-                const hideBreadcrumbs = () => {
-                    if (breadcrumbsContainer) {
-                        breadcrumbsContainer.classList.add("hidden");
-                        breadcrumbsContainer.classList.remove("flex");
-                    }
-                };
-
-                // Funzione per mostrare il breadcrumbs
-                const showBreadcrumbs = () => {
-                    if (breadcrumbsContainer) {
-                        breadcrumbsContainer.classList.remove("hidden");
-                        breadcrumbsContainer.classList.add("flex");
-                    }
-                };
-
-                if (hadScrolled > 0 && isNotHomepage) {
-                    hideBreadcrumbs();
-                } else {
-                    showBreadcrumbs();
-                }
-            }
-
-            updateNavBackground();
-            window.addEventListener("scroll", () => {
-                updateNavBackground();
-            });
-
             // Handle second menu
             function handleSecondMenuLevel() {
                 const screenSize = window.innerWidth;
