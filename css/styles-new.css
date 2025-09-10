@@ -585,7 +585,7 @@ body {
     }
     .stream-view-container {
         position: sticky;
-        top: 120px;
+        top: 125px;
         z-index: 20;
     }
 
@@ -600,7 +600,7 @@ body {
         gap: 5px;
     }
     .stream-view-container {
-        top: 96px;
+        top: 100px;
     }
 }
 
