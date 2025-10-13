@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Language Switcher Test</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                padding: 20px;
+                background-color: #f5f5f5;
+            }
+            .test-container {
+                max-width: 800px;
+                margin: 0 auto;
+                background: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+            .language-switcher {
+                background: white;
+                border: 2px solid #ddd;
+                border-radius: 8px;
+                padding: 10px 15px;
+                cursor: pointer;
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+            .language-switcher:hover {
+                border-color: #007bff;
+            }
+            .test-section {
+                margin: 20px 0;
+                padding: 15px;
+                border: 1px solid #eee;
+                border-radius: 5px;
+            }
+            .test-section h3 {
+                margin-top: 0;
+                color: #333;
+            }
+            .config-step {
+                background: #f8f9fa;
+                padding: 10px;
+                margin: 5px 0;
+                border-radius: 4px;
+                font-weight: bold;
+            }
+
+            .spec-item {
+                background: #e8f4f8;
+                padding: 8px;
+                margin: 3px 0;
+                border-radius: 3px;
+                font-weight: bold;
+                border-left: 3px solid #17a2b8;
+            }
+            .footer-text {
+                background: #e9ecef;
+                padding: 10px;
+                margin: 5px 0;
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="test-container">
+            <h1>Language Switcher Test</h1>
+
+            <!-- Language Switcher -->
+            <div class="language-switcher" data-locale-code="it">
+                <span data-translate="LANGUAGE">LINGUA</span>
+                <div id="it-icon" style="display: block">🇮🇹</div>
+                <div id="gb-icon" style="display: none">🇬🇧</div>
+            </div>
+
+            <div class="test-section">
+                <h3>Configuration Steps</h3>
+                <div class="config-step" data-translate="Scegli il Modello Esterno">Scegli il Modello Esterno</div>
+                <div class="config-step" data-translate="Colori dell'esterno">Colori dell'esterno</div>
+                <div class="config-step" data-translate="Carena">Carena</div>
+
+                <!-- Technical specifications -->
+                <div class="spec-item" data-translate="OVERALL LENGTH">OVERALL LENGTH</div>
+                <div class="spec-item" data-translate="MAX BEAM">MAX BEAM</div>
+                <div class="spec-item" data-translate="DISPLACEMENT">DISPLACEMENT</div>
+                <div class="config-step" data-translate="Linea di Bellezza">Linea di Bellezza</div>
+                <div class="config-step" data-translate="Scafo">Scafo</div>
+                <div class="config-step" data-translate="Coperta">Coperta</div>
+                <div class="config-step" data-translate="Cucina">Cucina</div>
+                <div class="config-step" data-translate="Pavimentazione">Pavimentazione</div>
+                <div class="config-step" data-translate="Scegli il Modello Interno">Scegli il Modello Interno</div>
+                <div class="config-step" data-translate="Essenza:">Essenza:</div>
+                <div class="config-step" data-translate="Tessuti divani">Tessuti divani</div>
+                <div class="config-step" data-translate="Moquette">Moquette</div>
+            </div>
+
+            <div class="test-section">
+                <h3>Footer Elements</h3>
+                <div class="footer-text" data-translate="Stay updated">Stay updated</div>
+                <div class="footer-text" data-translate="Pardo's range">Pardo's range</div>
+                <div class="footer-text" data-translate="You discover Walkaround">You discover Walkaround</div>
+                <div class="footer-text" data-translate="You discover Endurance">You discover Endurance</div>
+                <div class="footer-text" data-translate="You discover GT">You discover GT</div>
+            </div>
+
+            <div class="test-section">
+                <h3>Instructions</h3>
+                <p>
+                    Click the language switcher above to toggle between Italian and English. The text should change
+                    dynamically.
+                </p>
+                <p><strong>Expected behavior:</strong></p>
+                <ul>
+                    <li>Italian (default): Shows Italian text with 🇮🇹 flag</li>
+                    <li>English: Shows English text with 🇬🇧 flag</li>
+                    <li>Language preference is saved in localStorage</li>
+                    <li>Should be able to switch back and forth multiple times</li>
+                    <li>Page remembers your choice on reload</li>
+                </ul>
+                <p><strong>Debug:</strong> Open browser console to see language detection logs</p>
+                <p>
+                    <strong>Testing localStorage:</strong> Run <code>clearLanguagePreference()</code> in console to
+                    reset and test default behavior
+                </p>
+            </div>
+        </div>
+
+        <!-- Language Switcher Script -->
+        <script src="js/language-switcher.js"></script>
+    </body>
+</html>
