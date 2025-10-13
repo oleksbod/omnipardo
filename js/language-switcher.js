@@ -6,6 +6,7 @@ class LanguageSwitcher {
         this.translations = {
             it: {
                 // Configuration Steps
+                "tech-description": "Dati tecnici ed equipaggiamento di serie",
                 "Scegli il Modello Esterno": "Scegli il Modello",
                 "Colori dell'esterno": "Colori delle vernici esterne",
                 Carena: "Carena",
@@ -85,9 +86,11 @@ class LanguageSwitcher {
                 "OVERALL LENGTH": "LUNGHEZZA",
                 "MAX BEAM": "LARGHEZZA",
                 DISPLACEMENT: "DISLOCAMENTO",
+                SOON: "SOON",
             },
             en: {
                 // Configuration Steps
+                "tech-description": "Technical data and standard equipment",
                 "Scegli il Modello Esterno": "Choose model",
                 "Colori dell'esterno": "Exterior paint colors",
                 Carena: "Hull color",
@@ -167,6 +170,7 @@ class LanguageSwitcher {
                 "OVERALL LENGTH": "OVERALL LENGTH",
                 "MAX BEAM": "MAX BEAM",
                 DISPLACEMENT: "DISPLACEMENT",
+                SOON: "SOON",
             },
         };
 
