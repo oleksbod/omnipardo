@@ -342,6 +342,7 @@ body {
     gap: 20px;
     height: 99vh;
     overflow: hidden;
+    margin-bottom: 10px;
 }
 .background-container {
     position: fixed;
