@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <base href="/" />
+        <base href="/omnipardo/" />
 
         <title>Pardo Yachts Configurator</title>
         <link href="css/normalize.css" rel="stylesheet" type="text/css" media="all" />
@@ -3433,6 +3433,25 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Configuration Action Buttons -->
+                        <div class="config-action-buttons">
+                            <a
+                                href="https://centers.pardoyachts.com/dealers/"
+                                target="_blank"
+                                class="config-button dealer-button"
+                                data-translate="Select a dealer">
+                                Select a dealer
+                            </a>
+                            <button
+                                type="button"
+                                id="email-config-button"
+                                class="config-button email-config-button"
+                                disabled
+                                data-translate="Email me my configuration">
+                                Email me my configuration
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -4106,9 +4125,6 @@
 
                     /* Old language form styles removed */
                 </style>
-
-                <!-- Language Switcher Script -->
-                <script src="js/language-switcher.js"></script>
 
                 <script>
                     document.addEventListener("DOMContentLoaded", function () {

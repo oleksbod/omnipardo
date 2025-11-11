@@ -111,6 +111,8 @@ class LanguageSwitcher {
                 "MAX BEAM": "LARGHEZZA",
                 DISPLACEMENT: "DISLOCAMENTO",
                 SOON: "SOON",
+                "Select a dealer": "Seleziona un dealer",
+                "Email me my configuration": "Inviami la mia configurazione via email",
             },
             en: {
                 // Configuration Steps
@@ -219,6 +221,8 @@ class LanguageSwitcher {
                 "MAX BEAM": "MAX BEAM",
                 DISPLACEMENT: "DISPLACEMENT",
                 SOON: "SOON",
+                "Select a dealer": "Select a dealer",
+                "Email me my configuration": "Email me my configuration",
             },
         };
 

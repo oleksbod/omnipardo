@@ -330,7 +330,7 @@
         // Для локальної розробки: http://localhost:3000/api/send-email
         // Для продакшену: https://your-domain.com/api/send-email
         //
-        const API_ENDPOINT = "https://ic3t88zejk.execute-api.eu-north-1.amazonaws.com/v1"; // ⚠️ ЗАМІНІТЬ НА ВАШ URL!
+        const API_ENDPOINT = "https://ic3t88zejk.execute-api.eu-north-1.amazonaws.com/v2/send-email"; // ⚠️ ЗАМІНІТЬ НА ВАШ URL!
 
         try {
             const response = await fetch(API_ENDPOINT, {
