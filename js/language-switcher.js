@@ -27,6 +27,30 @@ class LanguageSwitcher {
                 "Tessuti divani": "Tessuti divani",
                 Moquette: "Moquette",
 
+                // Form translations
+                "Chiedi a noi, saremo lieti di assisterti": "Chiedi a noi, saremo lieti di assisterti",
+                "Required fields": "Campi obbligatori",
+                Name: "Nome*",
+                Surname: "Cognome*",
+                "Place of Residence": "Luogo di residenza*",
+                Email: "Email*",
+                Phone: "Telefono*",
+                "Model of Interest": "Modello di interesse",
+                "Navigation Area": "Area di navigazione",
+                "Boat Owned, if present": "Barca posseduta, se presente",
+                Message: "Messaggio",
+                Send: "Invia",
+                "Sending...": "Invio in corso...",
+                "Message sent successfully!": "Messaggio inviato con successo!",
+                "Failed to send message. Try again.": "Invio fallito. Riprova.",
+                "Please fill in all required fields.": "Compila tutti i campi obbligatori.",
+                "Please enter a valid email address.": "Inserisci un indirizzo email valido.",
+                "Please accept at least one privacy consent.": "Accetta almeno un consenso alla privacy.",
+                "Marketing consent text":
+                    "Prestando il tuo consenso, potremo inviarti comunicazioni commerciali relative a Pardo Yachts via e-mail, telefono, e potremo effettuarericerche di mercato al fine di valutare il tuo livello di soddisfazione riguardo i nostri prodotti e servizi.",
+                "Profiling consent text":
+                    "Prestando il tuo consenso, potremo inviarti comunicazioni commerciali personalizzate in base alle tue abitudini di acquisto e, in generale, inbase ai tuoi interessi, alle tue richieste e alle tue interazioni con noi.",
+
                 // Footer translations
                 "Stay updated": "Rimani aggiornato",
                 "Get the most relevant news from the Pardo world.": "Ricevi le notizie più rilevanti dal mondo Pardo.",
@@ -87,6 +111,8 @@ class LanguageSwitcher {
                 "MAX BEAM": "LARGHEZZA",
                 DISPLACEMENT: "DISLOCAMENTO",
                 SOON: "SOON",
+                "Select a dealer": "Seleziona un dealer",
+                "Email me my configuration": "Inviami la mia configurazione via email",
             },
             en: {
                 // Configuration Steps
@@ -110,6 +136,30 @@ class LanguageSwitcher {
                 "Essenza:": "Wood finish",
                 "Tessuti divani": "Sofa fabrics",
                 Moquette: "Carpet",
+
+                // Form translations
+                "Chiedi a noi, saremo lieti di assisterti": "Ask us, we will be happy to assist you",
+                "Required fields": "Required fields",
+                Name: "Name*",
+                Surname: "Surname*",
+                "Place of Residence": "Place of Residence*",
+                Email: "Email*",
+                Phone: "Phone*",
+                "Model of Interest": "Model of Interest",
+                "Navigation Area": "Navigation Area",
+                "Boat Owned, if present": "Boat Owned, if present",
+                Message: "Message",
+                Send: "Send",
+                "Sending...": "Sending...",
+                "Message sent successfully!": "Message sent successfully!",
+                "Failed to send message. Try again.": "Failed to send message. Try again.",
+                "Please fill in all required fields.": "Please fill in all required fields.",
+                "Please enter a valid email address.": "Please enter a valid email address.",
+                "Please accept at least one privacy consent.": "Please accept at least one privacy consent.",
+                "Marketing consent text":
+                    "By checking this box you consent to receive commercial communications and participate in market research regarding Pardo Yachts products and services via email, phone, and traditional mail.",
+                "Profiling consent text":
+                    "By checking this box, we will send you personalized commercial communications based on your purchasing habits and, in general, based on your interests, requests and interactions with us.",
 
                 // Footer translations
                 "Stay updated": "Stay updated",
@@ -171,6 +221,8 @@ class LanguageSwitcher {
                 "MAX BEAM": "MAX BEAM",
                 DISPLACEMENT: "DISPLACEMENT",
                 SOON: "SOON",
+                "Select a dealer": "Select a dealer",
+                "Email me my configuration": "Email me my configuration",
             },
         };
 

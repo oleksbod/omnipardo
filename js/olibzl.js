@@ -670,5 +670,6 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
 
     //Connecting to the stream
     //    - options contains parent DOM element name to attach to
-    cloudstream.connect(cloudstreamSettings);
+    //cloudstream.connect(cloudstreamSettings);
+    hideLoader();
 });

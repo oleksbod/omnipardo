@@ -4,11 +4,12 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <base href="/" />
+        <base href="/omnipardo/" />
 
         <title>Pardo Yachts Configurator</title>
         <link href="css/normalize.css" rel="stylesheet" type="text/css" media="all" />
         <link href="css/styles-new.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="css/contact-form.css" rel="stylesheet" type="text/css" media="all" />
         <link
             rel="icon"
             type="image/x-icon"
@@ -3432,6 +3433,25 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Configuration Action Buttons -->
+                        <div class="config-action-buttons">
+                            <a
+                                href="https://centers.pardoyachts.com/dealers/"
+                                target="_blank"
+                                class="config-button dealer-button"
+                                data-translate="Select a dealer">
+                                Select a dealer
+                            </a>
+                            <button
+                                type="button"
+                                id="email-config-button"
+                                class="config-button email-config-button"
+                                disabled
+                                data-translate="Email me my configuration">
+                                Email me my configuration
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -4106,9 +4126,6 @@
                     /* Old language form styles removed */
                 </style>
 
-                <!-- Language Switcher Script -->
-                <script src="js/language-switcher.js"></script>
-
                 <script>
                     document.addEventListener("DOMContentLoaded", function () {
                         const radioButtons = document.querySelectorAll('input[name="contact[role]"]');
@@ -4237,6 +4254,259 @@
                 </script>
             </footer>
         </div>
+
+        <!-- ===== Contact Form Modal ===== -->
+        <div id="contact-modal" class="contact-modal">
+            <div class="contact-overlay"></div>
+            <div class="contact-box">
+                <button class="contact-close" aria-label="Close">&times;</button>
+
+                <div class="contact-form-container">
+                    <div class="contact-form-container-heading">
+                        <p class="form-heading-text" data-translate="Chiedi a noi, saremo lieti di assisterti">
+                            Chiedi a noi, saremo lieti di assisterti
+                        </p>
+                        <p class="form-subtitle-text">
+                            <span data-translate="Required fields">Campi obbligatori</span
+                            ><span class="required-asterisk">*</span>
+                        </p>
+                    </div>
+
+                    <div class="form-container">
+                        <form id="contact-form" class="form-contact">
+                            <div class="contact-form-content">
+                                <!-- First Name -->
+                                <div class="form-group">
+                                    <input
+                                        type="text"
+                                        name="first_name"
+                                        id="first_name"
+                                        class="form-input"
+                                        placeholder="Nome*"
+                                        required
+                                        data-translate-placeholder="Name" />
+                                    <span class="error-message" id="first_name-error"></span>
+                                </div>
+
+                                <!-- Last Name (Surname) -->
+                                <div class="form-group">
+                                    <input
+                                        type="text"
+                                        name="last_name"
+                                        id="last_name"
+                                        class="form-input"
+                                        placeholder="Cognome*"
+                                        required
+                                        data-translate-placeholder="Surname" />
+                                    <span class="error-message" id="last_name-error"></span>
+                                </div>
+
+                                <!-- Place of Residence -->
+                                <div class="form-group">
+                                    <input
+                                        type="text"
+                                        name="residence"
+                                        id="residence"
+                                        class="form-input"
+                                        placeholder="Luogo di residenza*"
+                                        required
+                                        data-translate-placeholder="Place of Residence" />
+                                    <span class="error-message" id="residence-error"></span>
+                                </div>
+
+                                <!-- Email -->
+                                <div class="form-group">
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        id="email"
+                                        class="form-input"
+                                        placeholder="Email*"
+                                        required
+                                        data-translate-placeholder="Email" />
+                                    <span class="error-message" id="email-error"></span>
+                                </div>
+
+                                <!-- Phone -->
+                                <div class="form-group">
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        id="phone"
+                                        class="form-input"
+                                        placeholder="Telefono*"
+                                        required
+                                        data-translate-placeholder="Phone" />
+                                    <span class="error-message" id="phone-error"></span>
+                                </div>
+
+                                <!-- Models hidden -->
+                                <input type="hidden" name="models" id="selected-models" value="" />
+
+                                <!-- Models Dropdown -->
+                                <div class="form-group model-dropdown-group">
+                                    <div id="dropdown-toggle" class="form-group-dropdown">
+                                        <span
+                                            id="placeholder-text"
+                                            class="placeholder"
+                                            data-translate="Model of Interest"
+                                            >Modello di interesse</span
+                                        >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            id="dropdown-arrow"
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            class="dropdown-arrow-icon">
+                                            <path
+                                                d="M4.88056 8.17719C4.55561 7.84728 4 8.08094 4 8.5475C4 8.68703 4.05484 8.82078 4.15236 8.9191L10.5858 15.4053C11.3668 16.1982 12.6332 16.1982 13.4142 15.4053L19.8535 8.86761C19.9473 8.7724 20 8.64326 20 8.50862C20 8.05638 19.4614 7.82992 19.1464 8.1497L12.7071 14.6874C12.3166 15.0839 11.6834 15.0839 11.2929 14.6874L4.88056 8.17719Z"
+                                                fill="black"></path>
+                                        </svg>
+                                    </div>
+
+                                    <div id="dropdown-container" class="dropdown-container">
+                                        <div class="container-boat-label">
+                                            <div class="badge-product" data-value="E60">E60</div>
+                                            <div class="badge-product" data-value="E72">E72</div>
+                                            <div class="badge-product" data-value="GT52">GT52</div>
+                                            <div class="badge-product" data-value="GT65">GT65</div>
+                                            <div class="badge-product" data-value="GT75">GT75</div>
+                                            <div class="badge-product" data-value="P38">P38</div>
+                                            <div class="badge-product" data-value="P38R">P38R</div>
+                                            <div class="badge-product" data-value="P43">P43</div>
+                                            <div class="badge-product" data-value="P43R">P43R</div>
+                                            <div class="badge-product" data-value="P50">P50</div>
+                                        </div>
+                                    </div>
+                                    <span class="error-message" id="model-error"></span>
+                                </div>
+
+                                <!-- Navigation Area -->
+                                <div class="form-group">
+                                    <input
+                                        type="text"
+                                        name="port"
+                                        id="port"
+                                        class="form-input"
+                                        placeholder="Area di navigazione"
+                                        data-translate-placeholder="Navigation Area" />
+                                    <span class="error-message" id="port-error"></span>
+                                </div>
+
+                                <!-- Boat Owned -->
+                                <div class="form-group">
+                                    <input
+                                        type="text"
+                                        name="boat_registration"
+                                        id="boat_registration"
+                                        class="form-input"
+                                        placeholder="Barca posseduta, se presente"
+                                        data-translate-placeholder="Boat Owned, if present" />
+                                    <span class="error-message" id="boat_registration-error"></span>
+                                </div>
+
+                                <!-- Message -->
+                                <div class="form-group">
+                                    <textarea
+                                        name="message"
+                                        id="message"
+                                        class="form-textarea"
+                                        placeholder="Messaggio"
+                                        data-translate-placeholder="Message"
+                                        maxlength="230"></textarea>
+                                    <div class="char-counter"><span id="charCount">0</span>/230</div>
+                                    <span class="error-message" id="message-error"></span>
+                                </div>
+
+                                <!-- Checkboxes Container -->
+                                <div class="checkboxes-container">
+                                    <div class="checkboxes-inner">
+                                        <!-- Marketing Consent -->
+                                        <div class="form-group checkbox-item">
+                                            <div class="checkbox-input-wrapper">
+                                                <input
+                                                    type="checkbox"
+                                                    id="marketingConsent"
+                                                    name="marketing_consent"
+                                                    class="custom-checkbox" />
+                                                <label for="marketingConsent" class="checkbox-label-text">
+                                                    <span data-translate="Marketing consent text"
+                                                        >Prestando il tuo consenso, potremo inviarti comunicazioni
+                                                        commerciali relative a Pardo Yachts via e-mail, telefono, e
+                                                        potremo effettuarericerche di mercato al fine di valutare il tuo
+                                                        livello di soddisfazione riguardo i nostri prodotti e
+                                                        servizi.</span
+                                                    >
+                                                    <a
+                                                        href="//pardoyachts.com/pages/pardo-privacy-policy"
+                                                        target="_blank"
+                                                        class="privacy-link-inline"
+                                                        data-translate="Privacy Policy"
+                                                        >Privacy Policy</a
+                                                    >
+                                                </label>
+                                            </div>
+                                            <span class="error-message" id="marketingConsent-error"></span>
+                                        </div>
+
+                                        <!-- Profiling Consent -->
+                                        <div class="form-group checkbox-item">
+                                            <div class="checkbox-input-wrapper">
+                                                <input
+                                                    type="checkbox"
+                                                    id="profilingConsent"
+                                                    name="profiling_consent"
+                                                    class="custom-checkbox" />
+                                                <label for="profilingConsent" class="checkbox-label-text">
+                                                    <span data-translate="Profiling consent text"
+                                                        >Prestando il tuo consenso, potremo inviarti comunicazioni
+                                                        commerciali personalizzate in base alle tue abitudini di
+                                                        acquisto e, in generale, inbase ai tuoi interessi, alle tue
+                                                        richieste e alle tue interazioni con noi.</span
+                                                    >
+                                                    <a
+                                                        href="//pardoyachts.com/pages/pardo-privacy-policy"
+                                                        target="_blank"
+                                                        class="privacy-link-inline"
+                                                        data-translate="Privacy Policy"
+                                                        >Privacy Policy</a
+                                                    >
+                                                </label>
+                                            </div>
+                                            <span class="error-message" id="profilingConsent-error"></span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Privacy Policy Link -->
+                                    <div class="privacy-link-container">
+                                        <a
+                                            href="//pardoyachts.com/pages/pardo-privacy-policy"
+                                            target="_blank"
+                                            class="privacy-link-main"
+                                            data-translate="Privacy Policy"
+                                            >Privacy Policy</a
+                                        >
+                                    </div>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="submit-button-container">
+                                    <button type="submit" class="btn-submit" data-translate="Send" disabled>
+                                        <span data-translate="Send">Invia</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <p id="form-status" class="form-status"></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script src="js/olibzl.js"></script>
+        <script src="js/language-switcher.js"></script>
+        <script src="js/contact-form.js"></script>
     </body>
 </html>
