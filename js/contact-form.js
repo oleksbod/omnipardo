@@ -30,6 +30,8 @@
     function closeModal() {
         modal.classList.remove("show");
         document.body.classList.remove("modal-open");
+        // Save to localStorage so modal won't show again
+        localStorage.setItem("contactShown", "true");
     }
 
     closeBtn.addEventListener("click", closeModal);
