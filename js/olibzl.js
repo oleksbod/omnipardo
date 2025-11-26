@@ -387,7 +387,14 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                     });
 
                     if (label && label.classList.contains("normal")) {
-                        label.textContent = wrapper.dataset.name;
+                        const name = wrapper.dataset.name;
+                        label.textContent = name;
+                        // Update data-translate attribute for translation
+                        label.setAttribute("data-translate", name);
+                        // Trigger translation update if language switcher is available
+                        if (window.languageSwitcher) {
+                            window.languageSwitcher.translateContent(window.languageSwitcher.currentLanguage);
+                        }
                     }
 
                     if (wrapper.dataset.cucina === "true") {
@@ -587,7 +594,14 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
 
                     // update label text
                     if (label && label.classList.contains("normal")) {
-                        label.textContent = wrapper.dataset.name;
+                        const name = wrapper.dataset.name;
+                        label.textContent = name;
+                        // Update data-translate attribute for translation
+                        label.setAttribute("data-translate", name);
+                        // Trigger translation update if language switcher is available
+                        if (window.languageSwitcher) {
+                            window.languageSwitcher.translateContent(window.languageSwitcher.currentLanguage);
+                        }
                     }
 
                     // pick correct materials
