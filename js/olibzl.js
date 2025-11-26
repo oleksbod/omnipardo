@@ -624,7 +624,11 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
     });
 
     if (streamContainer) {
+        let isMouseInContainer = false;
+
+        // Track mouse enter/leave for container
         streamContainer.addEventListener("mouseenter", () => {
+            isMouseInContainer = true;
             const data = {
                 Type: 4,
                 Key: "",
@@ -634,6 +638,24 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
         });
 
         streamContainer.addEventListener("mouseleave", () => {
+            isMouseInContainer = false;
+            // Don't send FOCUS_OFF on mouseleave
+        });
+
+        // Send FOCUS_ON when mouse button is pressed inside container
+        streamContainer.addEventListener("mousedown", () => {
+            if (isMouseInContainer) {
+                const data = {
+                    Type: 4,
+                    Key: "",
+                    Value: "FOCUS_ON",
+                };
+                cloudstream.sendJsonData(data);
+            }
+        });
+
+        // Send FOCUS_OFF when mouse button is released anywhere on the page
+        document.addEventListener("mouseup", () => {
             const data = {
                 Type: 4,
                 Key: "",
@@ -670,6 +692,6 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
 
     //Connecting to the stream
     //    - options contains parent DOM element name to attach to
-    //cloudstream.connect(cloudstreamSettings);
-    hideLoader();
+    cloudstream.connect(cloudstreamSettings);
+    //hideLoader();
 });

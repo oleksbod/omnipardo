@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <base href="/omnipardo/" />
+        <base href="/" />
 
         <title>Pardo Yachts Configurator</title>
         <link href="css/normalize.css" rel="stylesheet" type="text/css" media="all" />
@@ -17,6 +17,12 @@
         <link href="//pardoyachts.com/cdn/shop/t/12/assets/main.css" rel="stylesheet" type="text/css" media="all" />
 
         <script type="text/javascript" src="https://libzl.zlthunder.net/libzl/versions/latest/libzl.js"></script>
+        <!-- html2canvas for screenshot fallback -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+            integrity="sha512-BNaRQnYJYi2q3Sa2iscqhBLHdBv3VYuH9jqzwPHkV/Ps3q2UiLZyyuN4kkKhniFefpy9HGQwfbfxsc2dY/0LQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
     </head>
 
     <body>
@@ -2627,7 +2633,10 @@
                                         data-mat="mat026"
                                         data-name="Natural Teak with black caulking"
                                         data-mesh="Hull6 : 2">
-                                        <div class="texture teak mat026"></div>
+                                        <img
+                                            src="img/teak/Natural Teak with black caulking_mat026.png"
+                                            alt="Natural Teak with black caulking"
+                                            class="texture teak mat026" />
                                     </div>
                                 </div>
                                 <div class="scene-container">
@@ -2636,7 +2645,10 @@
                                         data-mat="mat027"
                                         data-name="Natural Teak with grey caulking"
                                         data-mesh="Hull6 : 2">
-                                        <div class="texture teak mat027"></div>
+                                        <img
+                                            src="img/teak/Natural Teak with grey caulking_mat027.png"
+                                            alt="Natural Teak with grey caulking"
+                                            class="texture teak mat027" />
                                     </div>
                                 </div>
                                 <div class="scene-container">
@@ -2645,7 +2657,10 @@
                                         data-mat="mat028"
                                         data-name="Flexiteak col. Scrubbed with grey caulking"
                                         data-mesh="Hull6 : 2">
-                                        <div class="texture teak mat028"></div>
+                                        <img
+                                            src="img/teak/Flexiteak col. Scrubbed with grey caulking_mat028.png"
+                                            alt="Flexiteak col. Scrubbed with grey caulking"
+                                            class="texture teak mat028" />
                                     </div>
                                 </div>
                                 <div class="scene-container">
@@ -2654,7 +2669,10 @@
                                         data-mat="mat029"
                                         data-name="Flexiteak col. Scrubbed with white caulking"
                                         data-mesh="Hull6 : 2">
-                                        <div class="texture teak mat029"></div>
+                                        <img
+                                            src="img/teak/Flexiteak col. Scrubbed with white caulking_mat029.png"
+                                            alt="Flexiteak col. Scrubbed with white caulking"
+                                            class="texture teak mat029" />
                                     </div>
                                 </div>
                                 <div class="scene-container">
@@ -2663,7 +2681,10 @@
                                         data-mat="mat030"
                                         data-name="Flexiteak col. Scrubbed with black caulking"
                                         data-mesh="Hull6 : 2">
-                                        <div class="texture teak mat030"></div>
+                                        <img
+                                            src="img/teak/Flexiteak col. Scrubbed with back caulking_mat030.png"
+                                            alt="Flexiteak col. Scrubbed with black caulking"
+                                            class="texture teak mat030" />
                                     </div>
                                 </div>
                                 <div class="scene-container">
@@ -2672,7 +2693,10 @@
                                         data-mat="mat031"
                                         data-name="Flexiteak col. Natural teak with grey caulking"
                                         data-mesh="Hull6 : 2">
-                                        <div class="texture teak mat031"></div>
+                                        <img
+                                            src="img/teak/Flexiteak col. Natural teak with grey caulking_mat031.png"
+                                            alt="Flexiteak col. Natural teak with grey caulking"
+                                            class="texture teak mat031" />
                                     </div>
                                 </div>
                                 <div class="scene-container">
@@ -2681,7 +2705,10 @@
                                         data-mat="mat032"
                                         data-name="Flexiteak col. Natural teak with white caulking"
                                         data-mesh="Hull6 : 2">
-                                        <div class="texture teak mat032"></div>
+                                        <img
+                                            src="img/teak/Flexiteak col. Natural teak with white caulking_mat032.png"
+                                            alt="Flexiteak col. Natural teak with white caulking"
+                                            class="texture teak mat032" />
                                     </div>
                                 </div>
                                 <div class="scene-container">
@@ -2690,7 +2717,10 @@
                                         data-mat="mat033"
                                         data-name="Flexiteak col. Natural teak with black caulking"
                                         data-mesh="Hull6 : 2">
-                                        <div class="texture teak mat033"></div>
+                                        <img
+                                            src="img/teak/Flexiteak col. Natural teak with black caulking_mat033.png"
+                                            alt="Flexiteak col. Natural teak with black caulking"
+                                            class="texture teak mat033" />
                                     </div>
                                 </div>
                             </div>
@@ -4514,5 +4544,6 @@
         <script src="js/olibzl.js"></script>
         <script src="js/language-switcher.js"></script>
         <script src="js/contact-form.js"></script>
+        <script src="js/screenshot-cameras.js"></script>
     </body>
 </html>

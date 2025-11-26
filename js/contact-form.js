@@ -4,17 +4,44 @@
 
     // --- Modal logic ---
     const modal = document.getElementById("contact-modal");
-    const closeBtn = document.querySelector(".contact-close");
-    const overlay = document.querySelector(".contact-overlay");
     const form = document.getElementById("contact-form");
 
-    if (!modal || !closeBtn || !overlay || !form) {
+    if (!modal || !form) {
         console.warn("Contact form elements not found");
         return;
     }
 
-    // Show on first visit
-    if (!localStorage.getItem("contactShown")) {
+    // Check if user data exists in localStorage
+    function getUserData() {
+        try {
+            const userData = localStorage.getItem("userContactData");
+            return userData ? JSON.parse(userData) : null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    // Save user data to localStorage
+    function saveUserData(formData) {
+        try {
+            const userData = {
+                first_name: formData.first_name,
+                last_name: formData.last_name,
+                email: formData.email,
+                phone: formData.phone,
+                residence: formData.residence,
+                submittedAt: new Date().toISOString(),
+            };
+            localStorage.setItem("userContactData", JSON.stringify(userData));
+            localStorage.setItem("contactShown", "true");
+        } catch (e) {
+            console.error("Error saving user data:", e);
+        }
+    }
+
+    // Show on first visit only if user data doesn't exist
+    const userData = getUserData();
+    if (!userData) {
         window.addEventListener("load", () => {
             setTimeout(() => {
                 openModal();
@@ -30,19 +57,7 @@
     function closeModal() {
         modal.classList.remove("show");
         document.body.classList.remove("modal-open");
-        // Save to localStorage so modal won't show again
-        localStorage.setItem("contactShown", "true");
     }
-
-    closeBtn.addEventListener("click", closeModal);
-    overlay.addEventListener("click", closeModal);
-
-    // Close on Escape key
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && modal.classList.contains("show")) {
-            closeModal();
-        }
-    });
 
     // --- Form validation ---
     function validateEmail(email) {
@@ -346,6 +361,9 @@
             const result = await response.json();
 
             if (response.ok && result.success) {
+                // Save user data to localStorage
+                saveUserData(formData);
+
                 // Success
                 if (status) {
                     status.className = "form-status success";
@@ -375,7 +393,6 @@
                 checkRequiredFields();
                 setTimeout(() => {
                     closeModal();
-                    localStorage.setItem("contactShown", "true");
                 }, 1500);
             } else {
                 throw new Error(result.message || "Failed to send");
