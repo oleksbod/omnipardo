@@ -38,6 +38,7 @@ body.modal-open {
     backdrop-filter: blur(2px);
     opacity: 0;
     transition: opacity 0.3s ease;
+    pointer-events: none; /* Disable clicking on overlay */
 }
 
 .contact-modal.show .contact-overlay {
@@ -70,6 +71,7 @@ body.modal-open {
 }
 
 .contact-close {
+    display: none !important; /* Hide close button - form can only be closed after submission */
     position: absolute;
     top: 0.75rem;
     right: 1rem;

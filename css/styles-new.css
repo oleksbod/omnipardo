@@ -631,6 +631,7 @@ body {
     background-color: #f5f5f5;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }
 
 .email-config-button:disabled {
@@ -638,8 +639,16 @@ body {
     cursor: not-allowed;
     background-color: #e5e5e5;
     color: #999;
+    border-color: #ccc;
+    transform: none;
+    box-shadow: none;
 }
 
+.email-config-button:disabled:hover {
+    background-color: #e5e5e5;
+    transform: none;
+    box-shadow: none;
+}
 @media (max-width: 1000px) {
     .stream-container {
         flex-direction: column;

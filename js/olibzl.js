@@ -387,7 +387,14 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
                     });
 
                     if (label && label.classList.contains("normal")) {
-                        label.textContent = wrapper.dataset.name;
+                        const name = wrapper.dataset.name;
+                        label.textContent = name;
+                        // Update data-translate attribute for translation
+                        label.setAttribute("data-translate", name);
+                        // Trigger translation update if language switcher is available
+                        if (window.languageSwitcher) {
+                            window.languageSwitcher.translateContent(window.languageSwitcher.currentLanguage);
+                        }
                     }
 
                     if (wrapper.dataset.cucina === "true") {
@@ -587,7 +594,14 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
 
                     // update label text
                     if (label && label.classList.contains("normal")) {
-                        label.textContent = wrapper.dataset.name;
+                        const name = wrapper.dataset.name;
+                        label.textContent = name;
+                        // Update data-translate attribute for translation
+                        label.setAttribute("data-translate", name);
+                        // Trigger translation update if language switcher is available
+                        if (window.languageSwitcher) {
+                            window.languageSwitcher.translateContent(window.languageSwitcher.currentLanguage);
+                        }
                     }
 
                     // pick correct materials
@@ -624,7 +638,11 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
     });
 
     if (streamContainer) {
+        let isMouseInContainer = false;
+
+        // Track mouse enter/leave for container
         streamContainer.addEventListener("mouseenter", () => {
+            isMouseInContainer = true;
             const data = {
                 Type: 4,
                 Key: "",
@@ -634,6 +652,24 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
         });
 
         streamContainer.addEventListener("mouseleave", () => {
+            isMouseInContainer = false;
+            // Don't send FOCUS_OFF on mouseleave
+        });
+
+        // Send FOCUS_ON when mouse button is pressed inside container
+        streamContainer.addEventListener("mousedown", () => {
+            if (isMouseInContainer) {
+                const data = {
+                    Type: 4,
+                    Key: "",
+                    Value: "FOCUS_ON",
+                };
+                cloudstream.sendJsonData(data);
+            }
+        });
+
+        // Send FOCUS_OFF when mouse button is released anywhere on the page
+        document.addEventListener("mouseup", () => {
             const data = {
                 Type: 4,
                 Key: "",
@@ -670,6 +706,6 @@ libzl.cloudstream("cloudstreamExample").then(function (api) {
 
     //Connecting to the stream
     //    - options contains parent DOM element name to attach to
-    //cloudstream.connect(cloudstreamSettings);
-    hideLoader();
+    cloudstream.connect(cloudstreamSettings);
+    //hideLoader();
 });
