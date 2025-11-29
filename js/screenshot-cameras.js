@@ -21,6 +21,48 @@
             return;
         }
 
+        // Function to resize image to max width while maintaining aspect ratio
+        function resizeImage(blob, maxWidth = 1280, quality = 0.85) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => {
+                    // Calculate new dimensions
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > maxWidth) {
+                        height = (height * maxWidth) / width;
+                        width = maxWidth;
+                    }
+
+                    // Create canvas with new dimensions
+                    const canvas = document.createElement("canvas");
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext("2d");
+
+                    // Draw resized image
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // Convert to JPEG with specified quality
+                    canvas.toBlob(
+                        (resizedBlob) => {
+                            if (resizedBlob) {
+                                const url = URL.createObjectURL(resizedBlob);
+                                resolve({ url, blob: resizedBlob });
+                            } else {
+                                reject(new Error("Failed to resize image"));
+                            }
+                        },
+                        "image/jpeg", // Use JPEG format
+                        quality // Quality 0.85
+                    );
+                };
+                img.onerror = reject;
+                img.src = URL.createObjectURL(blob);
+            });
+        }
+
         // Function to take screenshot of streamContainer
         function takeScreenshot(cameraName) {
             return new Promise((resolve, reject) => {
@@ -32,10 +74,18 @@
                     if (canvas) {
                         // If canvas exists, convert it to image
                         canvas.toBlob(
-                            (blob) => {
+                            async (blob) => {
                                 if (blob) {
-                                    const url = URL.createObjectURL(blob);
-                                    resolve({ url, cameraName, blob });
+                                    try {
+                                        // Resize to 1280px max width with quality 0.85
+                                        const resized = await resizeImage(blob, 1280, 0.85);
+                                        resolve({ url: resized.url, cameraName, blob: resized.blob });
+                                    } catch (e) {
+                                        // Fallback to original if resize fails
+                                        console.warn("Failed to resize screenshot, using original:", e);
+                                        const url = URL.createObjectURL(blob);
+                                        resolve({ url, cameraName, blob });
+                                    }
                                 } else {
                                     reject(new Error("Failed to create blob from canvas"));
                                 }
@@ -46,22 +96,41 @@
                     } else if (video) {
                         // If video exists, draw it to canvas
                         const tempCanvas = document.createElement("canvas");
-                        tempCanvas.width = video.videoWidth || video.clientWidth;
-                        tempCanvas.height = video.videoHeight || video.clientHeight;
+
+                        // Limit resolution to maxWidth (1280px)
+                        const maxWidth = 1280;
+                        let width = video.videoWidth || video.clientWidth;
+                        let height = video.videoHeight || video.clientHeight;
+
+                        if (width > maxWidth) {
+                            height = (height * maxWidth) / width;
+                            width = maxWidth;
+                        }
+
+                        tempCanvas.width = width;
+                        tempCanvas.height = height;
                         const ctx = tempCanvas.getContext("2d");
                         ctx.drawImage(video, 0, 0, tempCanvas.width, tempCanvas.height);
 
                         tempCanvas.toBlob(
-                            (blob) => {
+                            async (blob) => {
                                 if (blob) {
-                                    const url = URL.createObjectURL(blob);
-                                    resolve({ url, cameraName, blob });
+                                    // Already resized, convert to JPEG with quality 0.85
+                                    try {
+                                        const resized = await resizeImage(blob, maxWidth, 0.85);
+                                        resolve({ url: resized.url, cameraName, blob: resized.blob });
+                                    } catch (e) {
+                                        // Fallback to original if resize fails
+                                        console.warn("Failed to resize screenshot, using original:", e);
+                                        const url = URL.createObjectURL(blob);
+                                        resolve({ url, cameraName, blob });
+                                    }
                                 } else {
                                     reject(new Error("Failed to create blob from video"));
                                 }
                             },
-                            "image/png",
-                            1.0
+                            "image/jpeg", // Use JPEG format
+                            0.85 // Quality 0.85
                         );
                     } else {
                         // Fallback: use html2canvas if available, or try to capture the container
@@ -70,12 +139,21 @@
                                 backgroundColor: null,
                                 useCORS: true,
                                 logging: false,
-                            }).then((canvas) => {
+                                scale: 1.0, // Keep original scale
+                            }).then(async (canvas) => {
                                 canvas.toBlob(
-                                    (blob) => {
+                                    async (blob) => {
                                         if (blob) {
-                                            const url = URL.createObjectURL(blob);
-                                            resolve({ url, cameraName, blob });
+                                            try {
+                                                // Resize to 1280px max width with quality 0.85
+                                                const resized = await resizeImage(blob, 1280, 0.85);
+                                                resolve({ url: resized.url, cameraName, blob: resized.blob });
+                                            } catch (e) {
+                                                // Fallback to original if resize fails
+                                                console.warn("Failed to resize screenshot, using original:", e);
+                                                const url = URL.createObjectURL(blob);
+                                                resolve({ url, cameraName, blob });
+                                            }
                                         } else {
                                             reject(new Error("Failed to create blob"));
                                         }
@@ -125,15 +203,23 @@
         }
 
         // Function to capture all cameras
-        async function captureAllCameras() {
+        async function captureAllCameras(download = true) {
             const screenshots = [];
             const originalCamera = document.querySelector(".camera.active")?.dataset.camera;
 
             console.log("Starting screenshot capture for all cameras...");
 
-            for (let i = 0; i < cameraNames.length; i++) {
-                const cameraName = cameraNames[i];
-                console.log(`Capturing ${cameraName} (${i + 1}/${cameraNames.length})...`);
+            // Filter out FPC camera (do not capture FPC screenshots)
+            const camerasToCapture = cameraNames.filter((name) => {
+                const upperName = name.toUpperCase();
+                return upperName !== "FPC" && upperName !== "FPS";
+            });
+
+            console.log(`Filtered cameras: ${camerasToCapture.length} (excluding FPC)`);
+
+            for (let i = 0; i < camerasToCapture.length; i++) {
+                const cameraName = camerasToCapture[i];
+                console.log(`Capturing ${cameraName} (${i + 1}/${camerasToCapture.length})...`);
 
                 try {
                     // Switch to camera
@@ -154,24 +240,29 @@
                 await switchToCamera(originalCamera);
             }
 
-            // Download all screenshots
-            screenshots.forEach((screenshot, index) => {
-                const link = document.createElement("a");
-                link.href = screenshot.url;
-                link.download = `screenshot_${screenshot.cameraName}_${Date.now()}_${index + 1}.png`;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
+            // Download all screenshots only if download flag is true
+            if (download) {
+                screenshots.forEach((screenshot, index) => {
+                    const link = document.createElement("a");
+                    link.href = screenshot.url;
+                    link.download = `screenshot_${screenshot.cameraName}_${Date.now()}_${index + 1}.jpg`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
 
-                // Clean up URL after a delay
-                setTimeout(() => {
-                    URL.revokeObjectURL(screenshot.url);
-                }, 100);
-            });
+                    // Clean up URL after a delay
+                    setTimeout(() => {
+                        URL.revokeObjectURL(screenshot.url);
+                    }, 100);
+                });
+            }
 
-            console.log(`✓ All screenshots captured and downloaded (${screenshots.length}/${cameraNames.length})`);
+            console.log(`✓ All screenshots captured (${screenshots.length}/${cameraNames.length})`);
             return screenshots;
         }
+
+        // Export function to window for use in other modules
+        window.captureAllCameras = captureAllCameras;
 
         // Create screenshot button
         function createScreenshotButton() {
